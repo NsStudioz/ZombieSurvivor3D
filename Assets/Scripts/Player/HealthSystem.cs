@@ -29,7 +29,6 @@ public class HealthSystem : MonoBehaviour
     private void TakeDamage(int damage)
     {
         healthComponent.TakeDamage(damage);
-        timeElapsed = timeElapsedThreshold;
     }
 
     private void OnTriggerEnter(Collider enemyCol)
@@ -37,6 +36,7 @@ public class HealthSystem : MonoBehaviour
         if (enemyCol.CompareTag(EnemyTag))
         {
             TakeDamage(1);
+            timeElapsed = timeElapsedThreshold;
             Debug.Log("Player Health: " + healthComponent.GetCurrentHealth());
 
             if (healthComponent.GetCurrentHealth() <= 0)
