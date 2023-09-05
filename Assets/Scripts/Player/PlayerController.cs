@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
         forward = mainCamera.transform.forward;
         forward.y = 0f;
         forward = Vector3.Normalize(forward);
+
+        right = Quaternion.Euler(new Vector3(zeroFloat, 90, zeroFloat)) * forward;
     }
 
 
