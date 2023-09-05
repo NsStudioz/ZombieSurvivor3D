@@ -8,6 +8,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] HealthComponent healthComponent;
 
     [Header("Player Elements")]
+    [SerializeField] bool isPlayerHit = false;
     [SerializeField] float timeElapsed;
     [SerializeField] float timeElapsedThreshold = 3f;
 
@@ -19,9 +20,8 @@ public class HealthSystem : MonoBehaviour
 
     private void Update()
     {
-        //TakeDamageTest();
-        //RegisterPlayerHit();
-        //RegenerateHealth();
+        TakeDamageTest();
+        RegisterPlayerHit();
     }
 
     private void TakeDamageTest()
@@ -35,6 +35,12 @@ public class HealthSystem : MonoBehaviour
 
         if (healthComponent.GetCurrentHealth() <= 0)
             Debug.Log("Player: Died!");
+    }
+
+    private void RegisterPlayerHit()
+    {
+        if (healthComponent.GetCurrentHealth() < healthComponent.GetMaxHealth())
+            isPlayerHit = true;
     }
 
 
