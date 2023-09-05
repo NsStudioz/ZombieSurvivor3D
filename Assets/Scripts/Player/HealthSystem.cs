@@ -22,6 +22,7 @@ public class HealthSystem : MonoBehaviour
     {
         TakeDamageTest();
         RegisterPlayerHit();
+        RegenerateHealth();
     }
 
     private void TakeDamageTest()
@@ -43,5 +44,19 @@ public class HealthSystem : MonoBehaviour
             isPlayerHit = true;
     }
 
+    private void RegenerateHealth()
+    {
+        if (healthComponent.GetCurrentHealth() <= 0)
+            return;
+
+        if (isPlayerHit)
+            timeElapsed -= Time.deltaTime;
+
+        if (timeElapsed <= 0)
+        {
+            healthComponent.SetCurrentHealthToMax();
+            isPlayerHit = false;
+        }
+    }
 
 }
