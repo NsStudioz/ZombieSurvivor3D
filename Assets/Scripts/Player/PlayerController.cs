@@ -5,12 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Camera Elements")]
-    Camera mainCamera = Camera.main;
+    Camera mainCamera;
 
     [Header("Main Elements")]
     [SerializeField] float moveSpeed = 1f;
     private const float zeroFloat = 0f;
     [SerializeField] Vector3 forward, right;
+
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
 
     void Start()
     {
