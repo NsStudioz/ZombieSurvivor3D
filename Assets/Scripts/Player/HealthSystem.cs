@@ -12,6 +12,8 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] float timeElapsed;
     [SerializeField] float timeElapsedThreshold = 3f;
 
+    [SerializeField] string EnemyTag = "Enemy";
+
     private void Start()
     {
         HealthComponent healthComponentInstance = new HealthComponent(3);
@@ -20,22 +22,26 @@ public class HealthSystem : MonoBehaviour
 
     private void Update()
     {
-        TakeDamageTest();
         RegisterPlayerHit();
         RegenerateHealth();
     }
 
-    private void TakeDamageTest()
+    private void TakeDamage(int damage)
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            healthComponent.TakeDamage(1);
-            Debug.Log("Player Health: " + healthComponent.GetCurrentHealth());
-            timeElapsed = timeElapsedThreshold;
-        }
+        healthComponent.TakeDamage(damage);
+        timeElapsed = timeElapsedThreshold;
+    }
 
-        if (healthComponent.GetCurrentHealth() <= 0)
-            Debug.Log("Player: Died!");
+    private void OnTriggerEnter(Collider enemyCol)
+    {
+        if (enemyCol.CompareTag(EnemyTag))
+        {
+            TakeDamage(1);
+            Debug.Log("Player Health: " + healthComponent.GetCurrentHealth());
+
+            if (healthComponent.GetCurrentHealth() <= 0)
+                Debug.Log("Player: Died!");  
+        }
     }
 
     private void RegisterPlayerHit()
