@@ -8,16 +8,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - World
+  - Ground
+  - Player
+  - Weapons
+  - Bullets
+  - Effects
+  - Enemies
   - 
   - 
   - 
