@@ -18,21 +18,22 @@ public class HealthSystem : MonoBehaviour
     private void Start()
     {
         if (gameObject.tag == PLAYER_TAG)
-        {
-            HealthComponent playerHealthComp = new HealthComponent(3);
-            healthComponent = playerHealthComp;
-        }
+            InitializeHealthComponent(3);
+
         else if (gameObject.tag == ENEMY_TAG)
-        {
-            HealthComponent enemyHealthComp = new HealthComponent(100);
-            healthComponent = enemyHealthComp;
-        }
+            InitializeHealthComponent(100);
     }
 
     private void Update()
     {
         RegisterPlayerHit();
         RegenerateHealth();
+    }
+
+    private void InitializeHealthComponent(int health)
+    {
+        HealthComponent newHealthComp = new HealthComponent(health);
+        healthComponent = newHealthComp;
     }
 
     private void TakeDamage(int damage)
