@@ -1300,11 +1300,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3092926756486156914, guid: 930eb7ad173842a429a4ff1408718fa5,
         type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 754086651}
-    - target: {fileID: 3092926756486156914, guid: 930eb7ad173842a429a4ff1408718fa5,
-        type: 3}
       propertyPath: retreatTransform
       value: 
       objectReference: {fileID: 896860527}
@@ -1317,10 +1312,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 754086657, guid: fe5b6b7490d5f6747b7d95eb29cfe59d, type: 3}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
     - target: {fileID: 1973735651369178545, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
         type: 3}
       propertyPath: m_Name

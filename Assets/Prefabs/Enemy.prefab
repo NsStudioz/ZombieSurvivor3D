@@ -112,9 +112,10 @@ GameObject:
   - component: {fileID: 1497343743173352722}
   - component: {fileID: 1651017192}
   - component: {fileID: 3092926756486156914}
+  - component: {fileID: 5800233508608578475}
   m_Layer: 12
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,3 +238,21 @@ MonoBehaviour:
   playerTransform: {fileID: 1973735651369178557, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
     type: 3}
   retreatTransform: {fileID: 0}
+--- !u!114 &5800233508608578475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497343743173352725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ddb9a90aa25a24e92d670b6f3f1603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthComponent:
+    currentHealth: 0
+    maxHealth: 0
+  isPlayerHit: 0
+  timeElapsed: 0
+  timeElapsedThreshold: 3

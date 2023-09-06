@@ -12,12 +12,21 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] float timeElapsed;
     [SerializeField] float timeElapsedThreshold = 3f;
 
-    [SerializeField] string EnemyTag = "Enemy";
+    [SerializeField] const string ENEMY_TAG = "Enemy";
+    [SerializeField] const string PLAYER_TAG = "Player";
 
     private void Start()
     {
-        HealthComponent healthComponentInstance = new HealthComponent(3);
-        healthComponent = healthComponentInstance;
+        if (gameObject.tag == PLAYER_TAG)
+        {
+            HealthComponent playerHealthComp = new HealthComponent(3);
+            healthComponent = playerHealthComp;
+        }
+        else if (gameObject.tag == ENEMY_TAG)
+        {
+            HealthComponent enemyHealthComp = new HealthComponent(100);
+            healthComponent = enemyHealthComp;
+        }
     }
 
     private void Update()
@@ -33,7 +42,7 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider enemyCol)
     {
-        if (enemyCol.CompareTag(EnemyTag))
+        if (gameObject.tag == PLAYER_TAG && enemyCol.CompareTag(ENEMY_TAG))
         {
             TakeDamage(1);
             timeElapsed = timeElapsedThreshold;
