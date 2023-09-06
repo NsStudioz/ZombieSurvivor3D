@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 525437304}
   - component: {fileID: 525437303}
   - component: {fileID: 525437302}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 1497343743173352722}
   - component: {fileID: 1651017192}
   - component: {fileID: 3092926756486156914}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,3 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5dc27d072290a4f9bb8be14de17035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  playerTransform: {fileID: 1973735651369178557, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+    type: 3}
+  retreatTransform: {fileID: 0}
