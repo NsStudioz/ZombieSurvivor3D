@@ -28,6 +28,16 @@ public class HealthSystem : MonoBehaviour
     {
         RegisterPlayerHit();
         RegenerateHealth();
+
+        // PROTOTYPE:
+        if (Input.GetKeyDown(KeyCode.M))
+            DamageEnemy();
+
+
+        if (gameObject.tag == ENEMY_TAG)
+            if (healthComponent.GetCurrentHealth() <= 0)
+                Destroy(gameObject);
+        //---------------------------------------------------
     }
 
     private void InitializeHealthComponent(int health)
@@ -75,4 +85,11 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    private void DamageEnemy()
+    {
+        if (gameObject.tag == ENEMY_TAG)
+        {
+            TakeDamage(50);
+        }
+    }
 }
