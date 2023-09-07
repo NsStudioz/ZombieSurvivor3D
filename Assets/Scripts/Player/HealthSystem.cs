@@ -26,18 +26,11 @@ public class HealthSystem : MonoBehaviour
 
     private void Update()
     {
-        RegisterPlayerHit();
-        RegenerateHealth();
-
-        // PROTOTYPE:
-        if (Input.GetKeyDown(KeyCode.M))
-            DamageEnemy();
-
-
-        if (gameObject.tag == ENEMY_TAG)
-            if (healthComponent.GetCurrentHealth() <= 0)
-                Destroy(gameObject);
-        //---------------------------------------------------
+        if (gameObject.tag == PLAYER_TAG)
+        {
+            RegisterPlayerHit();
+            RegenerateHealth();
+        }
     }
 
     private void InitializeHealthComponent(int health)
@@ -62,6 +55,21 @@ public class HealthSystem : MonoBehaviour
             if (healthComponent.GetCurrentHealth() <= 0)
                 Debug.Log("Player: Died!");  
         }
+
+        // PROTOTYPE:
+        if (gameObject.CompareTag(ENEMY_TAG) && enemyCol.CompareTag("EnemyKiller"))
+        {
+            TakeDamage(50);
+            Debug.Log("Enemy Hit!");
+
+            if (healthComponent.GetCurrentHealth() <= 0)
+            {
+                Destroy(gameObject);
+                Debug.Log("Enemy: Died!");
+            }
+        }
+
+        //---------------------------------------------------
     }
 
     private void RegisterPlayerHit()

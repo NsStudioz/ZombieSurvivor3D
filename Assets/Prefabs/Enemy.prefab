@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 525437301}
   - component: {fileID: 525437304}
   - component: {fileID: 525437303}
-  - component: {fileID: 525437302}
   m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &525437302
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525437300}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &1497343743173352725
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +97,8 @@ GameObject:
   - component: {fileID: 1497343743173352722}
   - component: {fileID: 1651017192}
   - component: {fileID: 3092926756486156914}
-  - component: {fileID: 5800233508608578475}
+  - component: {fileID: 918699399}
+  - component: {fileID: 918699400}
   m_Layer: 12
   m_Name: Enemy
   m_TagString: Enemy
@@ -194,7 +180,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497343743173352725}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -235,10 +221,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  playerTransform: {fileID: 1973735651369178557, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-    type: 3}
+  playerTransform: {fileID: 0}
   retreatTransform: {fileID: 0}
---- !u!114 &5800233508608578475
+--- !u!54 &918699399
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497343743173352725}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!114 &918699400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
