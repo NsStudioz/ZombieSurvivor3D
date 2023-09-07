@@ -217,6 +217,7 @@ MonoBehaviour:
   isPlayerHit: 0
   timeElapsed: 0
   timeElapsedThreshold: 3
+  enemyType: 1
 --- !u!1 &2027018051771984453
 GameObject:
   m_ObjectHideFlags: 0

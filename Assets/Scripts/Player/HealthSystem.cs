@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+
     [Header("Main Elements")]
     [SerializeField] HealthComponent healthComponent;
 
@@ -15,13 +16,21 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] const string ENEMY_TAG = "Enemy";
     [SerializeField] const string PLAYER_TAG = "Player";
 
+    [Header("Enemy Elements")]
+    [SerializeField] private EnemyTypes enemyType = EnemyTypes.Weakling;
+
+    public enum EnemyTypes
+    {
+        Weakling, Elite, Boss
+    }
+
     private void Start()
     {
         if (gameObject.tag == PLAYER_TAG)
             InitializeHealthComponent(3);
 
         else if (gameObject.tag == ENEMY_TAG)
-            InitializeHealthComponent(100);
+            SetEnemyTypeHealth();
     }
 
     private void Update()
@@ -31,6 +40,18 @@ public class HealthSystem : MonoBehaviour
             RegisterPlayerHit();
             RegenerateHealth();
         }
+    }
+
+    private void SetEnemyTypeHealth()
+    {
+        if (enemyType == EnemyTypes.Weakling)
+            InitializeHealthComponent(100);
+
+        if (enemyType == EnemyTypes.Elite)
+            InitializeHealthComponent(200);
+
+        if (enemyType == EnemyTypes.Boss)
+            InitializeHealthComponent(1000);
     }
 
     private void InitializeHealthComponent(int health)
