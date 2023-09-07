@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PauseController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameStateManager.GameState currentGameState = GameStateManager.Instance.CurrentGameState;
+
+            // Ternary operator => is the new state = Gameplay ? true : false;
+            GameStateManager.GameState newGameState = currentGameState == GameStateManager.GameState.Gameplay ?
+                GameStateManager.GameState.Paused : 
+                GameStateManager.GameState.Gameplay; 
+
+            GameStateManager.Instance.SetState(newGameState);
+        }
     }
 }
