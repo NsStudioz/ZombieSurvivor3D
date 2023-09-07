@@ -17,6 +17,8 @@ public class PauseController : MonoBehaviour
                 GameStateManager.GameState.Gameplay; 
 
             GameStateManager.Instance.SetState(newGameState);
+
+            Debug.Log("GameState Changed: " + newGameState);
         }
     }
 }
