@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameStateManager
 {
     
-    private static GameStateManager instance;
+    private static GameStateManager _instance;
 
     //Events:
     public delegate void GameStateChangeHandler(GameState newGameState);
@@ -16,10 +16,10 @@ public class GameStateManager
     {
         get
         {
-            if (instance == null)
-                instance = new GameStateManager();
+            if (_instance == null)
+                _instance = new GameStateManager();
 
-            return instance;
+            return _instance;
         }
     }
 
