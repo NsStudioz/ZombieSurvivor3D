@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+
     [Header("Main Elements")]
     [SerializeField] HealthComponent healthComponent;
 
@@ -12,18 +13,51 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] float timeElapsed;
     [SerializeField] float timeElapsedThreshold = 3f;
 
-    [SerializeField] string EnemyTag = "Enemy";
+    [SerializeField] const string ENEMY_TAG = "Enemy";
+    [SerializeField] const string PLAYER_TAG = "Player";
+
+    [Header("Enemy Elements")]
+    [SerializeField] private EnemyTypes enemyType = EnemyTypes.Weakling;
+
+    public enum EnemyTypes
+    {
+        Weakling, Elite, Boss
+    }
 
     private void Start()
     {
-        HealthComponent healthComponentInstance = new HealthComponent(3);
-        healthComponent = healthComponentInstance;
+        if (gameObject.tag == PLAYER_TAG)
+            InitializeHealthComponent(3);
+
+        else if (gameObject.tag == ENEMY_TAG)
+            SetEnemyTypeHealth();
     }
 
     private void Update()
     {
-        RegisterPlayerHit();
-        RegenerateHealth();
+        if (gameObject.tag == PLAYER_TAG)
+        {
+            RegisterPlayerHit();
+            RegenerateHealth();
+        }
+    }
+
+    private void SetEnemyTypeHealth()
+    {
+        if (enemyType == EnemyTypes.Weakling)
+            InitializeHealthComponent(100);
+
+        if (enemyType == EnemyTypes.Elite)
+            InitializeHealthComponent(200);
+
+        if (enemyType == EnemyTypes.Boss)
+            InitializeHealthComponent(1000);
+    }
+
+    private void InitializeHealthComponent(int health)
+    {
+        HealthComponent newHealthComp = new HealthComponent(health);
+        healthComponent = newHealthComp;
     }
 
     private void TakeDamage(int damage)
@@ -33,7 +67,7 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider enemyCol)
     {
-        if (enemyCol.CompareTag(EnemyTag))
+        if (gameObject.tag == PLAYER_TAG && enemyCol.CompareTag(ENEMY_TAG))
         {
             TakeDamage(1);
             timeElapsed = timeElapsedThreshold;
@@ -42,6 +76,21 @@ public class HealthSystem : MonoBehaviour
             if (healthComponent.GetCurrentHealth() <= 0)
                 Debug.Log("Player: Died!");  
         }
+
+        // PROTOTYPE:
+        if (gameObject.CompareTag(ENEMY_TAG) && enemyCol.CompareTag("EnemyKiller"))
+        {
+            TakeDamage(50);
+            Debug.Log("Enemy Hit!");
+
+            if (healthComponent.GetCurrentHealth() <= 0)
+            {
+                Destroy(transform.parent.gameObject);
+                Debug.Log("Enemy: Died!");
+            }
+        }
+
+        //---------------------------------------------------
     }
 
     private void RegisterPlayerHit()
@@ -65,4 +114,11 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    private void DamageEnemy()
+    {
+        if (gameObject.tag == ENEMY_TAG)
+        {
+            TakeDamage(50);
+        }
+    }
 }
