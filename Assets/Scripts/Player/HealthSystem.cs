@@ -64,7 +64,7 @@ public class HealthSystem : MonoBehaviour
 
             if (healthComponent.GetCurrentHealth() <= 0)
             {
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
                 Debug.Log("Enemy: Died!");
             }
         }
