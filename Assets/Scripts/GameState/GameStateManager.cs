@@ -17,5 +17,15 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public enum GameState
+    {
+        Gameplay,
+        Paused
+    }
+
+    public GameState CurrentGameState { get; private set; }
+
+
+
 
 }
