@@ -27,6 +27,11 @@ public class EnemyNavMesh : MonoBehaviour
 
     void Update()
     {
+        // Works fine with GameState:
+        target = playerTransform;
+        navMeshAgent.destination = target.position;
+        //-------------------------------------------
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             target = playerTransform;
@@ -42,5 +47,6 @@ public class EnemyNavMesh : MonoBehaviour
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
         enabled = newGameState == GameStateManager.GameState.Gameplay;
+        navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 }
