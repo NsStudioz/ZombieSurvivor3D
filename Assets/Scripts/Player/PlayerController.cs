@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     void Start()
@@ -60,6 +67,11 @@ public class PlayerController : MonoBehaviour
             Vector3 targetPos = new Vector3(cameraRayHit.point.x, transform.position.y, cameraRayHit.point.z);
             transform.LookAt(targetPos);
         }
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,11 @@ public class HealthSystem : MonoBehaviour
         Weakling, Elite, Boss
     }
 
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
     private void Start()
     {
         if (gameObject.tag == PLAYER_TAG)
@@ -40,6 +46,16 @@ public class HealthSystem : MonoBehaviour
             RegisterPlayerHit();
             RegenerateHealth();
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 
     private void SetEnemyTypeHealth()
@@ -121,4 +137,5 @@ public class HealthSystem : MonoBehaviour
             TakeDamage(50);
         }
     }
+
 }

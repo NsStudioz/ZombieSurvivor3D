@@ -10,6 +10,16 @@ public class EnemyNavMesh : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform retreatTransform;
 
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged; // prevents memory leaks and errors after the object is destroyed.
+    }
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -17,6 +27,11 @@ public class EnemyNavMesh : MonoBehaviour
 
     void Update()
     {
+        // Works fine with GameState:
+        target = playerTransform;
+        navMeshAgent.destination = target.position;
+        //-------------------------------------------
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             target = playerTransform;
@@ -27,5 +42,11 @@ public class EnemyNavMesh : MonoBehaviour
             target = retreatTransform;
             navMeshAgent.destination = target.position;
         }
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
+        navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 }
