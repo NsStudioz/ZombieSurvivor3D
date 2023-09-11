@@ -6,8 +6,8 @@ using UnityEngine;
 public class HandheldSO : ScriptableObject
 {
     [Header("Main Elements")]
-    [SerializeField] GameObject HandheldPrefab;
-    [SerializeField] RuntimeAnimatorController RigAnimController;
+    [SerializeField] public GameObject HandheldPrefab;
+    [SerializeField] public RuntimeAnimatorController RigAnimController;
 
     public HandheldTypes HandheldType { get; private set; }
     public FiringModes FiringMode { get; private set; }
