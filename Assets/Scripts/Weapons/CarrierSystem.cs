@@ -15,6 +15,15 @@ public class CarrierSystem : MonoBehaviour
     private GameObject _CurrentHandheldGO;
     private IHandheldObject _CurrentHandheldInterface;
 
+    #region Helpers
+
+    public Animator GetAnimator()
+    {
+        return RigAnimator;
+    }
+
+    #endregion
+
     private void Awake()
     {
         SwitchHandheld(EquipableHandhelds[0]);
