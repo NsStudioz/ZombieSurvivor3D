@@ -15,6 +15,8 @@ public class CarrierSystem : MonoBehaviour
     private GameObject _CurrentHandheldGO;
     private IHandheldObject _CurrentHandheldInterface;
 
+    private int _CurrentHandheldIndex;
+
     #region Helpers
 
     public Animator GetAnimator()
@@ -66,6 +68,27 @@ public class CarrierSystem : MonoBehaviour
     // This code block template is for Handheld input actions:
     public void OnAnyAction(InputAction.CallbackContext context)
     {
+        if (_CurrentHandheldInterface != null)
+        {
+            // ADD INPUT ACTION HERE FROM NEW INPUT SYSTEM => INPUT ACTIONS FOR WEAPONS
+            // EXAMPLE:
+            // _CurrentHandheldInterface.OnAction00(context);
+        }
+    }
+
+    
+    // Weapon/Equipment Switching;
+    // This code block template is for Handheld input actions:
+    public void OnAnyActionPerformed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _CurrentHandheldIndex += 1 * (int)Mathf.Sign(context.ReadValue<float>()); // can't use int, must cast to float.
+            _CurrentHandheldIndex = Mathf.Clamp(_CurrentHandheldIndex, 0, EquipableHandhelds.Count - 1); // clamp between 0 to max count - 1.
+
+            SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+        }
+
         if (_CurrentHandheldInterface != null)
         {
             // ADD INPUT ACTION HERE FROM NEW INPUT SYSTEM => INPUT ACTIONS FOR WEAPONS
