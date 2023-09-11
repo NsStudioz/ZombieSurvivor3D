@@ -29,20 +29,6 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     private CarrierSystem carrierSystem;
 
-    #region Old_Code:
-    // This code block template is for Handheld input actions:
-    public void OnAnyAction(InputAction.CallbackContext context)
-    {
-/*        if (_CurrentHandheldInterface != null)
-        {
-            // ADD INPUT ACTION HERE FROM NEW INPUT SYSTEM => INPUT ACTIONS FOR WEAPONS
-            // EXAMPLE:
-            // _CurrentHandheldInterface.OnAction00(context);
-        }*/
-    }
-
-    #endregion
-
     // updates our carrier, with that we can use the animations of a specific handheld:
     public void OnAttachedCarrier(CarrierSystem attachedCarrier)
     {
@@ -61,14 +47,15 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
         
     }
 
+    // These code block templates are for Handheld input actions:
     public void OnSwitchWeapon(InputAction.CallbackContext context)
     {
-        
+
     }
 
     public void OnFire1(InputAction.CallbackContext context)
     {
-        
+
     }
 
     public void OnFire2(InputAction.CallbackContext context)
@@ -81,33 +68,9 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     }
 
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnReplaceWeapon(InputAction.CallbackContext context)
     {
 
     }
 
-    public void OnJump(InputAction.CallbackContext context)
-    {
-
-    }
-
-    public void OnMove1(InputAction.CallbackContext context)
-    {
-
-    }
-
-    public void OnMove2(InputAction.CallbackContext context)
-    {
-
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-
-    }
-
-    public void OnPauseResume(InputAction.CallbackContext context)
-    {
-
-    }
 }
