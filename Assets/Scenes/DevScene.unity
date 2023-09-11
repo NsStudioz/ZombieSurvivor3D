@@ -2678,6 +2678,83 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe5b6b7490d5f6747b7d95eb29cfe59d, type: 3}
+--- !u!1 &1973735651707725639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1973735651369178545, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1973735651707725638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1973735651707725640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973735651707725639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: bde54f5465d794243940c97c94a53b79,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae54b088-d435-4894-b4a0-dfd3498f6ada
+    m_ActionName: GameplayControls/SwitchWeapon[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0320eee0-4f35-4388-b00e-c307004cdddc
+    m_ActionName: GameplayControls/Fire1[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b1ddbb4e-c417-45ee-aead-c5530c5216bb
+    m_ActionName: GameplayControls/Fire2[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b81edf36-6db1-42bd-8995-bc033aba293e
+    m_ActionName: GameplayControls/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b3fe6885-7e11-48af-8332-29fc3924cc7e
+    m_ActionName: GameplayControls/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aed06b62-3514-4fe4-8bee-e180574a33d4
+    m_ActionName: GameplayControls/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c662984-62f2-4253-9aba-3e57c179b0ec
+    m_ActionName: GameplayControls/Move1[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 509eca1f-c054-4234-8084-4ae71a828399
+    m_ActionName: GameplayControls/Move2[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d09d2830-cda7-4d47-8507-8cd68b37d854
+    m_ActionName: GameplayControls/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de1e7efb-c69a-4e5c-b625-c0b3b70135d0
+    m_ActionName: GameplayControls/PauseResume[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: GameplayControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &2261602776430108760
 PrefabInstance:
   m_ObjectHideFlags: 0
