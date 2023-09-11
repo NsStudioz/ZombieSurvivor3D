@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarrierSystem : MonoBehaviour
+public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
 {
+    // System for important logic (Math + fire weapon + etc...)
+
 
     [SerializeField] Transform RigSocket;
     [SerializeField] Animator RigAnimator;
@@ -64,7 +66,7 @@ public class CarrierSystem : MonoBehaviour
         }
     }
 
-
+    #region Old_Code:
     // This code block template is for Handheld input actions:
     public void OnAnyAction(InputAction.CallbackContext context)
     {
@@ -97,4 +99,75 @@ public class CarrierSystem : MonoBehaviour
         }
     }
 
+    #endregion
+
+    public void OnSwitchWeapon(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _CurrentHandheldIndex += 1 * (int)Mathf.Sign(context.ReadValue<float>()); // can't use int, must cast to float.
+            _CurrentHandheldIndex = Mathf.Clamp(_CurrentHandheldIndex, 0, EquipableHandhelds.Count - 1); // clamp between 0 to max count - 1.
+
+            SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+        }
+
+        // Using this code block to avoid binding/unbiding from our input system:
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnSwitchWeapon(context);
+    }
+
+    public void OnFire1(InputAction.CallbackContext context)
+    {
+        // Using this code block to avoid binding/unbiding from our input system:
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnFire1(context);
+    }
+
+    public void OnFire2(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnFire2(context);
+    }
+
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnReload(context);
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnInteract(context);
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnJump(context);
+    }
+
+    public void OnMove1(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnMove1(context);
+    }
+
+    public void OnMove2(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnMove2(context);
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnLook(context);
+    }
+
+    public void OnPauseResume(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnPauseResume(context);
+    }
 }
