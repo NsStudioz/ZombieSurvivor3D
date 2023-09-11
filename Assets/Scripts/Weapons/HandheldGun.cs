@@ -6,6 +6,8 @@ using static HandheldSO;
 
 public class HandheldGun : MonoBehaviour, IHandheldObject
 {
+    // Input Handling will trigger animations and weapon/equipment logic:
+
     [Header("Main Elements")]
     [SerializeField] private Animator _WeaponAnimator;
     [SerializeField] string handheldName;
@@ -27,7 +29,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     private CarrierSystem carrierSystem;
 
-
+    #region Old_Code:
     // This code block template is for Handheld input actions:
     public void OnAnyAction(InputAction.CallbackContext context)
     {
@@ -38,6 +40,8 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
             // _CurrentHandheldInterface.OnAction00(context);
         }*/
     }
+
+    #endregion
 
     // updates our carrier, with that we can use the animations of a specific handheld:
     public void OnAttachedCarrier(CarrierSystem attachedCarrier)
@@ -55,5 +59,55 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     public void OnUnequip()
     {
         
+    }
+
+    public void OnSwitchWeapon(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnFire1(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    public void OnFire2(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnReload(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnMove1(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnMove2(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnPauseResume(InputAction.CallbackContext context)
+    {
+
     }
 }
