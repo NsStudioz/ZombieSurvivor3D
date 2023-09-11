@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IHandheldObject
 {
 
-    void OnAttachedToPlayer();
+    void OnAttachedCarrier(CarrierSystem attachedCarrier);
     void OnEquip();
     void OnUnequip();
 
