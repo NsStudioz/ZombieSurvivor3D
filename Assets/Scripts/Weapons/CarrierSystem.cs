@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CarrierSystem : MonoBehaviour
 {
@@ -49,6 +50,18 @@ public class CarrierSystem : MonoBehaviour
             _CurrentHandheldSO = null;
             _CurrentHandheldInterface = null;
             _CurrentHandheldGO = null;
+        }
+    }
+
+
+    // This code block template is for Handheld input actions:
+    public void OnAnyAction(InputAction.CallbackContext context)
+    {
+        if (_CurrentHandheldInterface != null)
+        {
+            // ADD INPUT ACTION HERE FROM NEW INPUT SYSTEM => INPUT ACTIONS FOR WEAPONS
+            // EXAMPLE:
+            // _CurrentHandheldInterface.OnAction00(context);
         }
     }
 
