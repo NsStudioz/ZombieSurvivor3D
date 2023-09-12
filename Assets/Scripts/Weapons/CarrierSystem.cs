@@ -25,6 +25,11 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
         return RigAnimator;
     }
 
+    public HandheldSO GetCurrentHandheldScriptableObject()
+    {
+        return _CurrentHandheldSO;
+    }
+
     #endregion
 
     private void Awake()
@@ -65,6 +70,7 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
         }
     }
 
+    #region Input_Events:
 
     public void OnSwitchWeapon(InputAction.CallbackContext context)
     {
@@ -108,5 +114,7 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
         if (_CurrentHandheldInterface != null)
             _CurrentHandheldInterface.OnReplaceWeapon(context);
     }
+
+    #endregion
 
 }
