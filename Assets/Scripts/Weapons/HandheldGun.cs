@@ -23,6 +23,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     [Header("Testing Purposes")]
     [SerializeField] GameObject bulletTestGO;
+    [SerializeField] private bool isLeftMouseClickHeld = false;
 
 /*    [Header("Audio Files")]
     [SerializeField] AudioClip _EquipAudio;
@@ -31,6 +32,26 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     [SerializeField] AudioClip _FailedFireAudio;*/
 
     private CarrierSystem carrierSystem;
+
+    private void Update()
+    {
+        if (ammoCapacity > 0)
+            return;
+
+        while (isLeftMouseClickHeld)
+        {
+            fireRate -= Time.deltaTime;
+
+            if (fireRate <= 0f)
+            {
+                GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
+                ammoCapacity--;
+                fireRate = fireRateCooldown;
+            }
+
+            break;
+        }
+    }
 
     // updates our carrier, with that we can use the animations of a specific handheld:
     public void OnAttachedCarrier(CarrierSystem attachedCarrier)
@@ -74,10 +95,13 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     public void OnFire1(InputAction.CallbackContext context)
     {
-        if (context.performed && ammoCapacity > 0)
+        if (context.performed)
+            isLeftMouseClickHeld = true;
+
+        else if (context.canceled)
         {
-            GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
-            ammoCapacity--;
+            isLeftMouseClickHeld = false;
+            fireRate = 0f;
         }
     }
 
