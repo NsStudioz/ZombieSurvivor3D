@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RigSocket: {fileID: 6100891875041561533}
-  RigAnimator: {fileID: 0}
+  RigAnimator: {fileID: 5649784629110535979}
   EquipableHandhelds:
   - {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f, type: 2}
   - {fileID: 11400000, guid: 2b5d7309e9bee1741acf761dce5623d9, type: 2}
@@ -472,7 +472,7 @@ Animator:
   m_GameObject: {fileID: 8766481516446264474}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c12d0b3e9937ed4190c1982063c2534, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
