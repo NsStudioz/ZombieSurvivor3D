@@ -268,23 +268,83 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4693091567844335043}
+        m_TargetAssemblyTypeName: CarrierSystem, Assembly-CSharp
+        m_MethodName: OnSwitchWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ae54b088-d435-4894-b4a0-dfd3498f6ada
     m_ActionName: GameplayControls/SwitchWeapon[/Mouse/middleButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4693091567844335043}
+        m_TargetAssemblyTypeName: CarrierSystem, Assembly-CSharp
+        m_MethodName: OnFire1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0320eee0-4f35-4388-b00e-c307004cdddc
     m_ActionName: GameplayControls/Fire1[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4693091567844335043}
+        m_TargetAssemblyTypeName: CarrierSystem, Assembly-CSharp
+        m_MethodName: OnFire2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b1ddbb4e-c417-45ee-aead-c5530c5216bb
     m_ActionName: GameplayControls/Fire2[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4693091567844335043}
+        m_TargetAssemblyTypeName: CarrierSystem, Assembly-CSharp
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b81edf36-6db1-42bd-8995-bc033aba293e
     m_ActionName: GameplayControls/Reload[/Keyboard/r]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4693091567844335043}
+        m_TargetAssemblyTypeName: CarrierSystem, Assembly-CSharp
+        m_MethodName: OnReplaceWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 4a98aa95-de05-4c31-92c5-e80504f3754f
     m_ActionName: GameplayControls/ReplaceWeapon[/Keyboard/x]
   - m_PersistentCalls:
