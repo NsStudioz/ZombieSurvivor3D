@@ -13,8 +13,8 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     [Header("Main Attributes")]
     [SerializeField] int ammoCapacity;
-    [SerializeField] int fireRate;
-    [SerializeField] int fireRateCooldown;
+    [SerializeField] float fireRate;
+    [SerializeField] float fireRateCooldown;
     [SerializeField] float reloadCooldown;
 
     [Header("Second Attributes")]

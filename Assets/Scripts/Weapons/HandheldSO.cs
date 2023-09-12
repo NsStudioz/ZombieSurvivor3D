@@ -15,8 +15,8 @@ public class HandheldSO : ScriptableObject
     [Header("Attributes")]
     [SerializeField] public string handheldName;
     [SerializeField] public int ammoCapacity;
-    [SerializeField] public int fireRate;
-    [SerializeField] public int fireRateCooldown;
+    [SerializeField] public float fireRate;
+    [SerializeField] public float fireRateCooldown;
     [SerializeField] public float reloadCooldown;
 
     public enum HandheldTypes
