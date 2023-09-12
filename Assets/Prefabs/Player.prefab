@@ -285,28 +285,36 @@ MonoBehaviour:
     m_ActionName: GameplayControls/Reload[/Keyboard/r]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: b3fe6885-7e11-48af-8332-29fc3924cc7e
-    m_ActionName: GameplayControls/Interact[/Keyboard/e]
+    m_ActionId: 4a98aa95-de05-4c31-92c5-e80504f3754f
+    m_ActionName: GameplayControls/ReplaceWeapon[/Keyboard/x]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: aed06b62-3514-4fe4-8bee-e180574a33d4
-    m_ActionName: GameplayControls/Jump[/Keyboard/space]
+    m_ActionId: b63683dc-6732-4e48-a53c-0453906b5d52
+    m_ActionName: MovementControls/New action
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 3c662984-62f2-4253-9aba-3e57c179b0ec
-    m_ActionName: GameplayControls/Move1[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionId: 5e4797b5-a99d-45b6-b5c9-c3aab222c549
+    m_ActionName: MovementControls/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 509eca1f-c054-4234-8084-4ae71a828399
-    m_ActionName: GameplayControls/Move2[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionId: 33a16dcc-7600-448b-b3cb-506bc412260b
+    m_ActionName: MovementControls/Move1[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: d09d2830-cda7-4d47-8507-8cd68b37d854
-    m_ActionName: GameplayControls/Look[/Mouse/delta]
+    m_ActionId: 47c17049-dc43-4b0b-a258-20567b2f4cc0
+    m_ActionName: MovementControls/Move2[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: de1e7efb-c69a-4e5c-b625-c0b3b70135d0
-    m_ActionName: GameplayControls/PauseResume[/Keyboard/escape]
+    m_ActionId: 5cd5f7ac-c04d-4de9-a038-0dea66c9136d
+    m_ActionName: MovementControls/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: da002812-b248-4d70-b810-452dedbf7b20
+    m_ActionName: PauseResumeControls/PauseResume[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 99e809ae-623e-4c2a-bb4d-1e870502c441
+    m_ActionName: InteractionControls/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameplayControls
@@ -321,6 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6132592083931102624}
+  - component: {fileID: 4693091567844335043}
   m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
@@ -344,6 +353,23 @@ Transform:
   m_Father: {fileID: 1973735651369178557}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4693091567844335043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024685678032073875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e0ac50f5524dfc4b9afffd538eb78af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RigSocket: {fileID: 6100891875041561533}
+  RigAnimator: {fileID: 0}
+  EquipableHandhelds:
+  - {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f, type: 2}
+  - {fileID: 11400000, guid: 2b5d7309e9bee1741acf761dce5623d9, type: 2}
 --- !u!1 &8766481516446264474
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6100891875041561533}
+  - component: {fileID: 5649784629110535979}
   m_Layer: 8
   m_Name: PlaceArmsRigHere
   m_TagString: Untagged
@@ -375,3 +402,23 @@ Transform:
   m_Father: {fileID: 6132592083931102624}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5649784629110535979
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8766481516446264474}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
