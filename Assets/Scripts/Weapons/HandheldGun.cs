@@ -21,6 +21,9 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     [SerializeField] string HandheldType = "";
     [SerializeField] string FiringMode = "";
 
+    [Header("Testing Purposes")]
+    [SerializeField] GameObject bulletTestGO;
+
 /*    [Header("Audio Files")]
     [SerializeField] AudioClip _EquipAudio;
     [SerializeField] AudioClip _UnequipAudio;
@@ -71,7 +74,11 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     public void OnFire1(InputAction.CallbackContext context)
     {
-
+        if (context.performed && ammoCapacity > 0)
+        {
+            GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
+            ammoCapacity--;
+        }
     }
 
     public void OnFire2(InputAction.CallbackContext context)
