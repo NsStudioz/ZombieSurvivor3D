@@ -13,11 +13,11 @@ public class HandheldSO : ScriptableObject
     public FiringModes FiringMode { get; private set; }
 
     [Header("Attributes")]
-    [SerializeField] string handheldName;
-    [SerializeField] int ammoCapacity;
-    [SerializeField] int fireRate;
-    [SerializeField] int fireRateCooldown;
-    [SerializeField] float reloadCooldown;
+    [SerializeField] public string handheldName;
+    [SerializeField] public int ammoCapacity;
+    [SerializeField] public int fireRate;
+    [SerializeField] public int fireRateCooldown;
+    [SerializeField] public float reloadCooldown;
 
     public enum HandheldTypes
     {
