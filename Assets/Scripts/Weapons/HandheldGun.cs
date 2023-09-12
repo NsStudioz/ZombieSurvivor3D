@@ -38,6 +38,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     public void OnEquip()
     {
+        SyncHandheldGunData();
         // Example:
         //carrierSystem.GetAnimator().SetTrigger("Equip");
     }
@@ -46,6 +47,18 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     {
         
     }
+
+    private void SyncHandheldGunData()
+    {
+        handheldName = carrierSystem.GetCurrentHandheldScriptableObject().handheldName;
+        ammoCapacity = carrierSystem.GetCurrentHandheldScriptableObject().ammoCapacity;
+        fireRate = carrierSystem.GetCurrentHandheldScriptableObject().fireRate;
+        fireRateCooldown = carrierSystem.GetCurrentHandheldScriptableObject().fireRateCooldown;
+        reloadCooldown = carrierSystem.GetCurrentHandheldScriptableObject().reloadCooldown;
+    }
+
+
+    #region Input_Events:
 
     // These code block templates are for Handheld input actions:
     public void OnSwitchWeapon(InputAction.CallbackContext context)
@@ -72,5 +85,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     {
 
     }
+
+    #endregion
 
 }
