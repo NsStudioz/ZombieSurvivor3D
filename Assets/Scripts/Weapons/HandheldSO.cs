@@ -9,8 +9,11 @@ public class HandheldSO : ScriptableObject
     [SerializeField] public GameObject HandheldPrefab;
     [SerializeField] public RuntimeAnimatorController RigAnimController;
 
-    public HandheldTypes HandheldType { get; private set; }
-    public FiringModes FiringMode { get; private set; }
+    //public HandheldTypes HandheldType { get; private set; }
+    //public FiringModes FiringMode { get; private set; }
+
+    public HandheldTypes HandheldType = HandheldTypes.Pistol;
+    public FiringModes FiringMode = FiringModes.Single;
 
     [Header("Attributes")]
     [SerializeField] public string handheldName;
