@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static HandheldSO;
 
 public class HandheldGun : MonoBehaviour, IHandheldObject
 {
@@ -12,14 +11,15 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     [SerializeField] private Animator _WeaponAnimator;
     [SerializeField] string handheldName;
 
-    public HandheldTypes HandheldType { get; private set; }
-    public FiringModes FiringMode { get; private set; }
-
-    [Header("Attributes")]
+    [Header("Main Attributes")]
     [SerializeField] int ammoCapacity;
     [SerializeField] int fireRate;
     [SerializeField] int fireRateCooldown;
     [SerializeField] float reloadCooldown;
+
+    [Header("Second Attributes")]
+    [SerializeField] string HandheldType = "";
+    [SerializeField] string FiringMode = "";
 
 /*    [Header("Audio Files")]
     [SerializeField] AudioClip _EquipAudio;
@@ -55,6 +55,9 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
         fireRate = carrierSystem.GetCurrentHandheldScriptableObject().fireRate;
         fireRateCooldown = carrierSystem.GetCurrentHandheldScriptableObject().fireRateCooldown;
         reloadCooldown = carrierSystem.GetCurrentHandheldScriptableObject().reloadCooldown;
+        //  
+        HandheldType = carrierSystem.GetCurrentHandheldScriptableObject().HandheldType.ToString();
+        FiringMode = carrierSystem.GetCurrentHandheldScriptableObject().FiringMode.ToString();
     }
 
 
