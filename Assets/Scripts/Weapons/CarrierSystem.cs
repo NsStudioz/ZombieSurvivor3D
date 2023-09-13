@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     [SerializeField] private HandheldSO _InteractableHandheldSO = null;
 
+    [SerializeField] PlayerInput playerInput;
+
     #region Helpers
 
     public Animator GetAnimator()
@@ -32,6 +35,22 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
     public HandheldSO GetCurrentHandheldScriptableObject()
     {
         return _CurrentHandheldSO;
+    }
+
+    #endregion
+
+    #region Event_Listeners
+
+    private void OnEnable()
+    {
+        playerInput.actions.FindActionMap("GameplayControls").Enable();
+        playerInput.actions.FindActionMap("InteractionControls").Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions.FindActionMap("GameplayControls").Disable();
+        playerInput.actions.FindActionMap("InteractionControls").Disable();
     }
 
     #endregion
