@@ -373,7 +373,7 @@ MonoBehaviour:
     m_ActionName: InteractionControls/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: GameplayControls
+  m_DefaultActionMap: InteractionControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &5024685678032073875
@@ -429,6 +429,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f, type: 2}
   isInteractButtonClickHeld: 0
   _InteractableHandheldSO: {fileID: 0}
+  playerInput: {fileID: 1973735651707725640}
 --- !u!135 &736888081
 SphereCollider:
   m_ObjectHideFlags: 0
