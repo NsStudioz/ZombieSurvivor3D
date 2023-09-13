@@ -22,7 +22,7 @@ public class BulletDamage : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             IDamageable damageable = col.GetComponent<IDamageable>();
-            damageable?.Damage(weaponDamage); // if damageable is not null...Then Damage
+            damageable?.TakeDamage(weaponDamage); // if damageable is not null...Then Damage
         }
         else
             Destroy(gameObject);

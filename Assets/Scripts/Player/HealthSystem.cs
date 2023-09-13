@@ -76,7 +76,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
         healthComponent = newHealthComp;
     }
 
-    private void TakeDamage(int damage)
+    private void DamageOld(int damage)
     {
         healthComponent.TakeDamage(damage);
     }
@@ -85,7 +85,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
     {
         if (gameObject.tag == PLAYER_TAG && enemyCol.CompareTag(ENEMY_TAG))
         {
-            TakeDamage(1);
+            DamageOld(1);
             timeElapsed = timeElapsedThreshold;
             Debug.Log("Player Health: " + healthComponent.GetCurrentHealth());
 
@@ -96,7 +96,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
         // PROTOTYPE:
         if (gameObject.CompareTag(ENEMY_TAG) && enemyCol.CompareTag("EnemyKiller"))
         {
-            TakeDamage(50);
+            DamageOld(50);
             Debug.Log("Enemy Hit!");
 
             if (healthComponent.GetCurrentHealth() <= 0)
@@ -134,12 +134,12 @@ public class HealthSystem : MonoBehaviour, IDamageable
     {
         if (gameObject.tag == ENEMY_TAG)
         {
-            TakeDamage(50);
+            DamageOld(50);
         }
     }
 
-    public void Damage(int damageAmount)
+    public void TakeDamage(int damageAmount)
     {
-        TakeDamage(damageAmount);
+        healthComponent.TakeDamage(damageAmount);
     }
 }
