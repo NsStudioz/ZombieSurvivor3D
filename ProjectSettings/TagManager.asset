@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - EnemyKiller
+  - Handheld
   layers:
   - Default
   - TransparentFX
