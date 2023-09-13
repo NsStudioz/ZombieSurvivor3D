@@ -20,6 +20,8 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     [SerializeField] private bool isInteractButtonClickHeld = false;
 
+    [SerializeField] private HandheldSO _InteractableHandheldSO = null;
+
     #region Helpers
 
     public Animator GetAnimator()
@@ -37,6 +39,22 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
     private void Awake()
     {
         SwitchHandheld(EquipableHandhelds[0]);
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Handheld"))
+        {
+            _InteractableHandheldSO = col.GetComponentInChildren<HandheldSOTag>().GetHandheldSOTag();
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("Handheld"))
+        {
+            _InteractableHandheldSO = null;
+        }
     }
 
     // Weapon/Equipment Switching:
