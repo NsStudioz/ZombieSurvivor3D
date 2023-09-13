@@ -47,7 +47,8 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
 
         _CurrentHandheldSO = handheld;
         _CurrentHandheldGO = Instantiate(_CurrentHandheldSO.HandheldPrefab, RigSocket, true); // prototype code, needs to be updated to support reload
-        _CurrentHandheldGO.transform.position = Vector3.zero;
+        //_CurrentHandheldGO.transform.position = Vector3.zero;
+        _CurrentHandheldGO.transform.localPosition = Vector3.zero;
         _CurrentHandheldGO.transform.localRotation = Quaternion.identity;
 
         // we want the IHandheldObject script to always be on the model and not on the parent object.
