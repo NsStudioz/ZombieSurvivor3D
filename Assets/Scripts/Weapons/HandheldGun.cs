@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,25 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     [SerializeField] AudioClip _FailedFireAudio;*/
 
     private CarrierSystem carrierSystem;
+
+    #region Event_Listeners
+
+    private void OnEnable()
+    {
+        CarrierSystem.OnInteractSimilarHandheld += RestockHandheldAmmo;
+    }
+
+    private void OnDisable()
+    {
+        CarrierSystem.OnInteractSimilarHandheld -= RestockHandheldAmmo;
+    }
+
+    private void RestockHandheldAmmo(HandheldSO handheld)
+    {
+        ammoCapacity = handheld.ammoCapacity;
+    }
+
+    #endregion
 
     private void Update()
     {

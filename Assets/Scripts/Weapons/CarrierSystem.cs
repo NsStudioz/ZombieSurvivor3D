@@ -25,6 +25,8 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     [SerializeField] PlayerInput playerInput;
 
+    public static event Action<HandheldSO> OnInteractSimilarHandheld;
+
     #region Helpers
 
     public Animator GetAnimator()
@@ -127,8 +129,14 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
         if (isInteractButtonClickHeld)
         {
-            EquipableHandhelds[_CurrentHandheldIndex] = _InteractableHandheldSO;
-            SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+            if (EquipableHandhelds[_CurrentHandheldIndex] == _InteractableHandheldSO)
+                OnInteractSimilarHandheld?.Invoke(_InteractableHandheldSO);
+
+            else if (EquipableHandhelds[_CurrentHandheldIndex] != _InteractableHandheldSO)
+            {
+                EquipableHandhelds[_CurrentHandheldIndex] = _InteractableHandheldSO;
+                SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+            }
         }
     }
 
