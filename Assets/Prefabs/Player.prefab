@@ -332,22 +332,6 @@ MonoBehaviour:
     m_ActionId: b81edf36-6db1-42bd-8995-bc033aba293e
     m_ActionName: GameplayControls/Reload[/Keyboard/r]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4693091567844335043}
-        m_TargetAssemblyTypeName: CarrierSystem, Assembly-CSharp
-        m_MethodName: OnReplaceWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4a98aa95-de05-4c31-92c5-e80504f3754f
-    m_ActionName: GameplayControls/ReplaceWeapon[/Keyboard/x]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: b63683dc-6732-4e48-a53c-0453906b5d52
     m_ActionName: MovementControls/New action
@@ -390,6 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6132592083931102624}
   - component: {fileID: 4693091567844335043}
+  - component: {fileID: 736888081}
   m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
@@ -430,6 +415,21 @@ MonoBehaviour:
   EquipableHandhelds:
   - {fileID: 11400000, guid: 2b5d7309e9bee1741acf761dce5623d9, type: 2}
   - {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f, type: 2}
+  isInteractButtonClickHeld: 0
+  _InteractableHandheldSO: {fileID: 0}
+--- !u!135 &736888081
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024685678032073875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8766481516446264474
 GameObject:
   m_ObjectHideFlags: 0
