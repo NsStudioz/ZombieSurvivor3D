@@ -62,15 +62,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ReplaceWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""4a98aa95-de05-4c31-92c5-e80504f3754f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -115,17 +106,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""865debcb-751b-4a13-b861-61eae7762dc9"",
-                    ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ReplaceWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -381,7 +361,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
         m_GameplayControls_Fire1 = m_GameplayControls.FindAction("Fire1", throwIfNotFound: true);
         m_GameplayControls_Fire2 = m_GameplayControls.FindAction("Fire2", throwIfNotFound: true);
         m_GameplayControls_Reload = m_GameplayControls.FindAction("Reload", throwIfNotFound: true);
-        m_GameplayControls_ReplaceWeapon = m_GameplayControls.FindAction("ReplaceWeapon", throwIfNotFound: true);
         // MovementControls
         m_MovementControls = asset.FindActionMap("MovementControls", throwIfNotFound: true);
         m_MovementControls_Newaction = m_MovementControls.FindAction("New action", throwIfNotFound: true);
@@ -458,7 +437,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameplayControls_Fire1;
     private readonly InputAction m_GameplayControls_Fire2;
     private readonly InputAction m_GameplayControls_Reload;
-    private readonly InputAction m_GameplayControls_ReplaceWeapon;
     public struct GameplayControlsActions
     {
         private @ControlsPC m_Wrapper;
@@ -467,7 +445,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
         public InputAction @Fire1 => m_Wrapper.m_GameplayControls_Fire1;
         public InputAction @Fire2 => m_Wrapper.m_GameplayControls_Fire2;
         public InputAction @Reload => m_Wrapper.m_GameplayControls_Reload;
-        public InputAction @ReplaceWeapon => m_Wrapper.m_GameplayControls_ReplaceWeapon;
         public InputActionMap Get() { return m_Wrapper.m_GameplayControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -489,9 +466,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
                 @Reload.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
-                @ReplaceWeapon.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReplaceWeapon;
-                @ReplaceWeapon.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReplaceWeapon;
-                @ReplaceWeapon.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReplaceWeapon;
             }
             m_Wrapper.m_GameplayControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -508,9 +482,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
-                @ReplaceWeapon.started += instance.OnReplaceWeapon;
-                @ReplaceWeapon.performed += instance.OnReplaceWeapon;
-                @ReplaceWeapon.canceled += instance.OnReplaceWeapon;
             }
         }
     }
@@ -652,7 +623,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
         void OnFire1(InputAction.CallbackContext context);
         void OnFire2(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnReplaceWeapon(InputAction.CallbackContext context);
     }
     public interface IMovementControlsActions
     {
