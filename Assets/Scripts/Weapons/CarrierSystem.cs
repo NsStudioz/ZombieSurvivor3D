@@ -111,9 +111,6 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
             EquipableHandhelds[_CurrentHandheldIndex] = _InteractableHandheldSO;
             SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
         }
-
-        if (_CurrentHandheldInterface != null)
-            _CurrentHandheldInterface.OnInteract(context);
     }
 
     public void OnSwitchWeapon(InputAction.CallbackContext context)
