@@ -23,10 +23,12 @@ public class BulletDamage : MonoBehaviour
         {
             IDamageable damageable = col.GetComponent<IDamageable>();
             damageable?.TakeDamage(weaponDamage); // if damageable is not null...Then Damage
-        }
-        else
+            Debug.Log("Enemy Hit!");
             Destroy(gameObject);
-            // Play effects on hit maybe... 
+        }
+
+        Destroy(gameObject);
+        // Play effects on hit maybe... 
     }
 
 }
