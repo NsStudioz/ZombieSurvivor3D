@@ -115,11 +115,6 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     }
 
-    public void OnReplaceWeapon(InputAction.CallbackContext context)
-    {
-
-    }
-
     #endregion
 
 }

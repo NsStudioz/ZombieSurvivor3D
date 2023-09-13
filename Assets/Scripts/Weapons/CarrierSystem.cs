@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
+public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions, ControlsPC.IInteractionControlsActions
 {
     // System for important logic (Math + fire weapon + etc...)
 
@@ -73,6 +73,11 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
 
     #region Input_Events:
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+
+    }
+
     public void OnSwitchWeapon(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -109,12 +114,6 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions
             _CurrentHandheldInterface.OnReload(context);
     }
 
-    public void OnReplaceWeapon(InputAction.CallbackContext context)
-    {
-        // Using this code block to avoid binding/unbiding from our input system:
-        if (_CurrentHandheldInterface != null)
-            _CurrentHandheldInterface.OnReplaceWeapon(context);
-    }
 
     #endregion
 
