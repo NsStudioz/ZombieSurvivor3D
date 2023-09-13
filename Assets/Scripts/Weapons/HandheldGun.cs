@@ -35,7 +35,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     private void Update()
     {
-        if (ammoCapacity > 0)
+        if (ammoCapacity <= 0)
             return;
 
         while (isLeftMouseClickHeld)
@@ -96,7 +96,9 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     public void OnFire1(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             isLeftMouseClickHeld = true;
+        }
 
         else if (context.canceled)
         {
