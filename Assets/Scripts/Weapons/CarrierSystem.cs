@@ -18,6 +18,8 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     private int _CurrentHandheldIndex;
 
+    [SerializeField] private bool isInteractButtonClickHeld = false;
+
     #region Helpers
 
     public Animator GetAnimator()
@@ -75,7 +77,11 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (context.performed)
+            isInteractButtonClickHeld = true;
 
+        else if (context.canceled)
+            isInteractButtonClickHeld = false;
     }
 
     public void OnSwitchWeapon(InputAction.CallbackContext context)
