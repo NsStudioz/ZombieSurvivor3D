@@ -1819,6 +1819,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 1774669298440197006, guid: adac71426dfa84243a71753fb60cff8d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1774669298440197007, guid: adac71426dfa84243a71753fb60cff8d,
         type: 3}
       propertyPath: m_RootOrder
@@ -2745,6 +2750,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: InteractionControls
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe5b6b7490d5f6747b7d95eb29cfe59d, type: 3}
 --- !u!1001 &2261602776430108760
@@ -2853,11 +2863,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletTest
       objectReference: {fileID: 0}
-    - target: {fileID: 1257796557909267476, guid: 137a9f5ca4016a04e8a0df0d336efabf,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5496861066083112288, guid: 137a9f5ca4016a04e8a0df0d336efabf,
         type: 3}
       propertyPath: m_RootOrder
@@ -2866,7 +2871,7 @@ PrefabInstance:
     - target: {fileID: 5496861066083112288, guid: 137a9f5ca4016a04e8a0df0d336efabf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.97
       objectReference: {fileID: 0}
     - target: {fileID: 5496861066083112288, guid: 137a9f5ca4016a04e8a0df0d336efabf,
         type: 3}

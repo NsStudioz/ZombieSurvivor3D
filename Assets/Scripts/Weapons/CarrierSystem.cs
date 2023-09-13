@@ -95,11 +95,25 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (_InteractableHandheldSO == null)
+            return;
+
         if (context.performed)
+        {
             isInteractButtonClickHeld = true;
+        }
 
         else if (context.canceled)
             isInteractButtonClickHeld = false;
+
+        if (isInteractButtonClickHeld)
+        {
+            EquipableHandhelds[_CurrentHandheldIndex] = _InteractableHandheldSO;
+            SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+        }
+
+        if (_CurrentHandheldInterface != null)
+            _CurrentHandheldInterface.OnInteract(context);
     }
 
     public void OnSwitchWeapon(InputAction.CallbackContext context)
