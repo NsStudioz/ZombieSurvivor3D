@@ -46,6 +46,13 @@ public class HealthSystem : MonoBehaviour, IDamageable
             RegisterPlayerHit();
             RegenerateHealth();
         }
+
+        // Prototype
+        if (gameObject.tag == PLAYER_TAG && healthComponent.GetCurrentHealth() <= 0)
+            Debug.Log("Player: Died!");
+
+        else if (gameObject.tag == ENEMY_TAG && healthComponent.GetCurrentHealth() <= 0)
+            Debug.Log("Enemy: Died!");
     }
 
     private void OnDestroy()
@@ -88,25 +95,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
             DamageOld(1);
             timeElapsed = timeElapsedThreshold;
             Debug.Log("Player Health: " + healthComponent.GetCurrentHealth());
-
-            if (healthComponent.GetCurrentHealth() <= 0)
-                Debug.Log("Player: Died!");  
         }
-
-        // PROTOTYPE:
-        if (gameObject.CompareTag(ENEMY_TAG) && enemyCol.CompareTag("EnemyKiller"))
-        {
-            DamageOld(50);
-            Debug.Log("Enemy Hit!");
-
-            if (healthComponent.GetCurrentHealth() <= 0)
-            {
-                Destroy(transform.parent.gameObject);
-                Debug.Log("Enemy: Died!");
-            }
-        }
-
-        //---------------------------------------------------
     }
 
     private void RegisterPlayerHit()
@@ -130,16 +119,20 @@ public class HealthSystem : MonoBehaviour, IDamageable
         }
     }
 
-    private void DamageEnemy()
-    {
-        if (gameObject.tag == ENEMY_TAG)
-        {
-            DamageOld(50);
-        }
-    }
-
     public void TakeDamage(int damageAmount)
     {
         healthComponent.TakeDamage(damageAmount);
     }
 }
+
+
+/*            if (healthComponent.GetCurrentHealth() <= 0)
+                Debug.Log("Player: Died!");  */
+
+/*    private void DamageEnemy()
+    {
+        if (gameObject.tag == ENEMY_TAG)
+        {
+            DamageOld(50);
+        }
+    }*/
