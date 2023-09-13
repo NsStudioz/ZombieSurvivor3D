@@ -9,15 +9,15 @@ public class HandheldSO : ScriptableObject
     [SerializeField] public GameObject HandheldPrefab;
     [SerializeField] public RuntimeAnimatorController RigAnimController;
 
-    public HandheldTypes HandheldType { get; private set; }
-    public FiringModes FiringMode { get; private set; }
+    public HandheldTypes HandheldType = HandheldTypes.Pistol;
+    public FiringModes FiringMode = FiringModes.Single;
 
     [Header("Attributes")]
-    [SerializeField] string handheldName;
-    [SerializeField] int ammoCapacity;
-    [SerializeField] int fireRate;
-    [SerializeField] int fireRateCooldown;
-    [SerializeField] float reloadCooldown;
+    [SerializeField] public string handheldName;
+    [SerializeField] public int ammoCapacity;
+    [SerializeField] public float fireRate;
+    [SerializeField] public float fireRateCooldown;
+    [SerializeField] public float reloadCooldown;
 
     public enum HandheldTypes
     {
