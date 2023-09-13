@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthSystem : MonoBehaviour
+public class HealthSystem : MonoBehaviour, IDamageable
 {
 
     [Header("Main Elements")]
@@ -138,4 +138,8 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    public void Damage(int damageAmount)
+    {
+        TakeDamage(damageAmount);
+    }
 }
