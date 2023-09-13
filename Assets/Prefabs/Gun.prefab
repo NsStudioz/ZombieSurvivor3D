@@ -151,7 +151,7 @@ MonoBehaviour:
   reloadCooldown: 0
   HandheldType: 
   FiringMode: 
-  bulletTestGO: {fileID: 1257796557909267476, guid: 137a9f5ca4016a04e8a0df0d336efabf,
+  bulletTestGO: {fileID: 8025252746644006777, guid: 3dab88e383c0d69408728419c032f549,
     type: 3}
   isLeftMouseClickHeld: 0
 --- !u!114 &3161092374749290056
