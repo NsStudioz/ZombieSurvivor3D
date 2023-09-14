@@ -8,10 +8,19 @@ public class BulletVelocity : MonoBehaviour
     [SerializeField] private float bulletSpeed;
 
     // Future Uses
-/*    [SerializeField] private float _UpwardForce;
-    [SerializeField] private float _BulletDownwardForce;
-    [SerializeField] private float _BulletDownwardForceThreshold;*/
+    /*    [SerializeField] private float _UpwardForce;
+        [SerializeField] private float _BulletDownwardForce;
+        [SerializeField] private float _BulletDownwardForceThreshold;*/
 
+    private void OnEnable()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
 
     void Update()
     {
@@ -22,6 +31,11 @@ public class BulletVelocity : MonoBehaviour
     {
         float speed = bulletSpeed * deltaTime;
         transform.Translate(transform.forward * speed, Space.World);
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 
 }

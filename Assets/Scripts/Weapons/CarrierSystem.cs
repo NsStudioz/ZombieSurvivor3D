@@ -45,6 +45,7 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     private void OnEnable()
     {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         playerInput.actions.FindActionMap("GameplayControls").Enable();
         playerInput.actions.FindActionMap("InteractionControls").Enable();
     }
@@ -53,6 +54,16 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
     {
         playerInput.actions.FindActionMap("GameplayControls").Disable();
         playerInput.actions.FindActionMap("InteractionControls").Disable();
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 
     #endregion

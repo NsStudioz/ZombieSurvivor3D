@@ -38,17 +38,25 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
     private void OnEnable()
     {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         CarrierSystem.OnInteractSimilarHandheld += RestockHandheldAmmo;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         CarrierSystem.OnInteractSimilarHandheld -= RestockHandheldAmmo;
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
     private void RestockHandheldAmmo(HandheldSO handheld)
     {
         ammoCapacity = handheld.ammoCapacity;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        if (this != null)
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 
     #endregion

@@ -7,6 +7,16 @@ public class BulletDamage : MonoBehaviour
 
     [SerializeField] int bulletDamage;
 
+    private void OnEnable()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Enemy"))
@@ -17,8 +27,13 @@ public class BulletDamage : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
         // Play effects on hit maybe... 
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 
 }
