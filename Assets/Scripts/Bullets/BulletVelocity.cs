@@ -7,6 +7,11 @@ public class BulletVelocity : MonoBehaviour
 
     [SerializeField] private float bulletSpeed;
 
+    // Future Uses
+/*    [SerializeField] private float _UpwardForce;
+    [SerializeField] private float _BulletDownwardForce;
+    [SerializeField] private float _BulletDownwardForceThreshold;*/
+
 
     void Update()
     {
