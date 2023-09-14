@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1774669298440197007}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Gun2
   m_TagString: Handheld
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1774669299401039766}
   - component: {fileID: 5238881678683326162}
   - component: {fileID: 983456693613218915}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Model
   m_TagString: Handheld
   m_Icon: {fileID: 0}
