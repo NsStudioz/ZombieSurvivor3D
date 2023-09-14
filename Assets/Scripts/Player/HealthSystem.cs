@@ -46,13 +46,6 @@ public class HealthSystem : MonoBehaviour, IDamageable
             RegisterPlayerHit();
             RegenerateHealth();
         }
-
-        // Prototype
-        if (gameObject.tag == PLAYER_TAG && healthComponent.GetCurrentHealth() <= 0)
-            Debug.Log("Player: Died!");
-
-        else if (gameObject.tag == ENEMY_TAG && healthComponent.GetCurrentHealth() <= 0)
-            Debug.Log("Enemy: Died!");
     }
 
     private void OnDestroy()
@@ -122,17 +115,9 @@ public class HealthSystem : MonoBehaviour, IDamageable
     public void TakeDamage(int damageAmount)
     {
         healthComponent.TakeDamage(damageAmount);
+
+        // Prototype
+        if (healthComponent.GetCurrentHealth() <= 0)
+            Debug.Log("Object Died!: " + gameObject.name);
     }
 }
-
-
-/*            if (healthComponent.GetCurrentHealth() <= 0)
-                Debug.Log("Player: Died!");  */
-
-/*    private void DamageEnemy()
-    {
-        if (gameObject.tag == ENEMY_TAG)
-        {
-            DamageOld(50);
-        }
-    }*/
