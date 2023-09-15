@@ -23,7 +23,7 @@ public class EnemyAttack : MonoBehaviour
         {
             IDamageable damageable = col.GetComponent<IDamageable>();
             damageable?.TakeDamage(damageToPlayer);
-            Debug.Log("Player Hit");
+            //Debug.Log("Player Hit");
         }
     }
 
