@@ -21,8 +21,8 @@ public class EnemyAttack : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            IDamageable damageable = col.GetComponent<IDamageable>();
-            damageable?.TakeDamage(damageToPlayer);
+            IDamageable damageableNew = col.GetComponent<IDamageable>();
+            damageableNew?.TakeDamage(damageToPlayer);
             //Debug.Log("Player Hit");
         }
     }

@@ -74,16 +74,21 @@ public class HealthSystem : MonoBehaviour, IDamageable
 
     private void RegenerateHealth()
     {
-        if (healthComponent.GetCurrentHealth() <= 0)
-            return;
-
         if (isPlayerHit)
+        {
+            if (healthComponent.GetCurrentHealth() <= 0)
+            {
+                //isPlayerHit = false;
+                return;
+            }
+
             timeElapsed -= Time.deltaTime;
 
-        if (timeElapsed <= 0)
-        {
-            healthComponent.SetCurrentHealthToMax();
-            isPlayerHit = false;
+            if (timeElapsed <= 0)
+            {
+                healthComponent.SetCurrentHealthToMax();
+                isPlayerHit = false;
+            }
         }
     }
 
@@ -100,6 +105,9 @@ public class HealthSystem : MonoBehaviour, IDamageable
         }
 
         if (healthComponent.GetCurrentHealth() <= 0)
+        {
+            isPlayerHit = false;
             Debug.Log("Object Died!: " + gameObject.name);
+        }
     }
 }
