@@ -2774,16 +2774,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 2261602777475772770, guid: 454d991b25d233c40be5d8c39160892a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2261602777475772771, guid: 454d991b25d233c40be5d8c39160892a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2261602777475772771, guid: 454d991b25d233c40be5d8c39160892a,
         type: 3}
       propertyPath: playerTransform
@@ -2794,11 +2784,6 @@ PrefabInstance:
       propertyPath: retreatTransform
       value: 
       objectReference: {fileID: 896860527}
-    - target: {fileID: 2261602777475772772, guid: 454d991b25d233c40be5d8c39160892a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2261602777475772773, guid: 454d991b25d233c40be5d8c39160892a,
         type: 3}
       propertyPath: m_RootOrder

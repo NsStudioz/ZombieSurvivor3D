@@ -4,12 +4,31 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    int damageToPlayer = 1;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnEnable()
     {
-        if (other.gameObject.CompareTag("Player"))
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Enemy: Collision with Player");
+            IDamageable damageable = col.GetComponent<IDamageable>();
+            damageable?.TakeDamage(damageToPlayer);
+            Debug.Log("Player Hit");
         }
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 }
