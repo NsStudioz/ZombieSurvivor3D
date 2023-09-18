@@ -19,9 +19,13 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     [SerializeField] float reloadCooldown;
 
     [Header("Second Attributes")]
-    [SerializeField] string HandheldType = "";
-    [SerializeField] string FiringMode = "";
     [SerializeField] int FiringModeInt = 0;
+
+    [Header("Firing Modes Attributes")]
+    private const int MODE_SINGLE = 3;
+    private const int MODE_SEMI = 2;
+    private const int MODE_BURST = 1;
+    private const int MODE_AUTO = 0;
     
 
     [Header("Testing Purposes")]
@@ -109,10 +113,10 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
         fireRate = carrierSystem.GetCurrentHandheldScriptableObject().fireRate;
         fireRateCooldown = carrierSystem.GetCurrentHandheldScriptableObject().fireRateCooldown;
         reloadCooldown = carrierSystem.GetCurrentHandheldScriptableObject().reloadCooldown;
-        //  
-        HandheldType = carrierSystem.GetCurrentHandheldScriptableObject().HandheldType.ToString();
-        FiringMode = carrierSystem.GetCurrentHandheldScriptableObject().FiringMode.ToString();
         FiringModeInt = (int)carrierSystem.GetCurrentHandheldScriptableObject().FiringMode;
+        //  
+        //HandheldType = carrierSystem.GetCurrentHandheldScriptableObject().HandheldType.ToString();
+        //FiringMode = carrierSystem.GetCurrentHandheldScriptableObject().FiringMode.ToString();
     }
 
 
