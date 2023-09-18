@@ -22,6 +22,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int minFloat;
     [SerializeField] int maxFloat;
 
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
     void Start()
     {
         
@@ -30,6 +35,18 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        
+
     }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
+    }
+
 }
