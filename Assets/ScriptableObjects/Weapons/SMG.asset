@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb26310c992894785621a878ec14b3, type: 3}
+  m_Name: SMG
+  m_EditorClassIdentifier: 
+  HandheldPrefab: {fileID: 1774669298440197006, guid: de7b41c054c89d349bf904c2f5d8f18c,
+    type: 3}
+  RigAnimController: {fileID: 9100000, guid: 5190babeefada97469517f09eb5c893f, type: 2}
+  HandheldType: 3
+  FiringMode: 0
+  handheldName: RifleTest2
+  ammoCapacity: 20
+  fireRate: 1
+  fireRateCooldown: 0.05
+  reloadCooldown: 0
