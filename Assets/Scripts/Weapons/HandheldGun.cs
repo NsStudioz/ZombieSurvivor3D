@@ -21,6 +21,8 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
     [Header("Second Attributes")]
     [SerializeField] string HandheldType = "";
     [SerializeField] string FiringMode = "";
+    [SerializeField] int FiringModeInt = 0;
+    
 
     [Header("Testing Purposes")]
     [SerializeField] GameObject bulletTestGO;
@@ -110,6 +112,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
         //  
         HandheldType = carrierSystem.GetCurrentHandheldScriptableObject().HandheldType.ToString();
         FiringMode = carrierSystem.GetCurrentHandheldScriptableObject().FiringMode.ToString();
+        FiringModeInt = (int)carrierSystem.GetCurrentHandheldScriptableObject().FiringMode;
     }
 
 
