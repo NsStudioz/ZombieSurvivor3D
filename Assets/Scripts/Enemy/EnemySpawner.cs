@@ -6,15 +6,18 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [Header("Main Elements")]
-    [SerializeField] List<GameObject> enemyStandardPrefabs = new List<GameObject>();
+    [SerializeField] GameObject enemyStandardPrefab;
+    [SerializeField] Queue<GameObject> enemyQueue = new Queue<GameObject>();
     [SerializeField] List<Transform> spawnPoints = new List<Transform>();
 
     [Header("Spawning")]
     [SerializeField] int pointerIndex = 0;
-    [SerializeField] int intRandomizer;
     //
     [SerializeField] float timer;
     [SerializeField] float timerThreshold;
+    //
+    [SerializeField] int enemyHealth = 0;
+    [SerializeField] int enemyMaxCount = 5;
 
     [Header("Limits")]
     [SerializeField] int minInt;
@@ -29,13 +32,21 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        
+        enemyQueue.Clear();
+        timer = Random.Range(minFloat, maxFloat);
     }
 
 
     void Update()
     {
+        timer -= Time.deltaTime;
 
+        if (timer <= 0f)
+        {
+            pointerIndex = Random.Range(minInt, maxInt);
+            GameObject newEnemyInstance = Instantiate(enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
+            timer = Random.Range(minFloat, maxFloat);
+        }
     }
 
     private void OnDestroy()
