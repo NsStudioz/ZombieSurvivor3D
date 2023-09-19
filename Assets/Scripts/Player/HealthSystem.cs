@@ -39,6 +39,12 @@ public class HealthSystem : MonoBehaviour, IDamageable
             SetEnemyTypeHealth();
     }
 
+    private void OnEnable()
+    {
+        if (gameObject.tag == ENEMY_TAG)
+            SetEnemyTypeHealth();
+    }
+
     private void Update()
     {
         RegenerateHealth();
