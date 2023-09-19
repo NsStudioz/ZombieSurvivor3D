@@ -7,7 +7,7 @@ public class EnemyNavMesh : MonoBehaviour
 {
     NavMeshAgent navMeshAgent;
     [SerializeField] Transform target = null;
-    [SerializeField] Transform playerTransform;
+    //[SerializeField] Transform playerTransform;
     [SerializeField] Transform retreatTransform;
 
     private void Awake()
@@ -17,24 +17,31 @@ public class EnemyNavMesh : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged; // prevents memory leaks and errors after the object is destroyed.
+        // prevents memory leaks and errors after the object is destroyed.
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged; 
     }
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        target = PlayerTag.Instance.playerTransform;
     }
 
     void Update()
     {
         // Works fine with GameState:
-        target = playerTransform;
-        navMeshAgent.destination = target.position;
+        if(target != null)
+        {
+            //target = playerTransform;
+            navMeshAgent.destination = target.position;
+        }
+
         //-------------------------------------------
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            target = playerTransform;
+            //target = playerTransform;
             navMeshAgent.destination = target.position;
         }
         else if (Input.GetKeyDown(KeyCode.V))
