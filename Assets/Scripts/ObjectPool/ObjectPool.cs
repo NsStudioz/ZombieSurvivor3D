@@ -19,13 +19,18 @@ public class ObjectPool : MonoBehaviour
 
     public void SpawnObject(Queue<GameObject> queueGO, int maxQueueCount ,GameObject prefabInstance, Vector3 position, Quaternion rotation)
     {
-        if(queueGO.Count < maxQueueCount)
+/*        if(queueGO.Count < maxQueueCount)
         {
-            GameObject newObjectInstance = Instantiate(prefabInstance, position, rotation);
-            // add to EnemyMaxCount
+            Instantiate(prefabInstance, position, rotation);
         }
-        else if(queueGO.Count >= maxQueueCount && !queueGO.Peek().gameObject.activeInHierarchy)
+        else
+            PopObjectFromPool(queueGO, position, rotation);*/
+
+        if(queueGO.Count > 0)
             PopObjectFromPool(queueGO, position, rotation);
+
+        else if (queueGO.Count <= 0)
+            Instantiate(prefabInstance, position, rotation);
     }
 
     private static void PopObjectFromPool(Queue<GameObject> queueGO, Vector3 position, Quaternion rotation)
@@ -39,6 +44,13 @@ public class ObjectPool : MonoBehaviour
     {
         instance.transform.position = position;
         instance.transform.rotation = rotation;
+    }
+
+    private void DespawnObject(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
+    {
+        queueGO.Enqueue(instanceToDespawn);
+        instanceToDespawn.SetActive(false);
+        SetObjectsPositionAndRotation(instanceToDespawn, position, rotation);
     }
 
     public void DespawnObjectDelay(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
@@ -56,14 +68,6 @@ public class ObjectPool : MonoBehaviour
         yield return new WaitForSeconds(timeDelay);
         DespawnObject(queueGO, instanceToDespawn, position, rotation);
     }
-
-    private void DespawnObject(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
-    {
-        queueGO.Enqueue(instanceToDespawn);
-        instanceToDespawn.SetActive(false);
-        SetObjectsPositionAndRotation(instanceToDespawn, position, rotation);
-    }
-
 
 
 }
