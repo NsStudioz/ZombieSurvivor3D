@@ -16,8 +16,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float timer;
     [SerializeField] float timerThreshold;
     //
-    [SerializeField] int enemyHealth = 0;
-    [SerializeField] int enemyMaxCount = 5;
+    //[SerializeField] int enemyHealth = 0;
+    //[SerializeField] int enemyMaxCount = 5;
 
     [Header("Limits")]
     [SerializeField] int minInt;
