@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     //
     //[SerializeField] int enemyHealth = 100;
     public int EnemyMaxCount { get; private set; }
+    [SerializeField] private int remainingEnemies = 10;
     [SerializeField] private int enemyCount = 0;
 
     [Header("Limits")]
@@ -45,9 +46,11 @@ public class EnemySpawner : MonoBehaviour
         timer = Random.Range(minFloat, maxFloat);
     }
 
-
     void Update()
     {
+        if (remainingEnemies <= 0)
+            return;
+
         if (enemyCount >= EnemyMaxCount)
             return;
 
@@ -57,6 +60,7 @@ public class EnemySpawner : MonoBehaviour
         {
             pointerIndex = Random.Range(minInt, maxInt);
             ObjectPool.Instance.SpawnObject(enemyQueue, EnemyMaxCount, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
+            remainingEnemies--;
             enemyCount++;
             timer = Random.Range(minFloat, maxFloat);
         }
@@ -64,7 +68,12 @@ public class EnemySpawner : MonoBehaviour
 
     public void ReduceEnemyCount(GameObject instanceToDespawn)
     {
-        ObjectPool.Instance.DespawnObjectDelay(1, enemyQueue, instanceToDespawn, transform.position, transform.rotation);
+        if (enemyQueue.Count >= EnemyMaxCount)
+            Destroy(instanceToDespawn);
+
+        else if(enemyQueue.Count < EnemyMaxCount)
+            ObjectPool.Instance.DespawnObjectDelay(0.2f, enemyQueue, instanceToDespawn, transform.position, transform.rotation);
+
         enemyCount--;
     }
 
@@ -83,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
     private void ClearQueue()
     {
         enemyQueue.Clear();
-        enemyCount = 0;
+        //remainingEnemies = 0;
     }
 
 }
