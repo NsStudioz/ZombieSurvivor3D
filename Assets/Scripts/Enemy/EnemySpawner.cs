@@ -16,8 +16,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float timer;
     [SerializeField] float timerThreshold;
     //
-    //[SerializeField] int enemyHealth = 0;
-    //[SerializeField] int enemyMaxCount = 5;
+    //[SerializeField] int enemyHealth = 100;
+    public int EnemyMaxCount { get; private set; }
+    [SerializeField] private int enemyCount = 0;
 
     [Header("Limits")]
     [SerializeField] int minInt;
@@ -32,19 +33,23 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        enemyQueue.Clear();
+        EnemyMaxCount = 5;
         timer = Random.Range(minFloat, maxFloat);
     }
 
 
     void Update()
     {
+        if (enemyCount >= EnemyMaxCount)
+            return;
+
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
         {
             pointerIndex = Random.Range(minInt, maxInt);
-            GameObject newEnemyInstance = Instantiate(enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
+            ObjectPool.Instance.SpawnObject(enemyQueue, EnemyMaxCount, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
+            enemyCount++;
             timer = Random.Range(minFloat, maxFloat);
         }
     }
@@ -52,12 +57,19 @@ public class EnemySpawner : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-    }
 
+        ClearQueue();
+    }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
         enabled = newGameState == GameStateManager.GameState.Gameplay;
+    }
+
+    private void ClearQueue()
+    {
+        enemyQueue.Clear();
+        enemyCount = 0;
     }
 
 }
