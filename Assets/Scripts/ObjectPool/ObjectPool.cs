@@ -5,6 +5,17 @@ using UnityEngine.UIElements;
 
 public class ObjectPool : MonoBehaviour
 {
+    public static ObjectPool Instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.Log("Something went wrong. there are more than 1 buildmanagers in the game!");
+            return;
+        }
+        Instance = this;
+    }
 
     public void SpawnObject(Queue<GameObject> queueGO, int maxQueueCount ,GameObject prefabInstance, Vector3 position, Quaternion rotation)
     {
@@ -13,7 +24,7 @@ public class ObjectPool : MonoBehaviour
             GameObject newObjectInstance = Instantiate(prefabInstance, position, rotation);
             // add to EnemyMaxCount
         }
-        else
+        else if(queueGO.Count >= maxQueueCount && !queueGO.Peek().gameObject.activeInHierarchy)
             PopObjectFromPool(queueGO, position, rotation);
     }
 
