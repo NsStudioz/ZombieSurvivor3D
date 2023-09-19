@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
 
     [Header("Main Elements")]
     [SerializeField] GameObject enemyStandardPrefab;
@@ -28,6 +29,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Debug.Log("Something went wrong. there are more than 1 buildmanagers in the game!");
+            return;
+        }
+        Instance = this;
+
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
@@ -54,10 +62,16 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void ReduceEnemyCount(GameObject instanceToDespawn)
+    {
+        ObjectPool.Instance.DespawnObjectDelay(1, enemyQueue, instanceToDespawn, transform.position, transform.rotation);
+        enemyCount--;
+    }
+
+
     private void OnDestroy()
     {
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-
         ClearQueue();
     }
 

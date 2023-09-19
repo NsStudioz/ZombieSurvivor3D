@@ -2039,12 +2039,11 @@ MonoBehaviour:
   pointerIndex: 0
   timer: 0
   timerThreshold: 5
-  enemyHealth: 0
   enemyCount: 0
   minInt: 0
   maxInt: 5
-  minFloat: 3
-  maxFloat: 10
+  minFloat: 1
+  maxFloat: 3
 --- !u!1 &986497878
 GameObject:
   m_ObjectHideFlags: 0
