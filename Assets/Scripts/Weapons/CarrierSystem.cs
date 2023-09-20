@@ -27,6 +27,8 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     public static event Action<HandheldSO> OnInteractSimilarHandheld;
 
+    public static event Action<GameObject> OnHandheldChanged;
+
     #region Helpers
 
     public Animator GetAnimator()
@@ -71,6 +73,7 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
     private void Awake()
     {
         SwitchHandheld(EquipableHandhelds[0]);
+        OnHandheldChanged?.Invoke(EquipableHandhelds[0].HandheldBulletPrefab);
     }
 
     private void OnTriggerEnter(Collider col)

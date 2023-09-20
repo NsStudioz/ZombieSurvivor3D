@@ -115,8 +115,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
         reloadCooldown = carrierSystem.GetCurrentHandheldScriptableObject().reloadCooldown;
         FiringModeInt = (int)carrierSystem.GetCurrentHandheldScriptableObject().FiringMode;
         //  
-        //HandheldType = carrierSystem.GetCurrentHandheldScriptableObject().HandheldType.ToString();
-        //FiringMode = carrierSystem.GetCurrentHandheldScriptableObject().FiringMode.ToString();
+        bulletTestGO = carrierSystem.GetCurrentHandheldScriptableObject().HandheldBulletPrefab;
     }
 
 
