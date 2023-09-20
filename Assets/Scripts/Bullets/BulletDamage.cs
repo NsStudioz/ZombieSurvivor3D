@@ -7,7 +7,7 @@ public class BulletDamage : MonoBehaviour
 
     [SerializeField] int bulletDamage;
 
-    private void OnEnable()
+    private void Start()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }

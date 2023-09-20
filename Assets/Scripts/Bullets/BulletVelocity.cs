@@ -12,7 +12,7 @@ public class BulletVelocity : MonoBehaviour
         [SerializeField] private float _BulletDownwardForce;
         [SerializeField] private float _BulletDownwardForceThreshold;*/
 
-    private void OnEnable()
+    private void Start()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
