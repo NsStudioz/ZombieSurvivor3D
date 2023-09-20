@@ -150,6 +150,7 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
             {
                 EquipableHandhelds[_CurrentHandheldIndex] = _InteractableHandheldSO;
                 SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+                OnHandheldChanged?.Invoke(EquipableHandhelds[_CurrentHandheldIndex].HandheldBulletPrefab);
             }
         }
     }
@@ -162,6 +163,9 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
             _CurrentHandheldIndex = Mathf.Clamp(_CurrentHandheldIndex, 0, EquipableHandhelds.Count - 1); // clamp between 0 to max count - 1.
 
             SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+
+            // Bug: deletes bullets on press, regardless if this is the correct behaviour:
+            OnHandheldChanged?.Invoke(EquipableHandhelds[_CurrentHandheldIndex].HandheldBulletPrefab);
         }
 
         // Using this code block to avoid binding/unbiding from our input system:

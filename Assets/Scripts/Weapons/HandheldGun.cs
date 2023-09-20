@@ -78,7 +78,8 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
             if (fireRate <= 0f)
             {
-                GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
+                //GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
+                BulletSpawner.Instance.SpawnBullet(transform.position, transform.rotation);
                 ammoCapacity--;
                 fireRate = fireRateCooldown;
             }
