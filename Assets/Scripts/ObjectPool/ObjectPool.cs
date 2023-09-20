@@ -23,9 +23,14 @@ public class ObjectPool : MonoBehaviour
             PopObjectFromPool(queueGO, position, rotation);
 
         else if (queueGO.Count <= 0)
-            Instantiate(prefabInstance, position, rotation);
+        {
+            GameObject newInstance = Instantiate(prefabInstance, position, rotation);
+            // Observe this line of code!:
+            newInstance.transform.SetParent(this.transform, true);
+        }
     }
 
+    // static bug???
     private static void PopObjectFromPool(Queue<GameObject> queueGO, Vector3 position, Quaternion rotation)
     {
         GameObject existingPrefabInstance = queueGO.Dequeue();
@@ -33,6 +38,7 @@ public class ObjectPool : MonoBehaviour
         SetObjectsPositionAndRotation(existingPrefabInstance, position, rotation);
     }
 
+    // static bug???
     private static void SetObjectsPositionAndRotation(GameObject instance, Vector3 position, Quaternion rotation)
     {
         instance.transform.position = position;
