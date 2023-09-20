@@ -19,6 +19,6 @@ MonoBehaviour:
   FiringMode: 0
   handheldName: RifleTest2
   ammoCapacity: 15
-  fireRate: 1
+  fireRate: 0
   fireRateCooldown: 0.5
   reloadCooldown: 0
