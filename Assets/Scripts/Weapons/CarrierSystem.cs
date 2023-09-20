@@ -70,7 +70,7 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     #endregion
 
-    private void Awake()
+    private void Start()
     {
         SwitchHandheld(EquipableHandhelds[0]);
         OnHandheldChanged?.Invoke(EquipableHandhelds[0].HandheldBulletPrefab);

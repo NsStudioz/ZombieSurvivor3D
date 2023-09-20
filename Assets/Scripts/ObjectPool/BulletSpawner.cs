@@ -21,6 +21,8 @@ public class BulletSpawner : MonoBehaviour
         }
         Instance = this;
 
+        CarrierSystem.OnHandheldChanged += SwitchBulletType;
+
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
