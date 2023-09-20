@@ -19,13 +19,6 @@ public class ObjectPool : MonoBehaviour
 
     public void SpawnObject(Queue<GameObject> queueGO, int maxQueueCount ,GameObject prefabInstance, Vector3 position, Quaternion rotation)
     {
-/*        if(queueGO.Count < maxQueueCount)
-        {
-            Instantiate(prefabInstance, position, rotation);
-        }
-        else
-            PopObjectFromPool(queueGO, position, rotation);*/
-
         if(queueGO.Count > 0)
             PopObjectFromPool(queueGO, position, rotation);
 
