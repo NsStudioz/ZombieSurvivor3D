@@ -30,16 +30,15 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    // static bug???
-    private static void PopObjectFromPool(Queue<GameObject> queueGO, Vector3 position, Quaternion rotation)
+
+    private void PopObjectFromPool(Queue<GameObject> queueGO, Vector3 position, Quaternion rotation)
     {
         GameObject existingPrefabInstance = queueGO.Dequeue();
         existingPrefabInstance.SetActive(true);
         SetObjectsPositionAndRotation(existingPrefabInstance, position, rotation);
     }
 
-    // static bug???
-    private static void SetObjectsPositionAndRotation(GameObject instance, Vector3 position, Quaternion rotation)
+    private void SetObjectsPositionAndRotation(GameObject instance, Vector3 position, Quaternion rotation)
     {
         instance.transform.position = position;
         instance.transform.rotation = rotation;
