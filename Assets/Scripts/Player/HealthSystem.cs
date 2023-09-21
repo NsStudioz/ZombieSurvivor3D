@@ -123,7 +123,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
     {
         if(gameObject.tag == ENEMY_TAG && healthComponent.GetCurrentHealth() <= 0)
         {
-            EnemySpawner.Instance.ReduceEnemyCount(transform.parent.gameObject);
+            EnemySpawner.Instance.DespawnEnemy(transform.parent.gameObject);
         }
     }
 

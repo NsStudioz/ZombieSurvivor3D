@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     //
     //[SerializeField] int enemyHealth = 100;
     public int EnemyMaxCount { get; private set; }
+    [SerializeField] private int enemyMaxCountModifier = 5;
     [SerializeField] private int remainingEnemies = 10;
     [SerializeField] private int enemyCount = 0;
 
@@ -32,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.Log("Something went wrong. there are more than 1 buildmanagers in the game!");
+            Debug.Log("Something went wrong. there are more than 1 EnemySpawner in the game!");
             return;
         }
         Instance = this;
@@ -42,8 +43,9 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        EnemyMaxCount = 5;
-        timer = Random.Range(minFloat, maxFloat);
+        EnemyMaxCount = enemyMaxCountModifier;
+
+        RandomizeEnemySpawn();
     }
 
     void Update()
@@ -57,16 +59,20 @@ public class EnemySpawner : MonoBehaviour
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
-        {
-            pointerIndex = Random.Range(minInt, maxInt);
-            ObjectPool.Instance.SpawnObject(enemyQueue, EnemyMaxCount, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
-            remainingEnemies--;
-            enemyCount++;
-            timer = Random.Range(minFloat, maxFloat);
-        }
+            SpawnEnemy();
     }
 
-    public void ReduceEnemyCount(GameObject instanceToDespawn)
+    private void SpawnEnemy()
+    {
+        ObjectPool.Instance.SpawnObject(enemyQueue, EnemyMaxCount, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
+
+        remainingEnemies--;
+        enemyCount++;
+
+        RandomizeEnemySpawn();
+    }
+
+    public void DespawnEnemy(GameObject instanceToDespawn)
     {
         if (enemyQueue.Count >= EnemyMaxCount)
             Destroy(instanceToDespawn);
@@ -77,6 +83,11 @@ public class EnemySpawner : MonoBehaviour
         enemyCount--;
     }
 
+    private void RandomizeEnemySpawn()
+    {
+        pointerIndex = Random.Range(minInt, maxInt);
+        timer = Random.Range(minFloat, maxFloat);
+    }
 
     private void OnDestroy()
     {
@@ -92,7 +103,7 @@ public class EnemySpawner : MonoBehaviour
     private void ClearQueue()
     {
         enemyQueue.Clear();
-        //remainingEnemies = 0;
+        remainingEnemies = 0;
     }
 
 }
