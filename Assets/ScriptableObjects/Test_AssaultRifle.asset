@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HandheldPrefab: {fileID: 1774669298440197006, guid: adac71426dfa84243a71753fb60cff8d,
     type: 3}
+  HandheldBulletPrefab: {fileID: 8025252746644006777, guid: 3dab88e383c0d69408728419c032f549,
+    type: 3}
   RigAnimController: {fileID: 9100000, guid: 5190babeefada97469517f09eb5c893f, type: 2}
   HandheldType: 3
   FiringMode: 0
   handheldName: RifleTest
   ammoCapacity: 30
-  fireRate: 1
+  fireRate: 0
   fireRateCooldown: 0.5
   reloadCooldown: 0

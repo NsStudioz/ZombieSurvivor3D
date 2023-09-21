@@ -39,6 +39,12 @@ public class HealthSystem : MonoBehaviour, IDamageable
             SetEnemyTypeHealth();
     }
 
+    private void OnEnable()
+    {
+        if (gameObject.tag == ENEMY_TAG)
+            SetEnemyTypeHealth();
+    }
+
     private void Update()
     {
         RegenerateHealth();
@@ -104,10 +110,21 @@ public class HealthSystem : MonoBehaviour, IDamageable
             isPlayerHit = true;
         }
 
+        DespawnEnemy();
+
         if (healthComponent.GetCurrentHealth() <= 0)
         {
             isPlayerHit = false;
-            Debug.Log("Object Died!: " + gameObject.name);
+            Debug.Log("Object Died!: " + transform.parent.gameObject.name);
         }
     }
+
+    private void DespawnEnemy()
+    {
+        if(gameObject.tag == ENEMY_TAG && healthComponent.GetCurrentHealth() <= 0)
+        {
+            EnemySpawner.Instance.ReduceEnemyCount(transform.parent.gameObject);
+        }
+    }
+
 }

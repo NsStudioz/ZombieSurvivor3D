@@ -94,11 +94,12 @@ GameObject:
   - component: {fileID: 1973735651369178557}
   - component: {fileID: 1973735651369178556}
   - component: {fileID: 1973735651369178559}
-  - component: {fileID: 1973735651369178558}
   - component: {fileID: 754086657}
   - component: {fileID: 754086652}
   - component: {fileID: 754086656}
   - component: {fileID: 1973735651707725640}
+  - component: {fileID: 1932851888}
+  - component: {fileID: 1932851880}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -173,20 +174,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1973735651369178558
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973735651369178545}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &754086657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -376,6 +363,32 @@ MonoBehaviour:
   m_DefaultActionMap: InteractionControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!65 &1932851888
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973735651369178545}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1932851880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973735651369178545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fc292c848c8bd4887c365dcbb6b5ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
 --- !u!1 &5024685678032073875
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +400,7 @@ GameObject:
   - component: {fileID: 6132592083931102624}
   - component: {fileID: 4693091567844335043}
   - component: {fileID: 736888081}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6100891875041561533}
   - component: {fileID: 5649784629110535979}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PlaceArmsRigHere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

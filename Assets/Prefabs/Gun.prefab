@@ -149,10 +149,8 @@ MonoBehaviour:
   fireRate: 0
   fireRateCooldown: 0
   reloadCooldown: 0
-  HandheldType: 
-  FiringMode: 
-  bulletTestGO: {fileID: 8025252746644006777, guid: 3dab88e383c0d69408728419c032f549,
-    type: 3}
+  FiringModeInt: 0
+  bulletTestGO: {fileID: 0}
   isLeftMouseClickHeld: 0
 --- !u!114 &3161092374749290056
 MonoBehaviour:

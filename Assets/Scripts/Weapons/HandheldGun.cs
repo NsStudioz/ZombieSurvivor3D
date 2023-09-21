@@ -78,7 +78,8 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
 
             if (fireRate <= 0f)
             {
-                GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
+                //GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
+                BulletSpawner.Instance.SpawnBullet(transform.position, transform.rotation);
                 ammoCapacity--;
                 fireRate = fireRateCooldown;
             }
@@ -115,8 +116,7 @@ public class HandheldGun : MonoBehaviour, IHandheldObject
         reloadCooldown = carrierSystem.GetCurrentHandheldScriptableObject().reloadCooldown;
         FiringModeInt = (int)carrierSystem.GetCurrentHandheldScriptableObject().FiringMode;
         //  
-        //HandheldType = carrierSystem.GetCurrentHandheldScriptableObject().HandheldType.ToString();
-        //FiringMode = carrierSystem.GetCurrentHandheldScriptableObject().FiringMode.ToString();
+        bulletTestGO = carrierSystem.GetCurrentHandheldScriptableObject().HandheldBulletPrefab;
     }
 
 

@@ -7,6 +7,7 @@ public class HandheldSO : ScriptableObject
 {
     [Header("Main Elements")]
     [SerializeField] public GameObject HandheldPrefab;
+    [SerializeField] public GameObject HandheldBulletPrefab;
     [SerializeField] public RuntimeAnimatorController RigAnimController;
 
     public HandheldTypes HandheldType = HandheldTypes.Pistol;

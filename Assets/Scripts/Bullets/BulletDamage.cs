@@ -7,7 +7,7 @@ public class BulletDamage : MonoBehaviour
 
     [SerializeField] int bulletDamage;
 
-    private void OnEnable()
+    private void Start()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
@@ -24,8 +24,11 @@ public class BulletDamage : MonoBehaviour
             IDamageable damageable = col.GetComponent<IDamageable>();
             damageable?.TakeDamage(bulletDamage); // if damageable is not null...Then Damage
             //Debug.Log("Enemy Hit!");
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            BulletSpawner.Instance.DespawnBullet(gameObject);
         }
+
+        BulletSpawner.Instance.DespawnBullet(gameObject);
 
         //Destroy(gameObject);
         // Play effects on hit maybe... 

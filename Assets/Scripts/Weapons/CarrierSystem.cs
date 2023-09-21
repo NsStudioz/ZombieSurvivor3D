@@ -27,6 +27,8 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     public static event Action<HandheldSO> OnInteractSimilarHandheld;
 
+    public static event Action<GameObject> OnHandheldChanged;
+
     #region Helpers
 
     public Animator GetAnimator()
@@ -68,9 +70,10 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
 
     #endregion
 
-    private void Awake()
+    private void Start()
     {
         SwitchHandheld(EquipableHandhelds[0]);
+        OnHandheldChanged?.Invoke(EquipableHandhelds[0].HandheldBulletPrefab);
     }
 
     private void OnTriggerEnter(Collider col)
@@ -147,6 +150,7 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
             {
                 EquipableHandhelds[_CurrentHandheldIndex] = _InteractableHandheldSO;
                 SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+                OnHandheldChanged?.Invoke(EquipableHandhelds[_CurrentHandheldIndex].HandheldBulletPrefab);
             }
         }
     }
@@ -159,6 +163,9 @@ public class CarrierSystem : MonoBehaviour, ControlsPC.IGameplayControlsActions,
             _CurrentHandheldIndex = Mathf.Clamp(_CurrentHandheldIndex, 0, EquipableHandhelds.Count - 1); // clamp between 0 to max count - 1.
 
             SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+
+            // Bug: deletes bullets on press, regardless if this is the correct behaviour:
+            OnHandheldChanged?.Invoke(EquipableHandhelds[_CurrentHandheldIndex].HandheldBulletPrefab);
         }
 
         // Using this code block to avoid binding/unbiding from our input system:
