@@ -59,7 +59,7 @@ public class BulletSpawner : MonoBehaviour
             Destroy(instanceToDestroy);
 
             if (i <= 0)
-                bulletQueue.Clear();
+                ClearQueue();
         }
     }
 
