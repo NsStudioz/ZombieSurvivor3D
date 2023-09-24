@@ -17,6 +17,8 @@ public class ObjectPool : MonoBehaviour
         Instance = this;
     }
 
+    #region SpawnObject
+
     public void SpawnObject(Queue<GameObject> queueGO, int maxQueueCount ,GameObject prefabInstance, Vector3 position, Quaternion rotation)
     {
         if(queueGO.Count > 0)
@@ -30,18 +32,32 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-
     private void PopObjectFromPool(Queue<GameObject> queueGO, Vector3 position, Quaternion rotation)
     {
         GameObject existingPrefabInstance = queueGO.Dequeue();
         existingPrefabInstance.SetActive(true);
         SetObjectsPositionAndRotation(existingPrefabInstance, position, rotation);
     }
-
+    
     private void SetObjectsPositionAndRotation(GameObject instance, Vector3 position, Quaternion rotation)
     {
         instance.transform.position = position;
         instance.transform.rotation = rotation;
+    }
+
+    #endregion
+
+
+    #region DespawnObject
+    
+    public void DespawnObjectDelay(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
+    {
+        StartCoroutine(DespawnObjectCoroutine(timeDelay, queueGO, instanceToDespawn, position, rotation));
+    }
+    
+    public void DespawnObjectImmediately(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
+    {
+        DespawnObject(queueGO, instanceToDespawn, position, rotation);
     }
 
     private void DespawnObject(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
@@ -51,21 +67,12 @@ public class ObjectPool : MonoBehaviour
         SetObjectsPositionAndRotation(instanceToDespawn, position, rotation);
     }
 
-    public void DespawnObjectDelay(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
-    {
-        StartCoroutine(DespawnObjectCoroutine(timeDelay, queueGO, instanceToDespawn, position, rotation));
-    }
-
-    public void DespawnObjectImmediately(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
-    {
-        DespawnObject(queueGO, instanceToDespawn, position, rotation);
-    }
-
     private IEnumerator DespawnObjectCoroutine(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
     {
         yield return new WaitForSeconds(timeDelay);
         DespawnObject(queueGO, instanceToDespawn, position, rotation);
     }
 
+    #endregion
 
 }

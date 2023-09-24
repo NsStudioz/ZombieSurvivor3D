@@ -29,6 +29,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int minFloat;
     [SerializeField] int maxFloat;
 
+
+    #region Monobehavior Methods:
+
     private void Awake()
     {
         if (Instance != null)
@@ -62,6 +65,14 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy();
     }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        ClearQueue();
+    }
+
+    #endregion
+
     private void SpawnEnemy()
     {
         ObjectPool.Instance.SpawnObject(enemyQueue, EnemyMaxCount, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
@@ -87,12 +98,6 @@ public class EnemySpawner : MonoBehaviour
     {
         pointerIndex = Random.Range(minInt, maxInt);
         timer = Random.Range(minFloat, maxFloat);
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        ClearQueue();
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
