@@ -106,11 +106,11 @@ public class HealthSystem : MonoBehaviour, IDamageable
         if (gameObject.tag == PLAYER_TAG)
         {
             timeElapsed = timeElapsedThreshold;
-            //Debug.Log("Player Health: " + healthComponent.GetCurrentHealth());
             isPlayerHit = true;
         }
 
         DespawnEnemy();
+        UpdateScore(10);
 
         if (healthComponent.GetCurrentHealth() <= 0)
         {
@@ -124,7 +124,13 @@ public class HealthSystem : MonoBehaviour, IDamageable
         if(gameObject.tag == ENEMY_TAG && healthComponent.GetCurrentHealth() <= 0)
         {
             EnemySpawner.Instance.DespawnEnemy(transform.parent.gameObject);
+            UpdateScore(100);
         }
+    }
+
+    private void UpdateScore(int scorePoints)
+    {
+        ScoreSystem.Instance.UpdateScore(scorePoints);
     }
 
 }
