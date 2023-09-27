@@ -2,32 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Handheld", menuName = "New Handheld SO", order = 1)]
-public class HandheldSO : ScriptableObject
+namespace ZombieSurvivor.Carrier.Handheld
 {
-    [Header("Main Elements")]
-    [SerializeField] public GameObject HandheldPrefab;
-    [SerializeField] public GameObject HandheldBulletPrefab;
-    [SerializeField] public RuntimeAnimatorController RigAnimController;
-
-    public HandheldTypes HandheldType = HandheldTypes.Pistol;
-    public FiringModes FiringMode = FiringModes.Single;
-
-    [Header("Attributes")]
-    [SerializeField] public string handheldName;
-    [SerializeField] public int ammoCapacity;
-    [SerializeField] public float fireRate;
-    [SerializeField] public float fireRateCooldown;
-    [SerializeField] public float reloadCooldown;
-
-    public enum HandheldTypes
+    [CreateAssetMenu(fileName = "Handheld", menuName = "New Handheld SO", order = 1)]
+    public class HandheldSO : ScriptableObject
     {
-        Pistol, Shotgun, SubmachineGun, AssaultRifle, SniperRifle, Launcher, GiftedArmament,
-        Equipment, SpecialEquipment
-    }
+        [Header("Main Elements")]
+        [SerializeField] public GameObject HandheldPrefab;
+        [SerializeField] public GameObject HandheldBulletPrefab;
+        [SerializeField] public RuntimeAnimatorController RigAnimController;
 
-    public enum FiringModes
-    {
-        Auto, Burst, Semi, Single
+        public HandheldTypes HandheldType = HandheldTypes.Pistol;
+        public FiringModes FiringMode = FiringModes.Single;
+
+        [Header("Attributes")]
+        [SerializeField] public string handheldName;
+        [SerializeField] public int ammoCapacity;
+        [SerializeField] public float fireRate;
+        [SerializeField] public float fireRateCooldown;
+        [SerializeField] public float reloadCooldown;
+
+        public enum HandheldTypes
+        {
+            Pistol, Shotgun, SubmachineGun, AssaultRifle, SniperRifle, Launcher, GiftedArmament,
+            Equipment, SpecialEquipment
+        }
+
+        public enum FiringModes
+        {
+            Auto, Burst, Semi, Single
+        }
     }
 }
+

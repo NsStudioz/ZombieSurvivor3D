@@ -1,83 +1,89 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor.Carrier;
 
-public class BulletSpawner : MonoBehaviour
+namespace ZombieSurvivor.ObjectPool.Spawners
 {
-    public static BulletSpawner Instance;
-
-    private Queue<GameObject> bulletQueue = new Queue<GameObject>();
-
-    [SerializeField] private GameObject bulletPrefab = null;
-
-    [SerializeField] private int bulletMaxReservedCount = 5;
-
-    private void Awake()
+    public class BulletSpawner : MonoBehaviour
     {
-        if (Instance != null)
+        public static BulletSpawner Instance;
+
+        private Queue<GameObject> bulletQueue = new Queue<GameObject>();
+
+        [SerializeField] private GameObject bulletPrefab = null;
+
+        [SerializeField] private int bulletMaxReservedCount = 5;
+
+        private void Awake()
         {
-            Debug.Log("Something went wrong. there are more than 1 buildmanagers in the game!");
-            return;
+            if (Instance != null)
+            {
+                Debug.Log("Something went wrong. there are more than 1 buildmanagers in the game!");
+                return;
+            }
+            Instance = this;
+
+            CarrierSystem.OnHandheldChanged += SwitchBulletType;
+
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
-        Instance = this;
 
-        CarrierSystem.OnHandheldChanged += SwitchBulletType;
-
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnEnable()
-    {
-        CarrierSystem.OnHandheldChanged += SwitchBulletType;
-    }
-
-    private void OnDisable()
-    {
-        CarrierSystem.OnHandheldChanged -= SwitchBulletType;
-    }
-
-    public void SpawnBullet(Vector3 position, Quaternion rotation)
-    {
-        ObjectPool.Instance.SpawnObject(bulletQueue, bulletMaxReservedCount, bulletPrefab, position, rotation);
-    }
-
-    public void DespawnBullet(GameObject instanceToDespawn)
-    {
-        ObjectPool.Instance.DespawnObjectImmediately(bulletQueue, instanceToDespawn, transform.position, transform.rotation);
-    }
-
-    private void SwitchBulletType(GameObject newBulletType)
-    {
-        if (bulletPrefab == newBulletType)
-            return;
-
-        bulletPrefab = newBulletType;
-
-        for (int i = bulletQueue.Count; i > 0; i--)
+        private void OnEnable()
         {
-            GameObject instanceToDestroy = bulletQueue.Dequeue();
-            Destroy(instanceToDestroy);
-
-            if (i <= 0)
-                ClearQueue();
+            CarrierSystem.OnHandheldChanged += SwitchBulletType;
         }
-    }
 
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        ClearQueue();
-    }
+        private void OnDisable()
+        {
+            CarrierSystem.OnHandheldChanged -= SwitchBulletType;
+        }
 
-    private void OnGameStateChanged(GameStateManager.GameState newGameState)
-    {
-        enabled = newGameState == GameStateManager.GameState.Gameplay;
-    }
+        public void SpawnBullet(Vector3 position, Quaternion rotation)
+        {
+            ObjectPool.Instance.SpawnObject(bulletQueue, bulletMaxReservedCount, bulletPrefab, position, rotation);
+        }
 
-    private void ClearQueue()
-    {
-        bulletQueue.Clear();
-    }
+        public void DespawnBullet(GameObject instanceToDespawn)
+        {
+            ObjectPool.Instance.DespawnObjectImmediately(bulletQueue, instanceToDespawn, transform.position, transform.rotation);
+        }
 
+        private void SwitchBulletType(GameObject newBulletType)
+        {
+            if (bulletPrefab == newBulletType)
+                return;
+
+            bulletPrefab = newBulletType;
+
+            for (int i = bulletQueue.Count; i > 0; i--)
+            {
+                GameObject instanceToDestroy = bulletQueue.Dequeue();
+                Destroy(instanceToDestroy);
+
+                if (i <= 0)
+                    ClearQueue();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            ClearQueue();
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        private void ClearQueue()
+        {
+            bulletQueue.Clear();
+        }
+
+
+    }
 
 }
+

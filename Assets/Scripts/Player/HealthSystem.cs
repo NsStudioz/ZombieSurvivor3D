@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor.ObjectPool.Spawners;
+using ZombieSurvivor.Interfaces;
 
 public class HealthSystem : MonoBehaviour, IDamageable
 {

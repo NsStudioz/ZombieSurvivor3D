@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor.ObjectPool.Spawners;
+using ZombieSurvivor.Interfaces;
 
 public class BulletDamage : MonoBehaviour
 {
@@ -26,6 +28,9 @@ public class BulletDamage : MonoBehaviour
             //Debug.Log("Enemy Hit!");
             //Destroy(gameObject);
             BulletSpawner.Instance.DespawnBullet(gameObject);
+
+/*            var layerMask = col.gameObject.layer;
+            LayerMask.LayerToName(layerMask);*/
         }
 
         BulletSpawner.Instance.DespawnBullet(gameObject);

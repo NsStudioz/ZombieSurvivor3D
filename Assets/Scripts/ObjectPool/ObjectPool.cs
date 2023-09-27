@@ -3,76 +3,80 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ObjectPool : MonoBehaviour
+namespace ZombieSurvivor.ObjectPool
 {
-    public static ObjectPool Instance;
-
-    private void Awake()
+    public class ObjectPool : MonoBehaviour
     {
-        if (Instance != null)
+        public static ObjectPool Instance;
+
+        private void Awake()
         {
-            Debug.Log("Something went wrong. there are more than 1 buildmanagers in the game!");
-            return;
+            if (Instance != null)
+            {
+                Debug.Log("Something went wrong. there are more than 1 buildmanagers in the game!");
+                return;
+            }
+            Instance = this;
         }
-        Instance = this;
-    }
 
-    #region SpawnObject
+        #region SpawnObject
 
-    public void SpawnObject(Queue<GameObject> queueGO, int maxQueueCount ,GameObject prefabInstance, Vector3 position, Quaternion rotation)
-    {
-        if(queueGO.Count > 0)
-            PopObjectFromPool(queueGO, position, rotation);
-
-        else if (queueGO.Count <= 0)
+        public void SpawnObject(Queue<GameObject> queueGO, int maxQueueCount, GameObject prefabInstance, Vector3 position, Quaternion rotation)
         {
-            GameObject newInstance = Instantiate(prefabInstance, position, rotation);
-            // Observe this line of code!:
-            newInstance.transform.SetParent(this.transform, true);
+            if (queueGO.Count > 0)
+                PopObjectFromPool(queueGO, position, rotation);
+
+            else if (queueGO.Count <= 0)
+            {
+                GameObject newInstance = Instantiate(prefabInstance, position, rotation);
+                // Observe this line of code!:
+                newInstance.transform.SetParent(this.transform, true);
+            }
         }
+
+        private void PopObjectFromPool(Queue<GameObject> queueGO, Vector3 position, Quaternion rotation)
+        {
+            GameObject existingPrefabInstance = queueGO.Dequeue();
+            existingPrefabInstance.SetActive(true);
+            SetObjectsPositionAndRotation(existingPrefabInstance, position, rotation);
+        }
+
+        private void SetObjectsPositionAndRotation(GameObject instance, Vector3 position, Quaternion rotation)
+        {
+            instance.transform.position = position;
+            instance.transform.rotation = rotation;
+        }
+
+        #endregion
+
+
+        #region DespawnObject
+
+        public void DespawnObjectDelay(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
+        {
+            StartCoroutine(DespawnObjectCoroutine(timeDelay, queueGO, instanceToDespawn, position, rotation));
+        }
+
+        public void DespawnObjectImmediately(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
+        {
+            DespawnObject(queueGO, instanceToDespawn, position, rotation);
+        }
+
+        private void DespawnObject(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
+        {
+            queueGO.Enqueue(instanceToDespawn);
+            instanceToDespawn.SetActive(false);
+            SetObjectsPositionAndRotation(instanceToDespawn, position, rotation);
+        }
+
+        private IEnumerator DespawnObjectCoroutine(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
+        {
+            yield return new WaitForSeconds(timeDelay);
+            DespawnObject(queueGO, instanceToDespawn, position, rotation);
+        }
+
+        #endregion
+
     }
-
-    private void PopObjectFromPool(Queue<GameObject> queueGO, Vector3 position, Quaternion rotation)
-    {
-        GameObject existingPrefabInstance = queueGO.Dequeue();
-        existingPrefabInstance.SetActive(true);
-        SetObjectsPositionAndRotation(existingPrefabInstance, position, rotation);
-    }
-    
-    private void SetObjectsPositionAndRotation(GameObject instance, Vector3 position, Quaternion rotation)
-    {
-        instance.transform.position = position;
-        instance.transform.rotation = rotation;
-    }
-
-    #endregion
-
-
-    #region DespawnObject
-    
-    public void DespawnObjectDelay(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
-    {
-        StartCoroutine(DespawnObjectCoroutine(timeDelay, queueGO, instanceToDespawn, position, rotation));
-    }
-    
-    public void DespawnObjectImmediately(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
-    {
-        DespawnObject(queueGO, instanceToDespawn, position, rotation);
-    }
-
-    private void DespawnObject(Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
-    {
-        queueGO.Enqueue(instanceToDespawn);
-        instanceToDespawn.SetActive(false);
-        SetObjectsPositionAndRotation(instanceToDespawn, position, rotation);
-    }
-
-    private IEnumerator DespawnObjectCoroutine(float timeDelay, Queue<GameObject> queueGO, GameObject instanceToDespawn, Vector3 position, Quaternion rotation)
-    {
-        yield return new WaitForSeconds(timeDelay);
-        DespawnObject(queueGO, instanceToDespawn, position, rotation);
-    }
-
-    #endregion
-
 }
+

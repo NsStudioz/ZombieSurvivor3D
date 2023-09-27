@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor.Carrier;
 
-public interface IHandheldObject : ControlsPC.IGameplayControlsActions
+namespace ZombieSurvivor.Interfaces
 {
+    public interface IHandheldObject : ControlsPC.IGameplayControlsActions
+    {
 
-    void OnAttachedCarrier(CarrierSystem attachedCarrier);
-    void OnEquip();
-    void OnUnequip();
+        void OnAttachedCarrier(CarrierSystem attachedCarrier);
+        void OnEquip();
+        void OnUnequip();
 
+    }
 }
