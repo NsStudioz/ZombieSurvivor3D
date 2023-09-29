@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.ObjectPool;
-using ZombieSurvivor3D.Gameplay.Player;
 using ZombieSurvivor3D.Gameplay.Score;
 
 namespace ZombieSurvivor3D.Gameplay.Health
