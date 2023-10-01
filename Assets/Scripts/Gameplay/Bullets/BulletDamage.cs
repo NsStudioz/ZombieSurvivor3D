@@ -51,17 +51,31 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
             //Debug.DrawRay(transform.position, transform.TransformDirection(direction * rayRange), Color.green);
 
             if (Physics.Raycast(newRay, out RaycastHit hit, rayRange, enemyLayerInt))
+            {
                 if (hit.collider.CompareTag(ENEMY_TAG))
                 {
                     IDamageable damageable = hit.collider.GetComponent<IDamageable>();
                     damageable?.TakeDamage(bulletDamage);
                     BulletSpawner.Instance.DespawnBullet(gameObject);
                 }
-
+            }
             else if(Physics.Raycast(newRay, out RaycastHit otherHit, rayRange, groundLayerInt))
+            {
                 if (otherHit.collider.CompareTag(GROUND_TAG))
                     BulletSpawner.Instance.DespawnBullet(gameObject);
+            }
+
         }
+
+
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+    }
+}
 
 /*        private void OnTriggerEnter(Collider col)
         {
@@ -73,8 +87,8 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
                                                       //Destroy(gameObject);
                                                       //BulletSpawner.Instance.DespawnBullet(gameObject);
 
-                *//*            var layerMask = col.gameObject.layer;
-                            LayerMask.LayerToName(layerMask);*//*
+                //var layerMask = col.gameObject.layer;
+                //LayerMask.LayerToName(layerMask);
             }
 
             BulletSpawner.Instance.DespawnBullet(gameObject);
@@ -82,12 +96,3 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
             //Destroy(gameObject);
             // Play effects on hit maybe... 
         }*/
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-    }
-
-}
