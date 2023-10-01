@@ -112,6 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 50
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  rayRange: 2
 --- !u!114 &7618205282707252841
 MonoBehaviour:
   m_ObjectHideFlags: 0

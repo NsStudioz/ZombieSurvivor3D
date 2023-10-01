@@ -13,6 +13,21 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
 
         [SerializeField] int bulletDamage;
 
+        [SerializeField] LayerMask EnemyLayer;
+        [SerializeField] LayerMask GroundLayer;
+        int enemyLayerInt;
+        int groundLayerInt;
+        [SerializeField] int rayRange;
+
+        const string ENEMY_TAG = "Enemy";
+        const string GROUND_TAG = "Ground";
+
+        private void Awake()
+        {
+            enemyLayerInt = EnemyLayer;
+            groundLayerInt = GroundLayer;
+        }
+
         private void Start()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
@@ -23,7 +38,32 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         }
 
-        private void OnTriggerEnter(Collider col)
+        private void Update()
+        {
+            SimulateRayCast();
+        }
+
+        private void SimulateRayCast()
+        {
+            Vector3 direction = Vector3.forward;
+            Ray newRay = new Ray(transform.position, transform.TransformDirection(direction * rayRange));
+
+            //Debug.DrawRay(transform.position, transform.TransformDirection(direction * rayRange), Color.green);
+
+            if (Physics.Raycast(newRay, out RaycastHit hit, rayRange, enemyLayerInt))
+                if (hit.collider.CompareTag(ENEMY_TAG))
+                {
+                    IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+                    damageable?.TakeDamage(bulletDamage);
+                    BulletSpawner.Instance.DespawnBullet(gameObject);
+                }
+
+            else if(Physics.Raycast(newRay, out RaycastHit otherHit, rayRange, groundLayerInt))
+                if (otherHit.collider.CompareTag(GROUND_TAG))
+                    BulletSpawner.Instance.DespawnBullet(gameObject);
+        }
+
+/*        private void OnTriggerEnter(Collider col)
         {
             if (col.CompareTag("Enemy"))
             {
@@ -31,17 +71,17 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
                 damageable?.TakeDamage(bulletDamage); // if damageable is not null...Then Damage
                                                       //Debug.Log("Enemy Hit!");
                                                       //Destroy(gameObject);
-                //BulletSpawner.Instance.DespawnBullet(gameObject);
+                                                      //BulletSpawner.Instance.DespawnBullet(gameObject);
 
-                /*            var layerMask = col.gameObject.layer;
-                            LayerMask.LayerToName(layerMask);*/
+                *//*            var layerMask = col.gameObject.layer;
+                            LayerMask.LayerToName(layerMask);*//*
             }
 
             BulletSpawner.Instance.DespawnBullet(gameObject);
 
             //Destroy(gameObject);
             // Play effects on hit maybe... 
-        }
+        }*/
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
