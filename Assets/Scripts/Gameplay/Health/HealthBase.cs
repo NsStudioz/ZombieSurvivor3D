@@ -4,7 +4,7 @@ using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Health
 {
-    public class HealthBase : MonoBehaviour
+    public class HealthBase : MonoBehaviour, IDamageable
     {
 
         [Header("Main Elements")]
