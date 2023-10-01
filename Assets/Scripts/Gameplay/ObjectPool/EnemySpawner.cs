@@ -93,7 +93,10 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
                 Destroy(instanceToDespawn);
 
             else if (enemyQueue.Count < EnemyMaxCount)
-                ObjectPool.Instance.DespawnObjectDelay(0.2f, enemyQueue, instanceToDespawn, transform.position, transform.rotation);
+            {
+                ObjectPool.Instance.DespawnObjectImmediately(enemyQueue, instanceToDespawn, transform.position, transform.rotation);
+                //ObjectPool.Instance.DespawnObjectDelay(0.2f, enemyQueue, instanceToDespawn, transform.position, transform.rotation);
+            }
 
             enemyCount--;
         }
