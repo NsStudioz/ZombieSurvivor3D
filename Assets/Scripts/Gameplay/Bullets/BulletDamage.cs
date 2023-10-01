@@ -31,7 +31,7 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
                 damageable?.TakeDamage(bulletDamage); // if damageable is not null...Then Damage
                                                       //Debug.Log("Enemy Hit!");
                                                       //Destroy(gameObject);
-                BulletSpawner.Instance.DespawnBullet(gameObject);
+                //BulletSpawner.Instance.DespawnBullet(gameObject);
 
                 /*            var layerMask = col.gameObject.layer;
                             LayerMask.LayerToName(layerMask);*/
