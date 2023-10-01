@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2261602776561399761}
   - component: {fileID: 2261602776561399760}
   - component: {fileID: 2261602776561399775}
-  - component: {fileID: 2261602776561399774}
   - component: {fileID: 300593575}
+  - component: {fileID: 5910329066372828191}
   m_Layer: 12
   m_Name: Body
   m_TagString: Enemy
@@ -117,25 +117,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2261602776561399774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2261602776561399772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ddb9a90aa25a24e92d670b6f3f1603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthComponent:
-    currentHealth: 0
-    maxHealth: 0
-  isPlayerHit: 0
-  timeElapsed: 0
-  timeElapsedThreshold: 3
-  enemyType: 0
 --- !u!114 &300593575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +129,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73931ac3dbc5e2a4198d77f4a7c24963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5910329066372828191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261602776561399772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e3df296ba80d34fa6241185cce94eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthComponent:
+    currentHealth: 0
+    maxHealth: 0
+  enemyType: 0
 --- !u!1 &2261602777148758860
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,5 +298,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  playerTransform: {fileID: 0}
   retreatTransform: {fileID: 0}

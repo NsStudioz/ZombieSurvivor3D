@@ -96,10 +96,10 @@ GameObject:
   - component: {fileID: 1973735651369178559}
   - component: {fileID: 754086657}
   - component: {fileID: 754086652}
-  - component: {fileID: 754086656}
   - component: {fileID: 1973735651707725640}
   - component: {fileID: 1932851888}
   - component: {fileID: 1932851880}
+  - component: {fileID: 6958849422612493311}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -209,25 +209,6 @@ MonoBehaviour:
   moveSpeed: 8
   forward: {x: 0, y: 0, z: 0}
   right: {x: 0, y: 0, z: 0}
---- !u!114 &754086656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973735651369178545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ddb9a90aa25a24e92d670b6f3f1603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthComponent:
-    currentHealth: 0
-    maxHealth: 0
-  isPlayerHit: 0
-  timeElapsed: 0
-  timeElapsedThreshold: 3
-  enemyType: 0
 --- !u!114 &1973735651707725640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +370,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
+--- !u!114 &6958849422612493311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973735651369178545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52537427fb7fefe4a9845aa2bf79b723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthComponent:
+    currentHealth: 0
+    maxHealth: 0
+  isPlayerHit: 0
+  timeElapsed: 0
+  timeElapsedThreshold: 3
 --- !u!1 &5024685678032073875
 GameObject:
   m_ObjectHideFlags: 0
