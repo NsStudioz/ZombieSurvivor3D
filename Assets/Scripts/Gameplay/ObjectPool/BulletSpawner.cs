@@ -11,7 +11,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
     {
         public static BulletSpawner Instance;
 
-        private Queue<GameObject> bulletQueue = new Queue<GameObject>();
+        [SerializeField] private Queue<GameObject> bulletQueue = new Queue<GameObject>();
 
         [SerializeField] private GameObject bulletPrefab = null;
 
@@ -43,7 +43,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
         public void SpawnBullet(Vector3 position, Quaternion rotation)
         {
-            ObjectPool.Instance.SpawnObject(bulletQueue, bulletMaxReservedCount, bulletPrefab, position, rotation);
+            ObjectPool.Instance.SpawnObject(bulletQueue, bulletPrefab, position, rotation);
         }
 
         public void DespawnBullet(GameObject instanceToDespawn)
@@ -65,6 +65,12 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
                 if (i <= 0)
                     ClearQueue();
+            }
+
+            // EXPERIMENTAL:
+            for (int i = 0; i < bulletMaxReservedCount + 1; i++)
+            {
+                ObjectPool.Instance.SpawnAndReserveObjectInPool(bulletQueue, bulletPrefab, transform.position, transform.rotation);
             }
         }
 
