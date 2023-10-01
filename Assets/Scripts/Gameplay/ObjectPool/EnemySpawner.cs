@@ -79,7 +79,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
         private void SpawnEnemy()
         {
-            ObjectPool.Instance.SpawnObject(enemyQueue, EnemyMaxCount, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
+            ObjectPool.Instance.SpawnObject(enemyQueue, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation);
 
             remainingEnemies--;
             enemyCount++;
