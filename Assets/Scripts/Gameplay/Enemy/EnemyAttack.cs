@@ -10,6 +10,7 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
     public class EnemyAttack : MonoBehaviour
     {
         int damageToPlayer = 1;
+        const string PLAYER_TAG = "Player";
 
         private void OnEnable()
         {
@@ -24,7 +25,7 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
 
         private void OnTriggerEnter(Collider col)
         {
-            if (col.gameObject.CompareTag("Player"))
+            if (col.gameObject.CompareTag(PLAYER_TAG))
             {
                 IDamageable damageableNew = col.GetComponent<IDamageable>();
                 damageableNew?.TakeDamage(damageToPlayer);
