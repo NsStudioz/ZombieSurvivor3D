@@ -129,6 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73931ac3dbc5e2a4198d77f4a7c24963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  rayRange: 1
 --- !u!114 &5910329066372828191
 MonoBehaviour:
   m_ObjectHideFlags: 0
