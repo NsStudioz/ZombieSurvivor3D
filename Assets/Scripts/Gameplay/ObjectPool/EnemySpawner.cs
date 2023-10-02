@@ -12,6 +12,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
         [Header("Main Elements")]
         [SerializeField] GameObject enemyStandardPrefab;
+        [SerializeField] Transform parentTransform;
         [SerializeField] Queue<GameObject> enemyQueue = new Queue<GameObject>();
         [SerializeField] List<Transform> spawnPoints = new List<Transform>();
 
@@ -61,7 +62,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
         {
             for (int i = 0; i < EnemyMaxCount + 1; i++)
             {
-                ObjectPool.Instance.SpawnAndReserveObjectInPool(enemyQueue, enemyStandardPrefab, transform.position, transform.rotation, transform);
+                ObjectPool.Instance.SpawnAndReserveObjectInPool(enemyQueue, enemyStandardPrefab, transform.position, transform.rotation, parentTransform);
             }
         }
 
@@ -89,7 +90,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
         private void SpawnEnemy()
         {
-            ObjectPool.Instance.SpawnObject(enemyQueue, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation, transform);
+            ObjectPool.Instance.SpawnObject(enemyQueue, enemyStandardPrefab, spawnPoints[pointerIndex].transform.position, transform.rotation, parentTransform);
 
             remainingEnemies--;
             enemyCount++;
