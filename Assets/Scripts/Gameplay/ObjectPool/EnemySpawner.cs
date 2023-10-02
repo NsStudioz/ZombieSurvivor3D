@@ -52,7 +52,17 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
         {
             EnemyMaxCount = enemyMaxCountModifier;
 
+            InitializeEnemiesInSpawner();
+
             RandomizeEnemySpawn();
+        }
+
+        private void InitializeEnemiesInSpawner()
+        {
+            for (int i = 0; i < EnemyMaxCount + 1; i++)
+            {
+                ObjectPool.Instance.SpawnAndReserveObjectInPool(enemyQueue, enemyStandardPrefab, transform.position, transform.rotation);
+            }
         }
 
         void Update()
