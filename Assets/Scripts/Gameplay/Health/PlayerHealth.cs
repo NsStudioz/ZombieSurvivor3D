@@ -45,7 +45,8 @@ namespace ZombieSurvivor3D.Gameplay.Health
             if (healthComponent.GetCurrentHealth() <= ZERO_HEALTH)
             {
                 isPlayerHit = false;
-                Debug.Log("Object Died!: " + transform.parent.gameObject.name);
+                gameObject.SetActive(false);
+                //Debug.Log("Object Died!: " + transform.parent.gameObject.name);
             }
         }
 
