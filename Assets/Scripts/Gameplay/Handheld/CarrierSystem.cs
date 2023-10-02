@@ -33,6 +33,13 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         public static event Action<GameObject> OnHandheldChanged;
 
+
+        // EXPERIMENT:
+        public List<GameObject> HandheldsGO;
+        private int handheldSOIndex = 0;
+        [SerializeField] private Transform preservedHandheldsTransform;
+        //
+
         #region Helpers
 
         public Animator GetAnimator()
@@ -76,7 +83,11 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         private void Start()
         {
-            SwitchHandheld(EquipableHandhelds[0]);
+            // EXPERIMENT:
+            InitializeHandheldGOsList();
+            BetterSwitchHandheld(EquipableHandhelds[0]);
+            //------------------------------------------------
+            //SwitchHandheld(EquipableHandhelds[0]);
             OnHandheldChanged?.Invoke(EquipableHandhelds[0].HandheldBulletPrefab);
         }
 
@@ -93,6 +104,57 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             if (col.CompareTag("Handheld"))
             {
                 _InteractableHandheldSO = null;
+            }
+        }
+
+        private void InitializeHandheldGOsList()
+        {
+            for (int i = 0; i < HandheldsGO.Count; i++)
+            {
+                HandheldsGO[i].SetActive(false);
+                HandheldsGO[i].transform.SetParent(preservedHandheldsTransform, true);
+                HandheldsGO[i].transform.localPosition = Vector3.zero;
+                HandheldsGO[i].transform.localRotation = Quaternion.identity;
+            }
+        }
+
+        public void BetterSwitchHandheld(HandheldSO handheld)
+        {
+            if (_CurrentHandheldSO == handheld)
+                return;
+
+            // remove previous handheld
+            HandheldsGO[handheldSOIndex].SetActive(false);
+            HandheldsGO[handheldSOIndex].transform.SetParent(preservedHandheldsTransform, true);
+            HandheldsGO[handheldSOIndex].transform.localPosition = Vector3.zero;
+            HandheldsGO[handheldSOIndex].transform.localRotation = Quaternion.identity;
+
+            // grab next handheld and id
+            _CurrentHandheldSO = handheld;
+            handheldSOIndex = handheld.Id;
+
+            // use ID to attach to player
+            HandheldsGO[handheldSOIndex].SetActive(true);
+            HandheldsGO[handheldSOIndex].transform.SetParent(RigSocket, true);
+            HandheldsGO[handheldSOIndex].transform.localPosition = Vector3.zero;
+            HandheldsGO[handheldSOIndex].transform.localRotation = Quaternion.identity;
+
+            // getting the interface to set animations and events on our model and not parent object.
+            _CurrentHandheldInterface = HandheldsGO[handheldSOIndex].GetComponentInChildren<IHandheldObject>();
+
+            if (_CurrentHandheldInterface != null)
+            {
+                _CurrentHandheldInterface.OnAttachedCarrier(this);
+                _CurrentHandheldInterface.OnEquip();
+
+                RigAnimator.runtimeAnimatorController = handheld.RigAnimController;
+            }
+            else
+            {
+                HandheldsGO[handheldSOIndex].SetActive(false);
+                _CurrentHandheldSO = null;
+                _CurrentHandheldInterface = null;
+                _CurrentHandheldGO = null;
             }
         }
 
@@ -166,7 +228,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 _CurrentHandheldIndex += 1 * (int)Mathf.Sign(context.ReadValue<float>()); // can't use int, must cast to float.
                 _CurrentHandheldIndex = Mathf.Clamp(_CurrentHandheldIndex, 0, EquipableHandhelds.Count - 1); // clamp between 0 to max count - 1.
 
-                SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+                //SwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
+                BetterSwitchHandheld(EquipableHandhelds[_CurrentHandheldIndex]);
 
                 // Bug: deletes bullets on press, regardless if this is the correct behaviour:
                 OnHandheldChanged?.Invoke(EquipableHandhelds[_CurrentHandheldIndex].HandheldBulletPrefab);
