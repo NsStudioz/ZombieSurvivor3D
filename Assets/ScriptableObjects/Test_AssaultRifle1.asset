@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9feb26310c992894785621a878ec14b3, type: 3}
-  m_Name: Test_AssaultRifle
+  m_Name: Test_AssaultRifle1
   m_EditorClassIdentifier: 
   HandheldPrefab: {fileID: 1774669298440197006, guid: adac71426dfa84243a71753fb60cff8d,
     type: 3}
@@ -24,3 +24,4 @@ MonoBehaviour:
   fireRate: 0
   fireRateCooldown: 0.5
   reloadCooldown: 0
+  Id: 1

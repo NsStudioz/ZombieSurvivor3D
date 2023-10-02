@@ -23,6 +23,9 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         [SerializeField] public float fireRateCooldown;
         [SerializeField] public float reloadCooldown;
 
+        [Header("Identification")]
+        [SerializeField] public int Id;
+
         public enum HandheldTypes
         {
             Pistol, Shotgun, SubmachineGun, AssaultRifle, SniperRifle, Launcher, GiftedArmament,
