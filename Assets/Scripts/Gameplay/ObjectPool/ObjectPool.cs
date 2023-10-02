@@ -22,7 +22,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
         #region SpawnObject
 
-        public void SpawnObject(Queue<GameObject> queueGO, GameObject prefabInstance, Vector3 position, Quaternion rotation)
+        public void SpawnObject(Queue<GameObject> queueGO, GameObject prefabInstance, Vector3 position, Quaternion rotation, Transform parentTransform)
         {
             if (queueGO.Count > 0)
                 PopObjectFromPool(queueGO, position, rotation);
@@ -31,15 +31,17 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             {
                 GameObject newInstance = Instantiate(prefabInstance, position, rotation);
                 // Observe this line of code!:
-                newInstance.transform.SetParent(this.transform, true);
+                //newInstance.transform.SetParent(transform, true);
+                newInstance.transform.SetParent(parentTransform, true);
             }
         }
 
-        public void SpawnAndReserveObjectInPool(Queue<GameObject> queueGO, GameObject prefabInstance, Vector3 position, Quaternion rotation)
+        public void SpawnAndReserveObjectInPool(Queue<GameObject> queueGO, GameObject prefabInstance, Vector3 position, Quaternion rotation, Transform parentTransform)
         {
             GameObject newInstance = Instantiate(prefabInstance, position, rotation);
             // Observe this line of code!:
-            newInstance.transform.SetParent(transform, true);
+            //newInstance.transform.SetParent(transform, true);
+            newInstance.transform.SetParent(parentTransform, true);
             newInstance.SetActive(false);
             
             queueGO.Enqueue(newInstance);
