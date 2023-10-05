@@ -26,19 +26,19 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             }
             Instance = this;
 
-            CarrierSystem.OnHandheldChanged += SwitchBulletType;
+            HandheldCarrier.OnHandheldChanged += SwitchBulletType;
 
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnEnable()
         {
-            CarrierSystem.OnHandheldChanged += SwitchBulletType;
+            HandheldCarrier.OnHandheldChanged += SwitchBulletType;
         }
 
         private void OnDisable()
         {
-            CarrierSystem.OnHandheldChanged -= SwitchBulletType;
+            HandheldCarrier.OnHandheldChanged -= SwitchBulletType;
         }
 
         public void SpawnBullet(Vector3 position, Quaternion rotation)

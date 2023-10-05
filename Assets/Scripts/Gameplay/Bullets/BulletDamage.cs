@@ -11,13 +11,15 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
     public class BulletDamage : MonoBehaviour
     {
 
+        [Header("Attributes")]
         [SerializeField] int bulletDamage;
+        [SerializeField] int rayRange;
 
+        [Header("Layer Collisions")]
         [SerializeField] LayerMask EnemyLayer;
         [SerializeField] LayerMask GroundLayer;
         int enemyLayerInt;
         int groundLayerInt;
-        [SerializeField] int rayRange;
 
         const string ENEMY_TAG = "Enemy";
         const string GROUND_TAG = "Ground";
@@ -36,6 +38,11 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         private void Update()
@@ -64,16 +71,7 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
                 if (otherHit.collider.CompareTag(GROUND_TAG))
                     BulletSpawner.Instance.DespawnBullet(gameObject);
             }
-
         }
-
-
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
     }
 }
 

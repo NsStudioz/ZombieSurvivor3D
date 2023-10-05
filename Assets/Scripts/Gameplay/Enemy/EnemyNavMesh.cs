@@ -30,7 +30,7 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
 
-            target = PlayerTag.Instance.playerTransform;
+            target = PlayerTag.Instance.PlayerTransform;
         }
 
         void Update()

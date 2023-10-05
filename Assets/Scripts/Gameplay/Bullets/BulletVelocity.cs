@@ -9,12 +9,12 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
     public class BulletVelocity : MonoBehaviour
     {
 
-        [SerializeField] private float bulletSpeed;
+        [SerializeField] float bulletSpeed;
 
         // Future Uses
-        /*    [SerializeField] private float _UpwardForce;
-            [SerializeField] private float _BulletDownwardForce;
-            [SerializeField] private float _BulletDownwardForceThreshold;*/
+        /*  [SerializeField] float _UpwardForce;
+            [SerializeField] float _BulletDownwardForce;
+            [SerializeField] float _BulletDownwardForceThreshold;*/
 
         private void Start()
         {
@@ -24,6 +24,11 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         void Update()
@@ -36,11 +41,5 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
             float speed = bulletSpeed * deltaTime;
             transform.Translate(transform.forward * speed, Space.World);
         }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
     }
 }

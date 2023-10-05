@@ -8,13 +8,13 @@ namespace ZombieSurvivor3D.Gameplay.Player
     {
         public static PlayerTag Instance;
 
-        public Transform playerTransform;
+        public Transform PlayerTransform;
 
         private void Awake()
         {
             Instance = this;
 
-            playerTransform = GetComponent<Transform>();
+            PlayerTransform = GetComponent<Transform>();
         }
     }
 }

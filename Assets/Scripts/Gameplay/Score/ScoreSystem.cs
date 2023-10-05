@@ -45,8 +45,8 @@ namespace ZombieSurvivor3D.Gameplay.Score
 
         public void UpdateScore(int scorePoints)
         {
-            scoreComponent.highScore = scoreComponent.GetUpdatedHighScore(scorePoints);
-            highScoreForUI = scoreComponent.highScore;
+            scoreComponent.HighScore = scoreComponent.GetUpdatedHighScore(scorePoints);
+            highScoreForUI = scoreComponent.HighScore;
         }
 
 

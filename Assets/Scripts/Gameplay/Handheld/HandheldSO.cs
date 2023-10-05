@@ -17,11 +17,11 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         public FiringModes FiringMode = FiringModes.Single;
 
         [Header("Attributes")]
-        [SerializeField] public string handheldName;
-        [SerializeField] public int ammoCapacity;
-        [SerializeField] public float fireRate;
-        [SerializeField] public float fireRateCooldown;
-        [SerializeField] public float reloadCooldown;
+        [SerializeField] public string HandheldName;
+        [SerializeField] public int AmmoCapacity;
+        [SerializeField] public float FireRate;
+        [SerializeField] public float FireRateCooldown;
+        [SerializeField] public float ReloadCooldown;
 
         [Header("Identification")]
         [SerializeField] public int Id;

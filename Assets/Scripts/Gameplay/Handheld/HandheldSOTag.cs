@@ -5,11 +5,11 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 {
     public class HandheldSOTag : MonoBehaviour
     {
-        [SerializeField] private HandheldSO HandheldSO_Tag;
+        [SerializeField] HandheldSO handheldSO_Tag;
 
         public HandheldSO GetHandheldSOTag()
         {
-            return HandheldSO_Tag;
+            return handheldSO_Tag;
         }
     }
 }

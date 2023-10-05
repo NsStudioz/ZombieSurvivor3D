@@ -8,7 +8,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
     {
 
         [Header("Main Elements")]
-        [SerializeField] protected HealthComponent healthComponent;
+        [SerializeField] protected HealthComponent HealthComponent;
         protected const int ZERO_HEALTH = 0;
 
         protected void Awake()
@@ -29,13 +29,13 @@ namespace ZombieSurvivor3D.Gameplay.Health
         protected virtual void InitializeHealthComponent(int health)
         {
             HealthComponent newHealthComp = new HealthComponent(health);
-            healthComponent = newHealthComp;
+            HealthComponent = newHealthComp;
         }
 
         // MUST BE PUBLIC, IN ORDER TO ACCESS DAMAGE:
         public virtual void TakeDamage(int damageAmount)
         {
-            healthComponent.TakeDamage(damageAmount);
+            HealthComponent.TakeDamage(damageAmount);
         }
     }
 }

@@ -8,21 +8,21 @@ namespace ZombieSurvivor3D.Gameplay.Score
     public struct ScoreComponent
     {
 
-        public int highScore;
+        public int HighScore;
 
         public ScoreComponent(int initValue)
         {
-            highScore = initValue;
+            HighScore = initValue;
         }
 
         public int GetUpdatedHighScore(int scorePoints)
         {
-            return highScore + scorePoints;
+            return HighScore + scorePoints;
         }
 
         public void UpdateScore(int scorePoints)
         {
-            highScore = GetUpdatedHighScore(scorePoints);
+            HighScore = GetUpdatedHighScore(scorePoints);
         }
     }
 }

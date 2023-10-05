@@ -3,33 +3,33 @@ namespace ZombieSurvivor3D.Gameplay.Health
     [System.Serializable]
     public struct HealthComponent
     {
-        public int currentHealth;
-        public int maxHealth;
+        public int CurrentHealth;
+        public int MaxHealth;
 
         public HealthComponent(int _maxHealth)
         {
-            maxHealth = _maxHealth;
-            currentHealth = _maxHealth;
+            MaxHealth = _maxHealth;
+            CurrentHealth = _maxHealth;
         }
 
         public void TakeDamage(int damage)
         {
-            currentHealth -= damage;
+            CurrentHealth -= damage;
         }
 
         public int GetCurrentHealth()
         {
-            return currentHealth;
+            return CurrentHealth;
         }
 
         public int GetMaxHealth()
         {
-            return maxHealth;
+            return MaxHealth;
         }
 
         public void SetCurrentHealthToMax()
         {
-            currentHealth = maxHealth;
+            CurrentHealth = MaxHealth;
         }
     }
 }

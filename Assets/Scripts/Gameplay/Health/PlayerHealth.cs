@@ -20,7 +20,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
         private void RegenerateHealth()
         {
-            if (healthComponent.GetCurrentHealth() <= ZERO_HEALTH)
+            if (HealthComponent.GetCurrentHealth() <= ZERO_HEALTH)
                 return;
 
             if (isPlayerHit)
@@ -29,7 +29,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
                 if (timeElapsed <= 0)
                 {
-                    healthComponent.SetCurrentHealthToMax();
+                    HealthComponent.SetCurrentHealthToMax();
                     isPlayerHit = false;
                 }
             }
@@ -42,7 +42,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
             timeElapsed = timeElapsedThreshold;
             isPlayerHit = true;
 
-            if (healthComponent.GetCurrentHealth() <= ZERO_HEALTH)
+            if (HealthComponent.GetCurrentHealth() <= ZERO_HEALTH)
             {
                 isPlayerHit = false;
                 gameObject.SetActive(false);

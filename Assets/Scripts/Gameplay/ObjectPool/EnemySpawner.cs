@@ -23,10 +23,11 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
         [SerializeField] float timerThreshold;
         //
         //[SerializeField] int enemyHealth = 100;
+        [Header("Enemy Counting")]
+        [SerializeField] int enemyMaxCountModifier = 5;
+        [SerializeField] int remainingEnemies = 10;
+        [SerializeField] int enemyCount = 0;
         public int EnemyMaxCount { get; private set; }
-        [SerializeField] private int enemyMaxCountModifier = 5;
-        [SerializeField] private int remainingEnemies = 10;
-        [SerializeField] private int enemyCount = 0;
 
         [Header("Limits")]
         [SerializeField] int minInt;

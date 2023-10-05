@@ -44,7 +44,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
         private void DespawnEnemy()
         {
-            if (healthComponent.GetCurrentHealth() <= ZERO_HEALTH)
+            if (HealthComponent.GetCurrentHealth() <= ZERO_HEALTH)
             {
                 //Debug.Log("Object Died!: " + transform.parent.gameObject.name);
                 EnemySpawner.Instance.DespawnEnemy(transform.parent.gameObject);
