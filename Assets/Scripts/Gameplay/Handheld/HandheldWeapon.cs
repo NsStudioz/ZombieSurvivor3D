@@ -9,12 +9,12 @@ using ZombieSurvivor3D.Gameplay.ObjectPool;
 
 namespace ZombieSurvivor3D.Gameplay.Handheld
 {
-    public class HandheldGun : MonoBehaviour, IHandheldObject
+    public class HandheldWeapon : MonoBehaviour, IHandheldObject
     {
         // Input Handling will trigger animations and weapon/equipment logic:
 
         [Header("Main Elements")]
-        [SerializeField] private Animator _WeaponAnimator;
+        [SerializeField] Animator weaponAnimator;
         [SerializeField] string handheldName;
 
         [Header("Main Attributes")]
@@ -26,16 +26,16 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         [Header("Second Attributes")]
         [SerializeField] int FiringModeInt = 0;
 
-        [Header("Firing Modes Attributes")]
+/*        [Header("Firing Modes Attributes")]
         private const int MODE_SINGLE = 3;
         private const int MODE_SEMI = 2;
         private const int MODE_BURST = 1;
-        private const int MODE_AUTO = 0;
+        private const int MODE_AUTO = 0;*/
 
 
         [Header("Testing Purposes")]
         [SerializeField] GameObject bulletTestGO;
-        [SerializeField] private bool isLeftMouseClickHeld = false;
+        [SerializeField] bool isLeftMouseClickHeld = false;
 
         /*    [Header("Audio Files")]
             [SerializeField] AudioClip _EquipAudio;
@@ -43,25 +43,25 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             [SerializeField] AudioClip _FireAudio;
             [SerializeField] AudioClip _FailedFireAudio;*/
 
-        private CarrierSystem carrierSystem;
+        HandheldCarrier handheldCarrier;
 
         #region Event_Listeners
 
         private void OnEnable()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            CarrierSystem.OnInteractSimilarHandheld += RestockHandheldAmmo;
+            HandheldCarrier.OnInteractSimilarHandheld += RestockHandheldAmmo;
         }
 
         private void OnDestroy()
         {
-            CarrierSystem.OnInteractSimilarHandheld -= RestockHandheldAmmo;
+            HandheldCarrier.OnInteractSimilarHandheld -= RestockHandheldAmmo;
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         }
 
         private void RestockHandheldAmmo(HandheldSO handheld)
         {
-            ammoCapacity = handheld.ammoCapacity;
+            ammoCapacity = handheld.AmmoCapacity;
         }
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
@@ -83,7 +83,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
                 if (fireRate <= 0f)
                 {
-                    //GameObject bulletInstance = Instantiate(bulletTestGO, transform.position, transform.rotation);
                     BulletSpawner.Instance.SpawnBullet(transform.position, transform.rotation);
                     ammoCapacity--;
                     fireRate = fireRateCooldown;
@@ -94,10 +93,10 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         }
 
         // updates our carrier, with that we can use the animations of a specific handheld:
-        public void OnAttachedCarrier(CarrierSystem attachedCarrier)
+        public void OnAttachedCarrier(HandheldCarrier attachedCarrier)
         {
-            carrierSystem = attachedCarrier;
-            _WeaponAnimator = carrierSystem.GetAnimator();
+            handheldCarrier = attachedCarrier;
+            weaponAnimator = handheldCarrier.GetAnimator();
         }
 
         public void OnEquip()
@@ -114,14 +113,14 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         private void SyncHandheldGunData()
         {
-            handheldName = carrierSystem.GetCurrentHandheldScriptableObject().handheldName;
-            ammoCapacity = carrierSystem.GetCurrentHandheldScriptableObject().ammoCapacity;
-            fireRate = carrierSystem.GetCurrentHandheldScriptableObject().fireRate;
-            fireRateCooldown = carrierSystem.GetCurrentHandheldScriptableObject().fireRateCooldown;
-            reloadCooldown = carrierSystem.GetCurrentHandheldScriptableObject().reloadCooldown;
-            FiringModeInt = (int)carrierSystem.GetCurrentHandheldScriptableObject().FiringMode;
+            handheldName = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldName;
+            ammoCapacity = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoCapacity;
+            fireRate = handheldCarrier.GetCurrentHandheldScriptableObject().FireRate;
+            fireRateCooldown = handheldCarrier.GetCurrentHandheldScriptableObject().FireRateCooldown;
+            reloadCooldown = handheldCarrier.GetCurrentHandheldScriptableObject().ReloadCooldown;
+            FiringModeInt = (int)handheldCarrier.GetCurrentHandheldScriptableObject().FiringMode;
             //  
-            bulletTestGO = carrierSystem.GetCurrentHandheldScriptableObject().HandheldBulletPrefab;
+            bulletTestGO = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldBulletPrefab;
         }
 
 
