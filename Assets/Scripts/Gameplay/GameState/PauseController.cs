@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ZombieSurvivor3D.Gameplay.GameState
 {
     public class PauseController : MonoBehaviour
     {
-
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))

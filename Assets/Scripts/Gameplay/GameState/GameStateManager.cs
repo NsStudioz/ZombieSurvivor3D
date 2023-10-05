@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace ZombieSurvivor3D.Gameplay.GameState
 {
     public class GameStateManager
@@ -32,8 +28,6 @@ namespace ZombieSurvivor3D.Gameplay.GameState
         }
 
         public GameState CurrentGameState { get; private set; }
-
-
 
         public void SetState(GameState newGameState)
         {
