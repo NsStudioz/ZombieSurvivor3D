@@ -2416,6 +2416,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 689557183}
     m_Modifications:
+    - target: {fileID: 983456693613218915, guid: de7b41c054c89d349bf904c2f5d8f18c,
+        type: 3}
+      propertyPath: handheldSO_Tag
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b5d7309e9bee1741acf761dce5623d9,
+        type: 2}
     - target: {fileID: 1774669298440197006, guid: de7b41c054c89d349bf904c2f5d8f18c,
         type: 3}
       propertyPath: m_Name
@@ -3031,6 +3037,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3161092374749290056, guid: adac71426dfa84243a71753fb60cff8d,
+        type: 3}
+      propertyPath: handheldSO_Tag
+      value: 
+      objectReference: {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adac71426dfa84243a71753fb60cff8d, type: 3}
 --- !u!4 &1314703237 stripped
