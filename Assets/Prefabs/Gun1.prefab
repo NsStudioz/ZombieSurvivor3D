@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb44297fdd93de49b5661648a5cf47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WeaponAnimator: {fileID: 0}
+  weaponAnimator: {fileID: 0}
   handheldName: 
   ammoCapacity: 0
   fireRate: 0
@@ -164,4 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053ac0c215a62db4e9745b68d8a9e1b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandheldSO_Tag: {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f, type: 2}
+  handheldSO_Tag: {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f, type: 2}

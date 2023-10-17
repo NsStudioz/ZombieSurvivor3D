@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreComponent:
-    highScore: 0
+    HighScore: 0
   highScoreForUI: 0
 --- !u!4 &1076567111
 Transform:
@@ -3738,6 +3738,12 @@ Transform:
   m_Father: {fileID: 1806183895}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1762247805 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5649784629110535979, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1973735651707725638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1806183894
 GameObject:
   m_ObjectHideFlags: 0
@@ -4259,6 +4265,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
         type: 3}
+      propertyPath: rigSocket
+      value: 
+      objectReference: {fileID: 1973735651707725639}
+    - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+        type: 3}
+      propertyPath: rigAnimator
+      value: 
+      objectReference: {fileID: 1762247805}
+    - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+        type: 3}
       propertyPath: HandheldsGO.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -4274,11 +4290,34 @@ PrefabInstance:
       objectReference: {fileID: 1314703238}
     - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
         type: 3}
+      propertyPath: EquipedHandhelds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+        type: 3}
       propertyPath: preservedHandheldsTransform
       value: 
       objectReference: {fileID: 689557183}
+    - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+        type: 3}
+      propertyPath: EquipedHandhelds.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b5d7309e9bee1741acf761dce5623d9,
+        type: 2}
+    - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+        type: 3}
+      propertyPath: EquipedHandhelds.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: e6c46f0873b6a8a4b9b0008817844f5f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe5b6b7490d5f6747b7d95eb29cfe59d, type: 3}
+--- !u!4 &1973735651707725639 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6100891875041561533, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1973735651707725638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2261602776430108760
 PrefabInstance:
   m_ObjectHideFlags: 0
