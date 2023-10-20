@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: DevScene Assets
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: DevScene Assets
   m_Data:
     m_SerializedData: []
   m_GUID: 9f88c6a77498b944790218b9f37178aa
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: f5a165244c93a60499ce7953f0057a99
+    m_Address: Assets/Prefabs/Test/Environment_Test.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7de59cd9256458f4b935b6ebdc81aa48, type: 2}
   m_SchemaSet:
