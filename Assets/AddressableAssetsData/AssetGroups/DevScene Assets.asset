@@ -20,7 +20,8 @@ MonoBehaviour:
   - m_GUID: f5a165244c93a60499ce7953f0057a99
     m_Address: Assets/Prefabs/Test/Environment_Test.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Environment
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7de59cd9256458f4b935b6ebdc81aa48, type: 2}
   m_SchemaSet:
