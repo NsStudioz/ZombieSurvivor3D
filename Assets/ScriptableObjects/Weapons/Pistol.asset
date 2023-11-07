@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9feb26310c992894785621a878ec14b3, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  HandheldPrefab: {fileID: 1774669298440197006, guid: de7b41c054c89d349bf904c2f5d8f18c,
+  HandheldPrefab: {fileID: 1774669298440197006, guid: 975d4ee85fd9fac4392d1e0dca9d715a,
+    type: 3}
+  HandheldBulletPrefab: {fileID: 1257796557909267476, guid: 137a9f5ca4016a04e8a0df0d336efabf,
     type: 3}
   RigAnimController: {fileID: 9100000, guid: 5190babeefada97469517f09eb5c893f, type: 2}
   HandheldType: 0
   FiringMode: 2
-  handheldName: RifleTest2
-  ammoCapacity: 8
-  fireRate: 1
-  fireRateCooldown: 0.2
-  reloadCooldown: 0
+  HandheldName: Pistol
+  AmmoCapacity: 8
+  FireRate: 0
+  FireRateCooldown: 0.3
+  ReloadCooldown: 0
+  Id: 0

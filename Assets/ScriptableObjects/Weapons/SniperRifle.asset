@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9feb26310c992894785621a878ec14b3, type: 3}
   m_Name: SniperRifle
   m_EditorClassIdentifier: 
-  HandheldPrefab: {fileID: 1774669298440197006, guid: de7b41c054c89d349bf904c2f5d8f18c,
+  HandheldPrefab: {fileID: 1774669298440197006, guid: 335911fcc20c3e441909a4f28b89f14d,
+    type: 3}
+  HandheldBulletPrefab: {fileID: 8025252746644006777, guid: 3dab88e383c0d69408728419c032f549,
     type: 3}
   RigAnimController: {fileID: 9100000, guid: 5190babeefada97469517f09eb5c893f, type: 2}
   HandheldType: 4
   FiringMode: 3
-  handheldName: RifleTest2
-  ammoCapacity: 5
-  fireRate: 1
-  fireRateCooldown: 1
-  reloadCooldown: 0
+  HandheldName: SniperRifle
+  AmmoCapacity: 5
+  FireRate: 0
+  FireRateCooldown: 1
+  ReloadCooldown: 0
+  Id: 0
