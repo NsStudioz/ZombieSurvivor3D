@@ -126,7 +126,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         #region Input_Events:
 
-        // These code block templates are for Handheld input actions:
+        // These code block templates are for Handheld input actions and logic:
         public void OnSwitchWeapon(InputAction.CallbackContext context)
         {
 
