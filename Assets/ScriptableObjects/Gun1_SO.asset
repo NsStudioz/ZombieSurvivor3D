@@ -22,6 +22,6 @@ MonoBehaviour:
   HandheldName: Gun1
   AmmoCapacity: 30
   FireRate: 0
-  FireRateCooldown: 2
+  FireRateCooldown: 0.1
   ReloadCooldown: 0
   Id: 1
