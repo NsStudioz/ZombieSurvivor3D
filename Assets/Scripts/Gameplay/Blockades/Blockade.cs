@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 namespace ZombieSurvivor3D.Blockades
@@ -9,9 +10,13 @@ namespace ZombieSurvivor3D.Blockades
 
         [SerializeField] private int pointsCost;
 
-        public void OpenBlockade(int pointsTotal)
+        public int GetPointCost()
         {
-            pointsTotal -= pointsCost;
+            return pointsCost;
+        }
+
+        public void Destroy()
+        {
             Destroy(gameObject);
         }
     }
