@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Loot
 {
     public class LootRandomizerSystem : MonoBehaviour
     {

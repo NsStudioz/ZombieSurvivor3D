@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Blockades;
 using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Score;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Blockades
 {
     public class BlockadeDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
     {

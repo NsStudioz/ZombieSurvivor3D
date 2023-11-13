@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Loot
 {
     public class ArsenalBox : MonoBehaviour
     {

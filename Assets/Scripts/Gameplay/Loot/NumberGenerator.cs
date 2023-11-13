@@ -1,6 +1,6 @@
 using System;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Loot
 {
     public class NumberGenerator
     {

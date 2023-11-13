@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
 
-namespace ZombieSurvivor3D.Blockades
+namespace ZombieSurvivor3D.Gameplay.Blockades
 {
     public class Blockade : MonoBehaviour
     {

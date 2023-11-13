@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Blockades;
 using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Score;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Loot
 {
     public class ArsenalBoxDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
     {
