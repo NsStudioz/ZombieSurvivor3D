@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
 
@@ -42,6 +43,27 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             return pointsCost;
         }
 
+        /// <summary>
+        /// When you take a weapon/equipment spawned from the box, it will reset the box and loot leftovers
+        /// </summary>
+        public void RemoveLootFromBox()
+        {
+            if (LootInstance != null)
+                StartCoroutine(CountDownToResetLoot());
+        }
+
+        /// <summary>
+        /// Re-test this function's WaitForSeconds function on a 144hz production build.
+        /// On player interaction, should Remove the loot item without respawning an item again until the next interaction input.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator CountDownToResetLoot()
+        {
+            yield return new WaitForSeconds(0.1f);
+            ResetBoxInteractionState();
+            ResetLootState();
+        }
+
         public void OpenArsenalBoxForLoot()
         {
             if (isInteracted)
@@ -53,11 +75,6 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                OpenArsenalBoxForLoot();
-            }
-
             if (LootInstance == null)
                 return;
 
@@ -70,6 +87,11 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             }
         }
 
+        private void InteractThisBox()
+        {
+            isInteracted = true;
+        }
+
         /// <summary>
         /// Remove loot from the box and reset timer.
         /// </summary>
@@ -78,11 +100,6 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             Destroy(LootInstance);
             LootInstance = null;
             timeElapsed = timeElapsedThreshold;
-        }
-
-        private void InteractThisBox()
-        {
-            isInteracted = true;
         }
 
         private void ResetBoxInteractionState()

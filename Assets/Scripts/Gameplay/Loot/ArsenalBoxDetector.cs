@@ -9,7 +9,7 @@ namespace ZombieSurvivor3D.Gameplay.Loot
     public class ArsenalBoxDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
     {
 
-        [SerializeField] private ArsenalBox ArsenalBoxObject = null;
+        [SerializeField] private static ArsenalBox ArsenalBoxObject = null;
         [SerializeField] private bool isPressed;
 
         private const string ARSENALBOX_TAG = "ArsenalBox";
@@ -43,6 +43,16 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         {
             if (col.CompareTag(ARSENALBOX_TAG))
                 ArsenalBoxObject = null;
+        }
+
+        public static bool GetArsenalBoxLootState()
+        {
+            return ArsenalBoxObject != null;
+        }
+
+        public static ArsenalBox GetArsenalBox()
+        {
+            return ArsenalBoxObject;
         }
 
         public void OnInteract(InputAction.CallbackContext context)
