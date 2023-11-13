@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927e2cba5c155fc41940871e39668f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsCost: 100
+  pointsCost: -100
   LootInstance: {fileID: 0}
   LootPosOffset: {fileID: 1822157475}
   timeElapsed: 3
@@ -4247,7 +4247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927e2cba5c155fc41940871e39668f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsCost: 100
+  pointsCost: -100
   LootInstance: {fileID: 0}
   LootPosOffset: {fileID: 560989658}
   timeElapsed: 3
