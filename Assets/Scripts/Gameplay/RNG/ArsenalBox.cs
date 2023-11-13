@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D
 {
@@ -18,15 +19,26 @@ namespace ZombieSurvivor3D
         [SerializeField] private float timeElapsedThreshold;
         [SerializeField] private bool isInteracted;
 
+        #region EventListeners:
+
         private void Awake()
         {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             LootRandomizerSystem.OnSpawnLoot += SpawnChosenLoot;
         }
 
         private void OnDestroy()
         {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             LootRandomizerSystem.OnSpawnLoot -= SpawnChosenLoot;
         }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
 
         public int GetPointsCost()
         {

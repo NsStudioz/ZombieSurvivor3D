@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ZombieSurvivor3D.Blockades;
+using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Score;
 
 namespace ZombieSurvivor3D
@@ -16,6 +17,24 @@ namespace ZombieSurvivor3D
 
         private const string ARSENALBOX_TAG = "ArsenalBox";
 
+        #region EventListeners:
+
+        private void Awake()
+        {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
 
         private void OnTriggerEnter(Collider col)
         {

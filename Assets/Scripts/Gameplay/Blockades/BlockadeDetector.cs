@@ -17,6 +17,25 @@ namespace ZombieSurvivor3D
 
         private const string BLOCKADE_TAG = "Blockade";
 
+        #region EventListeners:
+
+        private void Awake()
+        {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
+
 
         private void OnTriggerEnter(Collider col)
         {
