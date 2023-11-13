@@ -634,7 +634,7 @@ MonoBehaviour:
   pointsCost: 100
   LootInstance: {fileID: 0}
   LootPosOffset: {fileID: 1822157475}
-  timeElapsed: 0
+  timeElapsed: 3
   timeElapsedThreshold: 3
   isInteracted: 0
 --- !u!65 &301357480
@@ -4250,7 +4250,7 @@ MonoBehaviour:
   pointsCost: 100
   LootInstance: {fileID: 0}
   LootPosOffset: {fileID: 560989658}
-  timeElapsed: 0
+  timeElapsed: 3
   timeElapsedThreshold: 3
   isInteracted: 0
 --- !u!4 &1676514776

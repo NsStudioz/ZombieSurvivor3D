@@ -349,8 +349,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 577551837}
-        m_TargetAssemblyTypeName: ZombieSurvivor3D.BlockadeDetector, Assembly-CSharp
+      - m_Target: {fileID: 1353421825266329174}
+        m_TargetAssemblyTypeName: ZombieSurvivor3D.Gameplay.Loot.ArsenalBoxDetector,
+          Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
