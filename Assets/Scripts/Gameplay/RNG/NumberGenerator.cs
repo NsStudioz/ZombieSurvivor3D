@@ -7,7 +7,7 @@ namespace ZombieSurvivor3D
 
         public static event Action<int> OnRandomNumberGenerated;
 
-        public void Generate()
+        public static void Generate()
         {
             int rnd = UnityEngine.Random.Range(1, 100);
             OnRandomNumberGenerated?.Invoke(rnd);
