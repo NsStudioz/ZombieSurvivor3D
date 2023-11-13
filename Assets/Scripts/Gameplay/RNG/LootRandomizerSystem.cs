@@ -18,6 +18,9 @@ namespace ZombieSurvivor3D
         [SerializeField] private int pityLockCount = 0;
         [SerializeField] private bool isPityLocked = false;
 
+        // Events:
+        public static event Action<GameObject> OnSpawnLoot;
+
         #region RarityElements:
 
         private int minCommon = 1;
@@ -49,19 +52,6 @@ namespace ZombieSurvivor3D
         }
 
         #endregion
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                StartLootRandomizer();
-            }
-        }
-
-        private void StartLootRandomizer()
-        {
-            NumberGenerator.Generate();
-        }
 
         private void CycleThroughLootRarity(int rnd)
         {
@@ -100,7 +90,7 @@ namespace ZombieSurvivor3D
 
             Debug.Log("Chosen Loot: " + lootList[rnd]);
 
-            //GameObject lootInstance = Instantiate(lootList[rnd], transform.position, transform.rotation);
+            OnSpawnLoot?.Invoke(lootList[rnd]);
         }
 
         private void CountLockedPity()
