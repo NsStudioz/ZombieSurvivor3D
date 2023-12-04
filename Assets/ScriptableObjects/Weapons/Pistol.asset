@@ -24,4 +24,4 @@ MonoBehaviour:
   FireRate: 0
   FireRateCooldown: 0.3
   ReloadCooldown: 0
-  Id: 0
+  Id: 2
