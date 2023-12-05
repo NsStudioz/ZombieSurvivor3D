@@ -70,7 +70,7 @@ namespace ZombieSurvivor3D.Gameplay.Loot
                 return;
 
             InteractThisBox();
-            NumberGenerator.Generate();
+            NumberGenerator.GenerateForLoot();
         }
 
         private void Update()

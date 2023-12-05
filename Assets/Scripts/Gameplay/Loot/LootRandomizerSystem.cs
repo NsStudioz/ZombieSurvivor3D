@@ -37,13 +37,13 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            NumberGenerator.OnRandomNumberGenerated += CycleThroughLootRarity;
+            NumberGenerator.OnRandomNumberGeneratedLoot += CycleThroughLootRarity;
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            NumberGenerator.OnRandomNumberGenerated -= CycleThroughLootRarity;
+            NumberGenerator.OnRandomNumberGeneratedLoot -= CycleThroughLootRarity;
         }
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
