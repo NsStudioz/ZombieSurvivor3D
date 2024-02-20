@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d3a605c0ffbc049862373797f974c3, type: 3}
-  m_Name: PlayerRunBuff
+  m_Script: {fileID: 11500000, guid: 662fa34f65e23d64bad8dc2522660a10, type: 3}
+  m_Name: AbilityStrengthBuff
   m_EditorClassIdentifier: 
   category: 1
   buffTagId: 
-  buffName: I feel lighter
-  buffDescription: Running speed increased!
-  buffDurationUI: 10
-  buffAmountUI: 2
+  buffName: Another One
+  buffDescription: Equipped ability do extra damage
+  buffDurationUI: 60
+  buffAmountUI: 20
   buffSprite: {fileID: 0}
-  rarity: 1
-  statType: 1
-  buffDuration: 10
-  amount: 2
+  rarity: 3
+  statType: 6
+  buffDuration: 60
+  amount: 20

@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268765314c32d244bb6eecb2e73354d1, type: 3}
-  m_Name: EnemyHealthBuff
+  m_Script: {fileID: 11500000, guid: 662fa34f65e23d64bad8dc2522660a10, type: 3}
+  m_Name: EnemyRunSpeedDebuff
   m_EditorClassIdentifier: 
-  category: 1
+  category: 2
   buffTagId: 
-  buffName: Foes On Steroids
-  buffDescription: All enemeis receive additional health
-  buffDurationUI: 20
-  buffAmountUI: 50
+  buffName: You Feel Fat
+  buffDescription: Enemies run speed is slightly decreased
+  buffDurationUI: 15
+  buffAmountUI: -1
   buffSprite: {fileID: 0}
-  rarity: 3
+  rarity: 1
   statType: 5
-  buffDuration: 20
-  amount: 50
+  buffDuration: 15
+  amount: -1
