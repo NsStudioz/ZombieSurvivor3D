@@ -13,11 +13,7 @@ namespace ZombieSurvivor3D.Gameplay.Blockades
 
         private const string BLOCKADE_TAG = "Blockade";
 
-<<<<<<< HEAD
-        #region Event Listeners:
-=======
         #region EventListeners:
->>>>>>> 11_RNGSystem
 
         private void Awake()
         {
@@ -35,10 +31,6 @@ namespace ZombieSurvivor3D.Gameplay.Blockades
         }
 
         #endregion
-<<<<<<< HEAD
-=======
-
->>>>>>> 11_RNGSystem
 
         private void OnTriggerEnter(Collider col)
         {
