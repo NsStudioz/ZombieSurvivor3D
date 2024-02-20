@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ZombieSurvivor3D.Gameplay.GameState;
+using ZombieSurvivor3D.Gameplay.Loot;
 
 
 namespace ZombieSurvivor3D.Gameplay.Handheld
@@ -210,13 +211,20 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             if (isInteractButtonClickHeld)
             {
                 if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
-                    OnInteractSimilarHandheld?.Invoke(interactableHandheldSO);
+                    OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
 
                 else if (EquipedHandhelds[currentHandheldIndex] != interactableHandheldSO)
                 {
                     EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
                     SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-                    OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab);
+                    OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+                }
+
+                if (ArsenalBoxDetector.GetArsenalBoxLootState())
+                {
+                    ArsenalBox instance = ArsenalBoxDetector.GetArsenalBox();
+                    instance.RemoveLootFromBox();
+                    Debug.Log("Loot Removed from: " + instance);
                 }
             }
         }
@@ -230,7 +238,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
                 SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
 
-                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab);
+                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
             }
 
             // Using this code block to avoid binding/unbiding from our input system:

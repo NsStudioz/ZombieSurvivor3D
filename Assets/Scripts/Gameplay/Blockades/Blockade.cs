@@ -1,14 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.GameState;
 
-namespace ZombieSurvivor3D.Blockades
+namespace ZombieSurvivor3D.Gameplay.Blockades
 {
     public class Blockade : MonoBehaviour
     {
 
         [SerializeField] private int pointsCost;
+
+        #region EventListeners:
+
+        private void Awake()
+        {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
 
         public int GetPointCost()
         {

@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Blockades;
 using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Score;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Blockades
 {
     public class BlockadeDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
     {
@@ -17,7 +13,11 @@ namespace ZombieSurvivor3D
 
         private const string BLOCKADE_TAG = "Blockade";
 
+<<<<<<< HEAD
         #region Event Listeners:
+=======
+        #region EventListeners:
+>>>>>>> 11_RNGSystem
 
         private void Awake()
         {
@@ -35,6 +35,10 @@ namespace ZombieSurvivor3D
         }
 
         #endregion
+<<<<<<< HEAD
+=======
+
+>>>>>>> 11_RNGSystem
 
         private void OnTriggerEnter(Collider col)
         {

@@ -9,6 +9,7 @@ TagManager:
   - Handheld
   - Ground
   - Blockade
+  - ArsenalBox
   layers:
   - Default
   - TransparentFX
