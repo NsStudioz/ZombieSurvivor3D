@@ -19,7 +19,7 @@ MonoBehaviour:
   buffDurationUI: 30
   buffAmountUI: -2
   buffSprite: {fileID: 0}
-  rarity: 1
+  rarity: 2
   statType: 5
   buffDuration: 30
   amount: -2
