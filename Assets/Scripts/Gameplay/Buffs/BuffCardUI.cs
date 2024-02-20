@@ -17,7 +17,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
         [Header("Buff Card Elements")]
         [SerializeField] private Image cardImg = null; // need to access the sprite.
-        [SerializeField] private Image buffIcon = null; // need to access the sprite.
+        //[SerializeField] private Image buffIcon = null; // need to access the sprite.
         [SerializeField] private TextMeshProUGUI nameTxt;
         [SerializeField] private TextMeshProUGUI descriptionTxt;
         [SerializeField] private TextMeshProUGUI durationTxt;

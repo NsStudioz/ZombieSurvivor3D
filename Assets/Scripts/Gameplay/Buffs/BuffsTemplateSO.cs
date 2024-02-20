@@ -43,9 +43,3 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         public abstract void Apply();
     }
 }
-
-//[CreateAssetMenu(fileName = "Buffs", menuName = "New Buff SO", order = 1)]
-//[Header("Duration")]
-//public float bonusToStats;
-//public float nerfToStats;
-//public Image buffImage = null; // not sure if should be sprite or normal UI texture...
