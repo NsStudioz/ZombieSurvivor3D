@@ -5739,20 +5739,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CommonBuffs:
-  - {fileID: 11400000, guid: 07897cfa2626dc74f9b4540b92c97f9e, type: 2}
-  - {fileID: 11400000, guid: 7b289572b74950a45a487a1c266436a7, type: 2}
-  - {fileID: 11400000, guid: f4a7e7340e6c16e4ca2a052a9fdcbf9c, type: 2}
-  - {fileID: 11400000, guid: 8776c88ee3f1ee64c881749db02a24c1, type: 2}
+  - {fileID: 11400000, guid: 861d3ec665788074dbd31b25b0311434, type: 2}
+  - {fileID: 11400000, guid: 2b726e1f1aec24144bb8b2110e8b7e01, type: 2}
+  - {fileID: 11400000, guid: 9ead95e251eca524ea715081bccffcc7, type: 2}
   UncommonBuffs:
-  - {fileID: 11400000, guid: 07897cfa2626dc74f9b4540b92c97f9e, type: 2}
-  - {fileID: 11400000, guid: 7b289572b74950a45a487a1c266436a7, type: 2}
-  - {fileID: 11400000, guid: f4a7e7340e6c16e4ca2a052a9fdcbf9c, type: 2}
-  - {fileID: 11400000, guid: 8776c88ee3f1ee64c881749db02a24c1, type: 2}
+  - {fileID: 11400000, guid: 2e8e76a56af8a084faca9bef9cd2ce88, type: 2}
+  - {fileID: 11400000, guid: 74a814c4d1a3e124d862ebfbe5da04db, type: 2}
+  - {fileID: 11400000, guid: 4f528b794550a5143bc8eeeda7543329, type: 2}
+  - {fileID: 11400000, guid: 1da61f878ef447f4284e55d32319ccc0, type: 2}
   RareBuffs:
-  - {fileID: 11400000, guid: 07897cfa2626dc74f9b4540b92c97f9e, type: 2}
-  - {fileID: 11400000, guid: 7b289572b74950a45a487a1c266436a7, type: 2}
-  - {fileID: 11400000, guid: f4a7e7340e6c16e4ca2a052a9fdcbf9c, type: 2}
-  - {fileID: 11400000, guid: 8776c88ee3f1ee64c881749db02a24c1, type: 2}
+  - {fileID: 11400000, guid: 969d7c8c6a1fb3749afbc1dd75d6be52, type: 2}
+  - {fileID: 11400000, guid: 59075fbf2c3c10f4cbc102738ded81ff, type: 2}
+  - {fileID: 11400000, guid: 1897d72f2c3c9e24d9b52f68fde7b2ca, type: 2}
   pityLockCount: 0
   isPityLocked: 0
 --- !u!1 &1854797432

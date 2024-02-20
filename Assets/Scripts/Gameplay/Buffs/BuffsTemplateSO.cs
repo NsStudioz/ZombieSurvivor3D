@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ZombieSurvivor3D.Gameplay.Buffs
 {
     /// <summary>
-    /// Buff Blueprint as a Scriptable Object.
+    /// Buff Blueprint as a Scriptable Object. The base template for creating a buff item.
     /// </summary>
     public abstract class BuffsTemplateSO : ScriptableObject
     {
