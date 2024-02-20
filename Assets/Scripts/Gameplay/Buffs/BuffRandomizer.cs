@@ -1,27 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Loot;
 
-namespace ZombieSurvivor3D.Gameplay.BuffsDebuffs
+namespace ZombieSurvivor3D.Gameplay.Buffs
 {
+    /// <summary>
+    /// Grants a randomized buff or debuff, then passes the stats to a buff UI object.
+    /// </summary>
     public class BuffRandomizer : MonoBehaviour
     {
         [Header("Buffs Lists")]
-        [SerializeField] private List<GameObject> CommonBuffs;
-        [SerializeField] private List<GameObject> UncommonBuffs;
-        [SerializeField] private List<GameObject> RareBuffs;
-        [SerializeField] private List<GameObject> Debuffs;
+        [SerializeField] private List<BuffsTemplateSO> CommonBuffs;    // Contains buffs & Debuffs
+        [SerializeField] private List<BuffsTemplateSO> UncommonBuffs;  // Contains buffs & Debuffs
+        [SerializeField] private List<BuffsTemplateSO> RareBuffs;      // Contains buffs only
 
         [Header("Pity Lock Elements")]
         [SerializeField] private int pityLockCount = 0;
         [SerializeField] private bool isPityLocked = false;
 
         // Events:
-        public static event Action<GameObject,int> OnBuffRolled;
+        //public static event Action<GameObject,int> OnBuffRolled;
+        public static event Action<BuffsTemplateSO> OnBuffRolled;
 
         #region RarityElements:
 
@@ -43,27 +45,20 @@ namespace ZombieSurvivor3D.Gameplay.BuffsDebuffs
 
         #endregion
 
-        #region DebuffsElements:
-
-        private int debuffMinInt = 10;
-        private int debuffMaxInt = 90;
-
-        #endregion
-
         #region EventListeners:
 
         private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             NumberGenerator.OnRandomNumberGeneratedBuffs += RollRandomBuff;
-            NumberGenerator.OnRandomNumberGeneratedBuffs += RollRandomDebuff;
+            //NumberGenerator.OnRandomNumberGeneratedBuffs += RollRandomDebuff;
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             NumberGenerator.OnRandomNumberGeneratedBuffs -= RollRandomBuff;
-            NumberGenerator.OnRandomNumberGeneratedBuffs -= RollRandomDebuff;
+            //NumberGenerator.OnRandomNumberGeneratedBuffs -= RollRandomDebuff;
         }
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
@@ -126,11 +121,12 @@ namespace ZombieSurvivor3D.Gameplay.BuffsDebuffs
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                NumberGenerator.GenerateForBuffs();
+                // USE THIS ON PLAYER COLLISION TRIGGER:
+                //NumberGenerator.GenerateForBuffs(); 
             }
         }
 
-        // Spawn a buff for the player, Currently only spawns 1 buff:
+        // Roll 1 buff for the player:
         private void RollRandomBuff(int rnd)
         {
             int value = rnd;
@@ -146,36 +142,57 @@ namespace ZombieSurvivor3D.Gameplay.BuffsDebuffs
 
             Debug.Log("Random Value: " + value);
 
-            // Start Rolling a buff, complete on buffs branch:
+            // Is the buff common?:
             if (IsCommonRolledPreRareIndex(value) || IsCommonRolledPostRareIndex(value))
             {
                 // spawn random common buff:
                 //RollBuff(CommonBuffs);
                 Debug.Log("Spawn Common");
             }
+            // Is the buff uncommon?
             else if (IsUncommonRolledPreRareIndex(value) || IsUncommonRolledPostRareIndex(value))
             {
                 // spawn random Uncommon buff:
                 //RollBuff(UncommonBuffs);
                 Debug.Log("Spawn Uncommon");
             }
+            // Is the buff rare?
             else if (IsRareRolled(value))
             {
                 // spawn random rare buff:
                 //RollBuff(RareBuffs);
                 Debug.Log("Spawn Rare");
+                // lock rare buffs temporarily:
                 LockPity();
             }
         }
 
-        private void RollBuff(List<GameObject> buffList)
+        private int RollRandomItemFromList(List<BuffsTemplateSO> buffList)
+        {
+            return UnityEngine.Random.Range(0, buffList.Count);
+        }
+
+        // spawn the desired buff:
+        private void RollBuff(List<BuffsTemplateSO> buffList)
         {
             int rnd = RollRandomItemFromList(buffList);
 
             Debug.Log("Chosen Buff: " + buffList[rnd]);
 
-            OnBuffRolled?.Invoke(buffList[rnd], 1);
+            OnBuffRolled?.Invoke(buffList[rnd]);
         }
+
+/*        //DEBUFFS CODE BLOCKS, NO LONGER NEEDED:
+
+        // DATED, DELETE SOON:
+        [SerializeField] private List<GameObject> Debuffs;
+
+        #region DebuffsElements (DATED, DELETE SOON:):
+
+        private int debuffMinInt = 10;
+        private int debuffMaxInt = 90;
+
+        #endregion
 
         private void RollRandomDebuff(int rnd)
         {
@@ -196,11 +213,7 @@ namespace ZombieSurvivor3D.Gameplay.BuffsDebuffs
             Debug.Log("Chosen Debuff: " + buffList[rnd]);
 
             OnBuffRolled?.Invoke(buffList[rnd], -1);
-        }
+        }*/
 
-        private int RollRandomItemFromList(List<GameObject> buffList)
-        {
-            return UnityEngine.Random.Range(0, buffList.Count);
-        }
     }
 }
