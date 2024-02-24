@@ -22,15 +22,17 @@ namespace ZombieSurvivor3D
         [Header("Attack Attributes")]
         [SerializeField] private float damage = 100f;
         [SerializeField] private float fireRate = 1f;
-        [SerializeField] private float fireCooldownThreshold = 0f;
+        [SerializeField] private float fireCooldown = 0f;
 
         [Header("Defense Attributes")]
         [SerializeField] private float range = 1f;
         [SerializeField] private float turnSpeed = 1f;
 
-        //[Header("Bullet Setup")]
-        //[SerializeField] private GameObject bulletPrefab;
-        //[SerializeField] private Transform firingPosition;
+        [Header("Bullet Setup")]
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private Transform firingPoint;
+        [SerializeField] private Transform bulletStorage; // used bullet storage.
+        [SerializeField] private float activeDuration;
 
         [Header("Targetting frequency")]
         [SerializeField] private float repeatRate = 0.5f;
@@ -41,8 +43,8 @@ namespace ZombieSurvivor3D
         {
             // test:
             Activate();
-            //InvokeRepeating(nameof(AquireTarget), ZEROED_VALUE, repeatRate);
-            InvokeRepeating("AquireTarget", ZEROED_VALUE, repeatRate);
+            //
+            InvokeRepeating(nameof(AquireTarget), ZEROED_VALUE, repeatRate);
         }
 
         void Update()
@@ -54,7 +56,8 @@ namespace ZombieSurvivor3D
                 return;
 
             LockRotation();
-            //AquireTarget();
+
+            SetRateofFire();
         }
 
         /// <summary>
@@ -62,25 +65,25 @@ namespace ZombieSurvivor3D
         /// </summary>
         private void AquireTarget()
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
+            GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
 
             float shortestDistance = Mathf.Infinity;
-            GameObject nearestEnemy = null;
+            GameObject nearestTarget = null;
 
-            foreach (GameObject enemy in enemies)
+            foreach (GameObject targetIns in targets)
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                float distanceToTarget = Vector3.Distance(transform.position, targetIns.transform.position);
 
-                if (distanceToEnemy < shortestDistance)
+                if (distanceToTarget < shortestDistance)
                 {
-                    shortestDistance = distanceToEnemy;
-                    nearestEnemy = enemy;
+                    shortestDistance = distanceToTarget;
+                    nearestTarget = targetIns;
                 }
             }
 
-            if (nearestEnemy != null && shortestDistance <= range)
+            if (nearestTarget != null && shortestDistance <= range)
             {
-                target = nearestEnemy.transform;
+                target = nearestTarget.transform;
             }
             else
                 target = null;
@@ -99,6 +102,41 @@ namespace ZombieSurvivor3D
             Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
             // Rotate the turret:
             partToRotate.rotation = Quaternion.Euler(ZEROED_VALUE, rotation.y, ZEROED_VALUE);
+        }
+
+        /// <summary>
+        /// Release bullet from turret's chamber.
+        /// </summary>
+        private void Fire()
+        {
+            GameObject bulletIns = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+            bulletIns.transform.parent = bulletStorage;
+            StartCoroutine(TimeToFade(bulletIns));
+        }
+
+        /// <summary>
+        /// Open Fire at the target.
+        /// </summary>
+        private void SetRateofFire()
+        {
+            if (fireCooldown <= ZEROED_VALUE)
+            {
+                Fire();
+                fireCooldown = 1f / fireRate;
+            }
+
+            fireCooldown -= Time.deltaTime;
+        }
+
+        /// <summary>
+        /// Set timer to "Destroy" bullet instance object in the scene.
+        /// </summary>
+        /// <param name="bulletInstance"></param>
+        /// <returns></returns>
+        private IEnumerator TimeToFade(GameObject bulletInstance)
+        {
+            yield return new WaitForSecondsRealtime(activeDuration);
+            Destroy(bulletInstance);
         }
 
         private void Activate()
