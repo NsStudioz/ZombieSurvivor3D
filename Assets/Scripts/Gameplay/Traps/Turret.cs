@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.Bullets;
+using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Health;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Traps
 {
     public class Turret : MonoBehaviour
     {
@@ -42,18 +43,34 @@ namespace ZombieSurvivor3D
 
         private const float ZEROED_VALUE = 0f;
 
-        void Start()
+        #region EventListeners:
+
+        private void Awake()
         {
-            // test:
-            Activate();
-            //
-            InvokeRepeating(nameof(AquireTarget), ZEROED_VALUE, repeatRate);
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnDestroy()
         {
             if (isEnabled)
                 Deactivate();
+
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
+
+        void Start()
+        {
+            // test:
+            Activate();
+            //
+            InvokeRepeating(nameof(AquireTarget), ZEROED_VALUE, repeatRate);
         }
 
         void Update()
@@ -139,16 +156,6 @@ namespace ZombieSurvivor3D
         }
 
         /// <summary>
-        /// Release a caliber from turret's chamber.
-        /// </summary>
-        private void FireCaliber()
-        {
-            GameObject bulletIns = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
-            bulletIns.transform.parent = bulletStorage;
-            StartCoroutine(TimeToFade(bulletIns));
-        }
-
-        /// <summary>
         /// Fire at a designated target using ray-casting.
         /// </summary>
         private void Fire()
@@ -174,11 +181,26 @@ namespace ZombieSurvivor3D
         }
 
         /// <summary>
-        /// Force a turret's bullet object to seek target.
+        /// Release a caliber from turret's chamber.
         /// </summary>
-        private void TriggerCaliber(Transform target)
+        private void FireCaliber()
         {
-            // needs a turret caliber script
+            GameObject caliberGO = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+            caliberGO.transform.parent = bulletStorage;
+            TriggerCaliber(caliberGO, target);
+        }
+
+        /// <summary>
+        /// Force a turret's caliber object to seek target.
+        /// </summary>
+        private void TriggerCaliber(GameObject caliberIns, Transform target)
+        {
+            TurretCaliber newCaliber = caliberIns.GetComponent<TurretCaliber>();
+
+            if (newCaliber != null)
+                newCaliber.AquireTarget(target);
+
+            //StartCoroutine(TimeToFade(caliberGO));
         }
 
         /// <summary>
