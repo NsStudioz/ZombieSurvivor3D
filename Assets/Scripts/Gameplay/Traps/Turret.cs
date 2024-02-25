@@ -7,20 +7,17 @@ using ZombieSurvivor3D.Gameplay.Health;
 
 namespace ZombieSurvivor3D.Gameplay.Traps
 {
-    public class Turret : MonoBehaviour
+    public class Turret : TrapBase
     {
 
         [Header("Activation")]
-        [SerializeField] private bool isEnabled = false;
+        //[SerializeField] private bool isEnabled = false;
         [SerializeField] private bool hasCaliber = false;
 
         [Header("Main Attributes")]
-        [SerializeField] private Transform target = null;         // for targeting the enemy
+        [SerializeField] private Transform target = null;  // for targeting the enemy
         [SerializeField] private Transform partToRotate;
         [SerializeField] private string targetTag;
-
-        // for accessing the enemy's health component. Might be for future use:
-        //[SerializeField] private EnemyHealth EnemyTarget;  
 
         [Header("Attack Attributes")]
         [SerializeField] private int damage = 100;
@@ -36,7 +33,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform firingPoint;
         [SerializeField] private Transform bulletStorage; // used bullet storage.
-        [SerializeField] private float activeDuration;
 
         [Header("Targetting frequency")]
         [SerializeField] private float repeatRate = 0.5f;
@@ -45,22 +41,14 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            if (isEnabled)
-                Deactivate();
-
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
+            base.OnDestroy();
         }
 
         #endregion
@@ -75,7 +63,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         void Update()
         {
-            if (!isEnabled)
+            if (!isActivated)
                 return;
 
             if (target == null)
@@ -200,32 +188,39 @@ namespace ZombieSurvivor3D.Gameplay.Traps
             if (newCaliber != null)
                 newCaliber.AquireTarget(target);
 
-            //StartCoroutine(TimeToFade(caliberGO));
+
         }
 
-        /// <summary>
-        /// Set timer to "Destroy" bullet instance object in the scene.
-        /// </summary>
-        /// <param name="bulletInstance"></param>
-        /// <returns></returns>
-        private IEnumerator TimeToFade(GameObject bulletInstance)
-        {
-            yield return new WaitForSecondsRealtime(activeDuration);
-            Destroy(bulletInstance);
-        }
+        #region OldCode_RemoveSoon:
 
-        private void Activate()
-        {
-            isEnabled = true;
-        }
-
-        private void Deactivate()
-        {
-            isEnabled = false;
-        }
+        //[SerializeField] private float activeDuration;
 
 
+        //StartCoroutine(TimeToFade(caliberGO));
 
+        /*        /// <summary>
+                /// Set timer to "Destroy" bullet instance object in the scene.
+                /// </summary>
+                /// <param name="bulletInstance"></param>
+                /// <returns></returns>
+                private IEnumerator TimeToFade(GameObject bulletInstance)
+                {
+                    yield return new WaitForSecondsRealtime(activeDuration);
+                    Destroy(bulletInstance);
+                }*/
+
+        /*        private void ActivateOld()
+                {
+                    isEnabled = true;
+                }
+
+                private void DeactivateOld()
+                {
+                    isEnabled = false;
+                }*/
+
+
+        #endregion
 
     }
 }

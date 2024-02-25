@@ -3661,7 +3661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9341d8d71eaf9004083f0f5229096868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnabled: 0
+  isActivated: 1
   hasCaliber: 0
   target: {fileID: 0}
   partToRotate: {fileID: 1722313358}
@@ -3676,7 +3676,6 @@ MonoBehaviour:
     type: 3}
   firingPoint: {fileID: 241728464}
   bulletStorage: {fileID: 1688152124}
-  activeDuration: 3
   repeatRate: 0.5
 --- !u!1 &1122734048
 GameObject:
@@ -7067,7 +7066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9341d8d71eaf9004083f0f5229096868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnabled: 0
+  isActivated: 0
   hasCaliber: 0
   target: {fileID: 0}
   partToRotate: {fileID: 1950618229}
@@ -7082,7 +7081,6 @@ MonoBehaviour:
     type: 3}
   firingPoint: {fileID: 1228898525}
   bulletStorage: {fileID: 36014781}
-  activeDuration: 3
   repeatRate: 0.5
 --- !u!4 &2074660308
 Transform:
