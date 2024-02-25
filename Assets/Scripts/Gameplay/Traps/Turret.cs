@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.Bullets;
 using ZombieSurvivor3D.Gameplay.Health;
 
 namespace ZombieSurvivor3D
@@ -10,6 +11,7 @@ namespace ZombieSurvivor3D
 
         [Header("Activation")]
         [SerializeField] private bool isEnabled = false;
+        [SerializeField] private bool hasCaliber = false;
 
         [Header("Main Attributes")]
         [SerializeField] private Transform target = null;         // for targeting the enemy
@@ -20,12 +22,13 @@ namespace ZombieSurvivor3D
         //[SerializeField] private EnemyHealth EnemyTarget;  
 
         [Header("Attack Attributes")]
-        [SerializeField] private float damage = 100f;
+        [SerializeField] private int damage = 100;
         [SerializeField] private float fireRate = 1f;
         [SerializeField] private float fireCooldown = 0f;
 
         [Header("Defense Attributes")]
         [SerializeField] private float range = 1f;
+        [SerializeField] private float rayHitRange = 20f;
         [SerializeField] private float turnSpeed = 1f;
 
         [Header("Bullet Setup")]
@@ -47,6 +50,12 @@ namespace ZombieSurvivor3D
             InvokeRepeating(nameof(AquireTarget), ZEROED_VALUE, repeatRate);
         }
 
+        private void OnDestroy()
+        {
+            if (isEnabled)
+                Deactivate();
+        }
+
         void Update()
         {
             if (!isEnabled)
@@ -57,8 +66,10 @@ namespace ZombieSurvivor3D
 
             LockRotation();
 
-            SetRateofFire();
+            OpenFire();
         }
+
+        #region Locking & Rotating Systems:
 
         /// <summary>
         /// Find a target in the vicinity.
@@ -94,20 +105,43 @@ namespace ZombieSurvivor3D
         /// </summary>
         private void LockRotation()
         {
-            Vector3 dir = target.position - transform.position;
-
+            Vector3 dir = target.position - partToRotate.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
 
             // eulerAngles = converts the below Quaternion into Vector3:
             Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
             // Rotate the turret:
-            partToRotate.rotation = Quaternion.Euler(ZEROED_VALUE, rotation.y, ZEROED_VALUE);
+            partToRotate.rotation = Quaternion.Euler(rotation.x, rotation.y, ZEROED_VALUE);
+
+            //Backup:
+            //  Vector3 dir = target.position - transform.position;
+            //partToRotate.rotation = Quaternion.Euler(ZEROED_VALUE, rotation.y, ZEROED_VALUE);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Fire at the target.
+        /// </summary>
+        private void OpenFire()
+        {
+            if (fireCooldown <= ZEROED_VALUE)
+            {
+                if (!hasCaliber)
+                    Fire();
+                else
+                    FireCaliber();
+
+                fireCooldown = 1f / fireRate;
+            }
+
+            fireCooldown -= Time.deltaTime;
         }
 
         /// <summary>
-        /// Release bullet from turret's chamber.
+        /// Release a caliber from turret's chamber.
         /// </summary>
-        private void Fire()
+        private void FireCaliber()
         {
             GameObject bulletIns = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
             bulletIns.transform.parent = bulletStorage;
@@ -115,17 +149,36 @@ namespace ZombieSurvivor3D
         }
 
         /// <summary>
-        /// Open Fire at the target.
+        /// Fire at a designated target using ray-casting.
         /// </summary>
-        private void SetRateofFire()
+        private void Fire()
         {
-            if (fireCooldown <= ZEROED_VALUE)
-            {
-                Fire();
-                fireCooldown = 1f / fireRate;
-            }
+            // ray instance:
+            Ray ray = new Ray(partToRotate.position, partToRotate.TransformDirection(Vector3.forward));
 
-            fireCooldown -= Time.deltaTime;
+            // if the ray hits nothing:
+            if (!Physics.Raycast(ray, out RaycastHit hitInfo, rayHitRange))
+            {
+                //Debug.Log("Nothing");
+                Debug.DrawRay(partToRotate.position, partToRotate.TransformDirection(Vector3.forward) * rayHitRange, Color.green);
+                return;
+            }
+            else // if the ray hits something:
+            {
+                //Debug.Log("Hit");
+                Debug.DrawRay(partToRotate.position, partToRotate.TransformDirection(Vector3.forward) * hitInfo.distance, Color.red);
+                // hit enemy:
+                IDamageable damageable = hitInfo.collider.GetComponentInChildren<IDamageable>();
+                damageable?.TakeDamage(damage);
+            }
+        }
+
+        /// <summary>
+        /// Force a turret's bullet object to seek target.
+        /// </summary>
+        private void TriggerCaliber(Transform target)
+        {
+            // needs a turret caliber script
         }
 
         /// <summary>
@@ -150,11 +203,7 @@ namespace ZombieSurvivor3D
         }
 
 
-        private void OnDestroy()
-        {
-            if (isEnabled)
-                Deactivate();
-        }
+
 
     }
 }

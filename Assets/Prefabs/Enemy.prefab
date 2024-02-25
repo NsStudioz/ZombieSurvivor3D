@@ -129,10 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73931ac3dbc5e2a4198d77f4a7c24963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  rayRange: 1
 --- !u!114 &5910329066372828191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e3df296ba80d34fa6241185cce94eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthComponent:
-    currentHealth: 0
-    maxHealth: 0
+  HealthComponent:
+    CurrentHealth: 0
+    MaxHealth: 0
   enemyType: 0
 --- !u!1 &2261602777148758860
 GameObject:
@@ -162,7 +158,7 @@ GameObject:
   - component: {fileID: 2261602777148758862}
   m_Layer: 12
   m_Name: Head
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
