@@ -10,7 +10,7 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
 {
     public class EnemyNavMesh : MonoBehaviour
     {
-        NavMeshAgent navMeshAgent;
+        [SerializeField] NavMeshAgent navMeshAgent;
         [SerializeField] Transform target = null;
         //[SerializeField] Transform playerTransform;
         [SerializeField] Transform retreatTransform;
@@ -58,8 +58,13 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
+            if (newGameState == GameStateManager.GameState.Gameplay)
+                navMeshAgent.speed = 2f;
+            else if (newGameState == GameStateManager.GameState.Paused)
+                navMeshAgent.speed = 0f;
+
+            //navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
             enabled = newGameState == GameStateManager.GameState.Gameplay;
-            navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
     }
 }

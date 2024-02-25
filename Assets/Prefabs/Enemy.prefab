@@ -297,5 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5dc27d072290a4f9bb8be14de17035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 2261602777475772772}
   target: {fileID: 0}
   retreatTransform: {fileID: 0}
