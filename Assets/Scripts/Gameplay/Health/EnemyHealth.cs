@@ -42,10 +42,31 @@ namespace ZombieSurvivor3D.Gameplay.Health
             UpdateScore(10);
         }
 
+        public override void TakeContinuousDamage(int damageAmount, float timeDelay)
+        {
+            base.TakeContinuousDamage(damageAmount, timeDelay);
+            StartCoroutine(DamageOverTimeCoroutine(damageAmount, timeDelay));
+        }
+
+        private IEnumerator DamageOverTimeCoroutine(int damageAmount, float timeDelay)
+        {
+            int hitCount = 0;
+            while (hitCount < 5 || isAffected) // hitCount < 5 || isAffected = true;
+            {
+                if (isAffected)
+                    hitCount = 0;
+
+                TakeDamage(damageAmount);
+                hitCount++;
+                yield return new WaitForSeconds(timeDelay);
+            }
+        }
+
         private void DespawnEnemy()
         {
             if (HealthComponent.GetCurrentHealth() <= ZERO_HEALTH)
             {
+                StopAllCoroutines();
                 //Debug.Log("Object Died!: " + transform.parent.gameObject.name);
                 EnemySpawner.Instance.DespawnEnemy(transform.parent.gameObject);
                 UpdateScore(100);

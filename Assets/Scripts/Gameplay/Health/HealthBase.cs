@@ -9,7 +9,9 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
         [Header("Main Elements")]
         [SerializeField] protected HealthComponent HealthComponent;
+        [SerializeField] protected bool isAffected;
         protected const int ZERO_HEALTH = 0;
+
 
         protected void Awake()
         {
@@ -36,6 +38,16 @@ namespace ZombieSurvivor3D.Gameplay.Health
         public virtual void TakeDamage(int damageAmount)
         {
             HealthComponent.TakeDamage(damageAmount);
+        }
+
+        public virtual void TakeContinuousDamage(int damageAmount, float timeDelay) 
+        {
+            isAffected = true;
+        }
+
+        public void StopContinuousDamage()
+        {
+            isAffected = false;
         }
     }
 }

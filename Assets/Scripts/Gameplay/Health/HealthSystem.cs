@@ -138,5 +138,15 @@ namespace ZombieSurvivor3D.Gameplay.Health
         {
             ScoreSystem.Instance.UpdateScore(scorePoints);
         }
+
+        public void TakeContinuousDamage(int damageAmount, float timeDelay)
+        {
+            return;
+        }
+
+        public void StopContinuousDamage()
+        {
+            return;
+        }
     }
 }
