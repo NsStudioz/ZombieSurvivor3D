@@ -17,7 +17,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         private void OnTriggerEnter(Collider col)
         {
             IgnoreNonTarget(col);
-            Damage(col);
+            Damage(col);         
         }
 
         private void OnTriggerExit(Collider col)
@@ -28,21 +28,23 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         private void IgnoreNonTarget(Collider col)
         {
-            if (!col.CompareTag(targetTag) || col == null)
+            if (col.CompareTag(targetTag) || col == null)
                 return;
         }
 
         private void Damage(Collider col)
         {
             // Damage collider target over time:
-            IDamageable damageable = col.GetComponentInChildren<IDamageable>();
+            //IDamageable damageable = col.GetComponentInChildren<IDamageable>();
+            IDamageable damageable = col.GetComponent<IDamageable>();
             damageable?.TakeContinuousDamage(damage, damageOverTimeDelay);
         }
 
         private void StopContinuousDamage(Collider col)
         {
             // Stop damage over time effect:
-            IDamageable damageable = col.GetComponentInChildren<IDamageable>();
+            //IDamageable damageable = col.GetComponentInChildren<IDamageable>();
+            IDamageable damageable = col.GetComponent<IDamageable>();
             damageable?.StopContinuousDamage();
         }
 

@@ -410,6 +410,7 @@ MonoBehaviour:
   HealthComponent:
     CurrentHealth: 0
     MaxHealth: 0
+  isAffected: 0
   isPlayerHit: 0
   timeElapsed: 0
   timeElapsedThreshold: 3
@@ -512,7 +513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030ec1e2e2d0ff84e951a9203557d952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArsenalBoxObject: {fileID: 0}
   isPressed: 0
 --- !u!1 &8766481516446264474
 GameObject:

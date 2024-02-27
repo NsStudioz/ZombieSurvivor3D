@@ -56,7 +56,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         void Start()
         {
             // test:
-            Activate();
+            //Activate();
             //
             InvokeRepeating(nameof(AquireTarget), ZEROED_VALUE, repeatRate);
         }

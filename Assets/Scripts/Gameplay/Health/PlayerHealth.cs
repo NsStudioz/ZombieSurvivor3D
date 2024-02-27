@@ -52,18 +52,18 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
         public override void TakeContinuousDamage(int damageAmount, float timeDelay)
         {
-            return;
-            //StartCoroutine(DamageOverTimeCoroutine(damageAmount, timeDelay));
+            int newDamageAmount = 1;
+            // Stagger/slow effect feature:
+            base.TakeContinuousDamage(newDamageAmount, timeDelay);
+            StartCoroutine(DamageOverTimeCoroutine(newDamageAmount, timeDelay));
         }
 
-        // Might need to replace this with a stagger effect feature:
+        // NOTE: need to add a stagger/slow effect feature:
         private IEnumerator DamageOverTimeCoroutine(int damageAmount, float timeDelay)
         {
-            int hitCount = 0;
-            while (hitCount < 5 || HealthComponent.GetCurrentHealth() <= ZERO_HEALTH)
+            while (isAffected && HealthComponent.GetCurrentHealth() > ZERO_HEALTH) // stucks the loop! need to fix
             {
                 TakeDamage(damageAmount);
-                hitCount++;
                 yield return new WaitForSeconds(timeDelay);
             }
         }
