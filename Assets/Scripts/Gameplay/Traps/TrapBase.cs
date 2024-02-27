@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Traps
 {
     public abstract class TrapBase : MonoBehaviour
     {
 
+        [SerializeField] private int pointsCost;
         [SerializeField] protected bool isActivated = false;
 
         protected virtual void Awake()
@@ -20,8 +21,13 @@ namespace ZombieSurvivor3D
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
 
 
-            /*            if (isActivated)
-                            Deactivate();*/
+            if (isActivated)
+                Deactivate();
+        }
+
+        public int GetPointCost()
+        {
+            return pointsCost;
         }
 
         public virtual void OnGameStateChanged(GameStateManager.GameState newGameState)
@@ -31,12 +37,12 @@ namespace ZombieSurvivor3D
             //base.OnGameStateChanged(newGameState);  // for child, if needed.
         }
 
-        protected void Activate()
+        public void Activate()
         {
             isActivated = true;
         }
 
-        protected void Deactivate()
+        public void Deactivate()
         {
             isActivated = false;
         }
