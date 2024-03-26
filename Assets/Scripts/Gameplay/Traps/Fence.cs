@@ -8,9 +8,11 @@ namespace ZombieSurvivor3D.Gameplay.Traps
     public class Fence : TrapBase
     {
 
-        [SerializeField] private GameObject fenceGO;
-        [SerializeField] private BoxCollider boxCol;
-        [SerializeField] private int damage = 1;
+        //[SerializeField] private GameObject fenceGO;
+        //[SerializeField] private BoxCollider boxCol;
+        //[SerializeField] private int damage = 1;
+
+        [Header("Main Attributes")]
         [SerializeField] private string targetTag;
         [SerializeField] float damageOverTimeDelay;
 

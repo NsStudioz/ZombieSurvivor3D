@@ -11,20 +11,22 @@ namespace ZombieSurvivor3D.Gameplay.Traps
     {
 
         [Header("Activation")]
-        //[SerializeField] private bool isEnabled = false;
         [SerializeField] private bool hasCaliber = false;
 
-        [Header("Main Attributes")]
+        [Header("Targetting")]
         [SerializeField] private Transform target = null;  // for targeting the enemy
         [SerializeField] private Transform partToRotate;
         [SerializeField] private string targetTag;
 
-        [Header("Attack Attributes")]
-        [SerializeField] private int damage = 100;
+        [Header("Targetting frequency")]
+        [SerializeField] private float repeatRate = 0.5f;
+
+        [Header("Rate of Fire")]
+        //[SerializeField] private int damage = 100;
         [SerializeField] private float fireRate = 1f;
         [SerializeField] private float fireCooldown = 0f;
 
-        [Header("Defense Attributes")]
+        [Header("Attributes")]
         [SerializeField] private float range = 1f;
         [SerializeField] private float rayHitRange = 20f;
         [SerializeField] private float turnSpeed = 1f;
@@ -33,9 +35,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform firingPoint;
         [SerializeField] private Transform bulletStorage; // used bullet storage.
-
-        [Header("Targetting frequency")]
-        [SerializeField] private float repeatRate = 0.5f;
 
         private const float ZEROED_VALUE = 0f;
 
@@ -125,6 +124,9 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         #endregion
 
+
+        #region Firing_Mechs:
+
         /// <summary>
         /// Fire at the target.
         /// </summary>
@@ -187,38 +189,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
             if (newCaliber != null)
                 newCaliber.AquireTarget(target);
-
-
         }
-
-        #region OldCode_RemoveSoon:
-
-        //[SerializeField] private float activeDuration;
-
-
-        //StartCoroutine(TimeToFade(caliberGO));
-
-        /*        /// <summary>
-                /// Set timer to "Destroy" bullet instance object in the scene.
-                /// </summary>
-                /// <param name="bulletInstance"></param>
-                /// <returns></returns>
-                private IEnumerator TimeToFade(GameObject bulletInstance)
-                {
-                    yield return new WaitForSecondsRealtime(activeDuration);
-                    Destroy(bulletInstance);
-                }*/
-
-        /*        private void ActivateOld()
-                {
-                    isEnabled = true;
-                }
-
-                private void DeactivateOld()
-                {
-                    isEnabled = false;
-                }*/
-
 
         #endregion
 

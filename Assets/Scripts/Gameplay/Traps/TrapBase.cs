@@ -8,8 +8,10 @@ namespace ZombieSurvivor3D.Gameplay.Traps
     public abstract class TrapBase : MonoBehaviour
     {
 
+        [Header("Init Attributes")]
         [SerializeField] private int pointsCost;
         [SerializeField] protected bool isActivated = false;
+        [SerializeField] protected int damage;
 
         protected virtual void Awake()
         {
