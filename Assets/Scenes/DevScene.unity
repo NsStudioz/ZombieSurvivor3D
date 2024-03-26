@@ -5242,26 +5242,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!1 &1379375424 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5024685678032073875, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1973735651707725638}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1379375430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379375424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64675cd2ab2f9c945bf552a0c155c7e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TrapBaseObject: {fileID: 0}
-  isPressed: 0
 --- !u!1 &1385755222
 GameObject:
   m_ObjectHideFlags: 0
@@ -7717,41 +7697,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[3].m_Target
-      value: 
-      objectReference: {fileID: 1379375430}
-    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[3].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: OnInteract
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: ZombieSurvivor3D.TrapDetector, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1973735651707725640, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4693091567844335043, guid: fe5b6b7490d5f6747b7d95eb29cfe59d,
         type: 3}
