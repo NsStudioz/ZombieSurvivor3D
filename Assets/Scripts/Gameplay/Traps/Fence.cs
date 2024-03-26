@@ -18,12 +18,18 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         private void OnTriggerEnter(Collider col)
         {
+            if (!isActivated)
+                return;
+
             IgnoreNonTarget(col);
             Damage(col);         
         }
 
         private void OnTriggerExit(Collider col)
         {
+            if (!isActivated)
+                return;
+
             IgnoreNonTarget(col);
             StopContinuousDamage(col);
         }
