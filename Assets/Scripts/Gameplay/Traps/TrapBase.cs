@@ -35,8 +35,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         public virtual void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             enabled = newGameState == GameStateManager.GameState.Gameplay;
-            //isActivated = newGameState == GameStateManager.GameState.Gameplay;
-            //base.OnGameStateChanged(newGameState);  // for child, if needed.
         }
 
         public void Activate()

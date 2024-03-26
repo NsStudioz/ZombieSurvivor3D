@@ -10,7 +10,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         //[SerializeField] private GameObject fenceGO;
         //[SerializeField] private BoxCollider boxCol;
-        //[SerializeField] private int damage = 1;
 
         [Header("Main Attributes")]
         [SerializeField] private string targetTag;
@@ -43,7 +42,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         private void Damage(Collider col)
         {
             // Damage collider target over time:
-            //IDamageable damageable = col.GetComponentInChildren<IDamageable>();
             IDamageable damageable = col.GetComponent<IDamageable>();
             damageable?.TakeContinuousDamage(damage, damageOverTimeDelay);
         }
@@ -51,10 +49,11 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         private void StopContinuousDamage(Collider col)
         {
             // Stop damage over time effect:
-            //IDamageable damageable = col.GetComponentInChildren<IDamageable>();
             IDamageable damageable = col.GetComponent<IDamageable>();
             damageable?.StopContinuousDamage();
         }
 
+
+        //IDamageable damageable = col.GetComponentInChildren<IDamageable>();
     }
 }

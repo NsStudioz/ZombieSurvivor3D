@@ -13,16 +13,15 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         [Header("Activation")]
         [SerializeField] private bool hasCaliber = false;
 
-        [Header("Targetting")]
+        [Header("Targeting")]
         [SerializeField] private Transform target = null;  // for targeting the enemy
         [SerializeField] private Transform partToRotate;
         [SerializeField] private string targetTag;
 
-        [Header("Targetting frequency")]
+        [Header("Targeting frequency")]
         [SerializeField] private float repeatRate = 0.5f;
 
         [Header("Rate of Fire")]
-        //[SerializeField] private int damage = 100;
         [SerializeField] private float fireRate = 1f;
         [SerializeField] private float fireCooldown = 0f;
 

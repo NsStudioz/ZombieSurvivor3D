@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Health;
@@ -10,14 +9,15 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 {
     public class TurretCaliber : MonoBehaviour
     {
-
+        [Header("Targeting")]
         private Transform target = null;
 
-        public float speed = 10f;
+        [Header("Init")]
         public int damage = 50;
-
-        
         public float rayRange = 0f;
+
+        [Header("Caliber Attributes")]
+        public float speed = 10f;
         public float explosionRadius = 0f;
 
         #region EventListeners:
