@@ -167,6 +167,23 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
         }
 
+        private void ApplyInteraction()
+        {
+            // if interacting with a similar weapon, restock ammo:
+            if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
+                OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
+
+            // if interacting with a new weapon:
+            else if (EquipedHandhelds[currentHandheldIndex] != interactableHandheldSO)
+            {
+                //Replace current with the new weapon:
+                EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
+                SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
+                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            }
+        }
+
+
         #region Used_Input_Events:
 
         public void OnInteract(InputAction.CallbackContext context)
@@ -184,15 +201,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
             if (isInteractButtonClickHeld)
             {
-                if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
-                    OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
-
-                else if (EquipedHandhelds[currentHandheldIndex] != interactableHandheldSO)
-                {
-                    EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
-                    SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-                    OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
-                }
+                ApplyInteraction();
 
                 // MAKE AN EVENT INSTEAD:
                 if (ArsenalBoxDetector.GetArsenalBoxLootState())
@@ -207,6 +216,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         // NEEDS MAJOR OVERHAUL, CANNOT USE THIS IN FINISHED PRODUCT, TOO COMPLICATED FOR KEY REBINDING/CHANGING:
         public void OnScroll(InputAction.CallbackContext context)
         {
+            // Scroll up = Next Weapon | Scroll down = Previous Weapon:
             InputAction action = GetComponentInParent<PlayerInput>().actions["Scroll"];
             float value = action.ReadValue<float>();
 
