@@ -24,94 +24,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
     ""name"": ""ControlsPC"",
     ""maps"": [
         {
-            ""name"": ""GameplayControls"",
-            ""id"": ""0749e31b-8d86-4655-b4e0-ba9de88d1daa"",
-            ""actions"": [
-                {
-                    ""name"": ""SwitchWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""ae54b088-d435-4894-b4a0-dfd3498f6ada"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Fire1"",
-                    ""type"": ""Button"",
-                    ""id"": ""0320eee0-4f35-4388-b00e-c307004cdddc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Fire2"",
-                    ""type"": ""Button"",
-                    ""id"": ""b1ddbb4e-c417-45ee-aead-c5530c5216bb"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Reload"",
-                    ""type"": ""Button"",
-                    ""id"": ""b81edf36-6db1-42bd-8995-bc033aba293e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""902e1a7c-1543-492f-a6e8-4071df978249"",
-                    ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3fbaac51-605e-42cd-8305-14a325b6a610"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fire1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""29dfb38d-9cfa-4ac6-ae03-d0972abb7aa2"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fire2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b6a9bb9b-9dda-431d-871d-60ece573f93c"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""MovementControls"",
             ""id"": ""22b60974-2446-4cc9-86f7-5103ee6e193a"",
             ""actions"": [
@@ -351,16 +263,186 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameplayControls"",
+            ""id"": ""0749e31b-8d86-4655-b4e0-ba9de88d1daa"",
+            ""actions"": [
+                {
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae54b088-d435-4894-b4a0-dfd3498f6ada"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextWeapon"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""3662aa38-d747-4eb5-8f4a-575a3a77431e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousWeapon"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""4835c72b-ab0f-464a-b4e0-82de33fb1f5d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0320eee0-4f35-4388-b00e-c307004cdddc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire2"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1ddbb4e-c417-45ee-aead-c5530c5216bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""b81edf36-6db1-42bd-8995-bc033aba293e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""de33f026-4010-4ceb-a75b-6b0e11284dec"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""902e1a7c-1543-492f-a6e8-4071df978249"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fbaac51-605e-42cd-8305-14a325b6a610"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29dfb38d-9cfa-4ac6-ae03-d0972abb7aa2"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6a9bb9b-9dda-431d-871d-60ece573f93c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81f5ec29-a425-422f-a527-e5c99336f8d0"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb9ae541-ea7b-4407-928f-77da4b13b6e6"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34ac998a-a6b6-4950-8316-f849404c8d55"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""ActionControls"",
+            ""id"": ""bab037f0-3e9f-49de-8700-2a73c8d933c6"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb30dd1f-b77c-4c9e-80f2-67b675356f77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""351320ad-754f-4cdf-9862-bb78b038abe9"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // GameplayControls
-        m_GameplayControls = asset.FindActionMap("GameplayControls", throwIfNotFound: true);
-        m_GameplayControls_SwitchWeapon = m_GameplayControls.FindAction("SwitchWeapon", throwIfNotFound: true);
-        m_GameplayControls_Fire1 = m_GameplayControls.FindAction("Fire1", throwIfNotFound: true);
-        m_GameplayControls_Fire2 = m_GameplayControls.FindAction("Fire2", throwIfNotFound: true);
-        m_GameplayControls_Reload = m_GameplayControls.FindAction("Reload", throwIfNotFound: true);
         // MovementControls
         m_MovementControls = asset.FindActionMap("MovementControls", throwIfNotFound: true);
         m_MovementControls_Newaction = m_MovementControls.FindAction("New action", throwIfNotFound: true);
@@ -374,6 +456,18 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
         // InteractionControls
         m_InteractionControls = asset.FindActionMap("InteractionControls", throwIfNotFound: true);
         m_InteractionControls_Interact = m_InteractionControls.FindAction("Interact", throwIfNotFound: true);
+        // GameplayControls
+        m_GameplayControls = asset.FindActionMap("GameplayControls", throwIfNotFound: true);
+        m_GameplayControls_SwitchWeapon = m_GameplayControls.FindAction("SwitchWeapon", throwIfNotFound: true);
+        m_GameplayControls_NextWeapon = m_GameplayControls.FindAction("NextWeapon", throwIfNotFound: true);
+        m_GameplayControls_PreviousWeapon = m_GameplayControls.FindAction("PreviousWeapon", throwIfNotFound: true);
+        m_GameplayControls_Fire1 = m_GameplayControls.FindAction("Fire1", throwIfNotFound: true);
+        m_GameplayControls_Fire2 = m_GameplayControls.FindAction("Fire2", throwIfNotFound: true);
+        m_GameplayControls_Reload = m_GameplayControls.FindAction("Reload", throwIfNotFound: true);
+        m_GameplayControls_Scroll = m_GameplayControls.FindAction("Scroll", throwIfNotFound: true);
+        // ActionControls
+        m_ActionControls = asset.FindActionMap("ActionControls", throwIfNotFound: true);
+        m_ActionControls_Newaction = m_ActionControls.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -429,63 +523,6 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
     {
         return asset.FindBinding(bindingMask, out action);
     }
-
-    // GameplayControls
-    private readonly InputActionMap m_GameplayControls;
-    private IGameplayControlsActions m_GameplayControlsActionsCallbackInterface;
-    private readonly InputAction m_GameplayControls_SwitchWeapon;
-    private readonly InputAction m_GameplayControls_Fire1;
-    private readonly InputAction m_GameplayControls_Fire2;
-    private readonly InputAction m_GameplayControls_Reload;
-    public struct GameplayControlsActions
-    {
-        private @ControlsPC m_Wrapper;
-        public GameplayControlsActions(@ControlsPC wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SwitchWeapon => m_Wrapper.m_GameplayControls_SwitchWeapon;
-        public InputAction @Fire1 => m_Wrapper.m_GameplayControls_Fire1;
-        public InputAction @Fire2 => m_Wrapper.m_GameplayControls_Fire2;
-        public InputAction @Reload => m_Wrapper.m_GameplayControls_Reload;
-        public InputActionMap Get() { return m_Wrapper.m_GameplayControls; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GameplayControlsActions set) { return set.Get(); }
-        public void SetCallbacks(IGameplayControlsActions instance)
-        {
-            if (m_Wrapper.m_GameplayControlsActionsCallbackInterface != null)
-            {
-                @SwitchWeapon.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnSwitchWeapon;
-                @SwitchWeapon.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnSwitchWeapon;
-                @SwitchWeapon.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnSwitchWeapon;
-                @Fire1.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire1;
-                @Fire1.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire1;
-                @Fire1.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire1;
-                @Fire2.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire2;
-                @Fire2.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire2;
-                @Fire2.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire2;
-                @Reload.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
-                @Reload.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
-                @Reload.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
-            }
-            m_Wrapper.m_GameplayControlsActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @SwitchWeapon.started += instance.OnSwitchWeapon;
-                @SwitchWeapon.performed += instance.OnSwitchWeapon;
-                @SwitchWeapon.canceled += instance.OnSwitchWeapon;
-                @Fire1.started += instance.OnFire1;
-                @Fire1.performed += instance.OnFire1;
-                @Fire1.canceled += instance.OnFire1;
-                @Fire2.started += instance.OnFire2;
-                @Fire2.performed += instance.OnFire2;
-                @Fire2.canceled += instance.OnFire2;
-                @Reload.started += instance.OnReload;
-                @Reload.performed += instance.OnReload;
-                @Reload.canceled += instance.OnReload;
-            }
-        }
-    }
-    public GameplayControlsActions @GameplayControls => new GameplayControlsActions(this);
 
     // MovementControls
     private readonly InputActionMap m_MovementControls;
@@ -617,13 +654,120 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
         }
     }
     public InteractionControlsActions @InteractionControls => new InteractionControlsActions(this);
-    public interface IGameplayControlsActions
+
+    // GameplayControls
+    private readonly InputActionMap m_GameplayControls;
+    private IGameplayControlsActions m_GameplayControlsActionsCallbackInterface;
+    private readonly InputAction m_GameplayControls_SwitchWeapon;
+    private readonly InputAction m_GameplayControls_NextWeapon;
+    private readonly InputAction m_GameplayControls_PreviousWeapon;
+    private readonly InputAction m_GameplayControls_Fire1;
+    private readonly InputAction m_GameplayControls_Fire2;
+    private readonly InputAction m_GameplayControls_Reload;
+    private readonly InputAction m_GameplayControls_Scroll;
+    public struct GameplayControlsActions
     {
-        void OnSwitchWeapon(InputAction.CallbackContext context);
-        void OnFire1(InputAction.CallbackContext context);
-        void OnFire2(InputAction.CallbackContext context);
-        void OnReload(InputAction.CallbackContext context);
+        private @ControlsPC m_Wrapper;
+        public GameplayControlsActions(@ControlsPC wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SwitchWeapon => m_Wrapper.m_GameplayControls_SwitchWeapon;
+        public InputAction @NextWeapon => m_Wrapper.m_GameplayControls_NextWeapon;
+        public InputAction @PreviousWeapon => m_Wrapper.m_GameplayControls_PreviousWeapon;
+        public InputAction @Fire1 => m_Wrapper.m_GameplayControls_Fire1;
+        public InputAction @Fire2 => m_Wrapper.m_GameplayControls_Fire2;
+        public InputAction @Reload => m_Wrapper.m_GameplayControls_Reload;
+        public InputAction @Scroll => m_Wrapper.m_GameplayControls_Scroll;
+        public InputActionMap Get() { return m_Wrapper.m_GameplayControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameplayControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IGameplayControlsActions instance)
+        {
+            if (m_Wrapper.m_GameplayControlsActionsCallbackInterface != null)
+            {
+                @SwitchWeapon.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnSwitchWeapon;
+                @SwitchWeapon.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnSwitchWeapon;
+                @SwitchWeapon.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnSwitchWeapon;
+                @NextWeapon.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnNextWeapon;
+                @NextWeapon.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnNextWeapon;
+                @NextWeapon.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnNextWeapon;
+                @PreviousWeapon.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnPreviousWeapon;
+                @PreviousWeapon.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnPreviousWeapon;
+                @PreviousWeapon.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnPreviousWeapon;
+                @Fire1.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire1;
+                @Fire1.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire1;
+                @Fire1.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire1;
+                @Fire2.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire2;
+                @Fire2.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire2;
+                @Fire2.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnFire2;
+                @Reload.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnReload;
+                @Scroll.started -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnScroll;
+                @Scroll.performed -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnScroll;
+                @Scroll.canceled -= m_Wrapper.m_GameplayControlsActionsCallbackInterface.OnScroll;
+            }
+            m_Wrapper.m_GameplayControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SwitchWeapon.started += instance.OnSwitchWeapon;
+                @SwitchWeapon.performed += instance.OnSwitchWeapon;
+                @SwitchWeapon.canceled += instance.OnSwitchWeapon;
+                @NextWeapon.started += instance.OnNextWeapon;
+                @NextWeapon.performed += instance.OnNextWeapon;
+                @NextWeapon.canceled += instance.OnNextWeapon;
+                @PreviousWeapon.started += instance.OnPreviousWeapon;
+                @PreviousWeapon.performed += instance.OnPreviousWeapon;
+                @PreviousWeapon.canceled += instance.OnPreviousWeapon;
+                @Fire1.started += instance.OnFire1;
+                @Fire1.performed += instance.OnFire1;
+                @Fire1.canceled += instance.OnFire1;
+                @Fire2.started += instance.OnFire2;
+                @Fire2.performed += instance.OnFire2;
+                @Fire2.canceled += instance.OnFire2;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @Scroll.started += instance.OnScroll;
+                @Scroll.performed += instance.OnScroll;
+                @Scroll.canceled += instance.OnScroll;
+            }
+        }
     }
+    public GameplayControlsActions @GameplayControls => new GameplayControlsActions(this);
+
+    // ActionControls
+    private readonly InputActionMap m_ActionControls;
+    private IActionControlsActions m_ActionControlsActionsCallbackInterface;
+    private readonly InputAction m_ActionControls_Newaction;
+    public struct ActionControlsActions
+    {
+        private @ControlsPC m_Wrapper;
+        public ActionControlsActions(@ControlsPC wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_ActionControls_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_ActionControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IActionControlsActions instance)
+        {
+            if (m_Wrapper.m_ActionControlsActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_ActionControlsActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_ActionControlsActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_ActionControlsActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_ActionControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public ActionControlsActions @ActionControls => new ActionControlsActions(this);
     public interface IMovementControlsActions
     {
         void OnNewaction(InputAction.CallbackContext context);
@@ -639,5 +783,19 @@ public partial class @ControlsPC : IInputActionCollection2, IDisposable
     public interface IInteractionControlsActions
     {
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IGameplayControlsActions
+    {
+        void OnSwitchWeapon(InputAction.CallbackContext context);
+        void OnNextWeapon(InputAction.CallbackContext context);
+        void OnPreviousWeapon(InputAction.CallbackContext context);
+        void OnFire1(InputAction.CallbackContext context);
+        void OnFire2(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
+    }
+    public interface IActionControlsActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

@@ -124,13 +124,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         }
 
 
-        #region Input_Events:
-
-        // These code block templates are for Handheld input actions and logic:
-        public void OnSwitchWeapon(InputAction.CallbackContext context)
-        {
-
-        }
+        #region Used_Input_Events:
 
         public void OnFire1(InputAction.CallbackContext context)
         {
@@ -146,6 +140,15 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             }
         }
 
+        public void OnScroll(InputAction.CallbackContext context)
+        {
+
+        }
+
+        #endregion
+
+        #region OnHold_Input_Events:
+
         public void OnFire2(InputAction.CallbackContext context)
         {
 
@@ -154,6 +157,22 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         public void OnReload(InputAction.CallbackContext context)
         {
 
+        }
+
+        // These code block templates are for Handheld input actions and logic:
+        public void OnSwitchWeapon(InputAction.CallbackContext context)
+        {
+
+        }
+
+        public void OnNextWeapon(InputAction.CallbackContext context)
+        {
+            //Debug.Log("Individual Handheld Registered Scroll Up");
+        }
+
+        public void OnPreviousWeapon(InputAction.CallbackContext context)
+        {
+            //Debug.Log("Individual Handheld Registered Scroll Down");
         }
 
         #endregion

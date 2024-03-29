@@ -20,8 +20,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         // Current Handheld Elements
         HandheldSO currentHandheldSO;
-        GameObject currentHandheldGO; // used in method: SwitchHandheldOld()
-        IHandheldObject currentHandheldInterface;
+
+        IHandheldObject currentHandheldI;
         int currentHandheldIndex;
 
         [Header("Handheld Interaction")]
@@ -129,12 +129,12 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             SetHandheldPosition(handheldSOIndex, rigSocket, true, true);
 
             // getting the interface in child to set animations and events on our model and not parent object.
-            currentHandheldInterface = HandheldsGO[handheldSOIndex].GetComponentInChildren<IHandheldObject>();
+            currentHandheldI = HandheldsGO[handheldSOIndex].GetComponentInChildren<IHandheldObject>();
 
-            if (currentHandheldInterface != null)
+            if (currentHandheldI != null)
             {
-                currentHandheldInterface.OnAttachedCarrier(this);
-                currentHandheldInterface.OnEquip();
+                currentHandheldI.OnAttachedCarrier(this);
+                currentHandheldI.OnEquip();
 
                 rigAnimator.runtimeAnimatorController = handheld.RigAnimController;
             }
@@ -147,8 +147,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             //HandheldsGO[index].SetActive(false); // Temporarily kept.
             SetHandheldPosition(index, preservedHandheldsTransform, false, true);
             currentHandheldSO = null;
-            currentHandheldInterface = null;
-            currentHandheldGO = null;
+            currentHandheldI = null;
         }
 
         private void SetHandheldPosition(int index, Transform parent, bool isActive, bool worldPositionStays)
@@ -159,41 +158,16 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             HandheldsGO[index].transform.localRotation = Quaternion.identity;
         }
 
-        // (OLD PROTOTYPE) Weapon/Equipment Switching. Temporarily Keeping it as a backup:
-        /*        public void SwitchHandheldOld(HandheldSO handheld)
-                {
-                    if (_CurrentHandheldSO == handheld)
-                        return;
+        private void SwitchWeapon(float value)
+        {
+            currentHandheldIndex += 1 * (int)Mathf.Sign(value); // can't use int, must cast to float.
+            currentHandheldIndex = Mathf.Clamp(currentHandheldIndex, 0, EquipedHandhelds.Count - 1); // clamp between 0 to max count - 1.
 
-                    Destroy(_CurrentHandheldGO);
+            SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
+            OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+        }
 
-                    _CurrentHandheldSO = handheld;
-                    _CurrentHandheldGO = Instantiate(_CurrentHandheldSO.HandheldPrefab, RigSocket, true); // prototype code, needs to be updated to support reload
-
-                    _CurrentHandheldGO.transform.localPosition = Vector3.zero;
-                    _CurrentHandheldGO.transform.localRotation = Quaternion.identity;
-
-                    // we want the IHandheldObject script to always be on the model and not on the parent object.
-                    // that way we can set animations and events on our handhelds
-                    _CurrentHandheldInterface = _CurrentHandheldGO.GetComponentInChildren<IHandheldObject>();
-
-                    if (_CurrentHandheldInterface != null)
-                    {
-                        _CurrentHandheldInterface.OnAttachedCarrier(this);
-                        _CurrentHandheldInterface.OnEquip();
-
-                        RigAnimator.runtimeAnimatorController = handheld.RigAnimController;
-                    }
-                    else
-                    {
-                        DestroyImmediate(_CurrentHandheldGO);
-                        _CurrentHandheldSO = null;
-                        _CurrentHandheldInterface = null;
-                        _CurrentHandheldGO = null;
-                    }
-                }*/
-
-        #region Input_Events:
+        #region Used_Input_Events:
 
         public void OnInteract(InputAction.CallbackContext context)
         {
@@ -220,15 +194,37 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                     OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
                 }
 
+                // MAKE AN EVENT INSTEAD:
                 if (ArsenalBoxDetector.GetArsenalBoxLootState())
                 {
                     ArsenalBox instance = ArsenalBoxDetector.GetArsenalBox();
                     instance.RemoveLootFromBox();
-                    Debug.Log("Loot Removed from: " + instance);
+                    //Debug.Log("Loot Removed from: " + instance);
                 }
             }
         }
 
+        // NEEDS MAJOR OVERHAUL, CANNOT USE THIS IN FINISHED PRODUCT, TOO COMPLICATED FOR KEY REBINDING/CHANGING:
+        public void OnScroll(InputAction.CallbackContext context)
+        {
+            InputAction action = GetComponentInParent<PlayerInput>().actions["Scroll"];
+            float value = action.ReadValue<float>();
+
+            //Debug.Log("Value = " + value);
+
+            if (value > 0)
+                SwitchWeapon(value);
+                //Debug.Log("Scroll Up");
+
+            if (value < 0)
+                SwitchWeapon(value);
+                //Debug.Log("Scroll Down");
+
+            if (currentHandheldI != null)
+                currentHandheldI.OnScroll(context);
+        }
+
+        // PROTOTYPE, DELETE IF NO LONGER NEEDED:
         public void OnSwitchWeapon(InputAction.CallbackContext context)
         {
             if (context.performed)
@@ -242,34 +238,115 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             }
 
             // Using this code block to avoid binding/unbiding from our input system:
-            if (currentHandheldInterface != null)
-                currentHandheldInterface.OnSwitchWeapon(context);
+            if (currentHandheldI != null)
+                currentHandheldI.OnSwitchWeapon(context);
         }
+
+        // PROTOTYPE, DELETE IF NO LONGER NEEDED:
+        public void OnNextWeapon(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                InputAction action = GetComponentInParent<PlayerInput>().actions["NextWeapon"];
+                float valueH = action.ReadValue<float>();
+
+                if (valueH < 0)
+                    return;
+
+                Debug.Log("ValueH = " + valueH);
+
+                if (valueH > 0)
+                    Debug.Log("Scroll Up");
+            }
+                
+            if (currentHandheldI != null)
+                currentHandheldI.OnNextWeapon(context);
+        }
+
+        // PROTOTYPE, DELETE IF NO LONGER NEEDED:
+        public void OnPreviousWeapon(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                InputAction action = GetComponentInParent<PlayerInput>().actions["PreviousWeapon"];
+                float valueL = action.ReadValue<float>();
+
+                /*                if (value > 0)
+                                    return;*/
+                Debug.Log("ValueL = " + valueL);
+
+                if (valueL > 0)
+                    Debug.Log("Scroll Down");
+            }
+
+            if (currentHandheldI != null)
+                currentHandheldI.OnPreviousWeapon(context);
+        }
+
+        #endregion
+
+        #region OnHold_Input_Events:
 
         public void OnFire1(InputAction.CallbackContext context)
         {
             // Using this code block to avoid binding/unbiding from our input system:
-            if (currentHandheldInterface != null)
-                currentHandheldInterface.OnFire1(context);
+            if (currentHandheldI != null)
+                currentHandheldI.OnFire1(context);
         }
 
         public void OnFire2(InputAction.CallbackContext context)
         {
             // Using this code block to avoid binding/unbiding from our input system:
-            if (currentHandheldInterface != null)
-                currentHandheldInterface.OnFire2(context);
+            if (currentHandheldI != null)
+                currentHandheldI.OnFire2(context);
         }
 
         public void OnReload(InputAction.CallbackContext context)
         {
             // Using this code block to avoid binding/unbiding from our input system:
-            if (currentHandheldInterface != null)
-                currentHandheldInterface.OnReload(context);
+            if (currentHandheldI != null)
+                currentHandheldI.OnReload(context);
         }
-
 
         #endregion
 
     }
 
 }
+
+
+// (OLD PROTOTYPE) Weapon/Equipment Switching. Temporarily Keeping it as a backup:
+//GameObject currentHandheldGO; // used in method: SwitchHandheldOld()
+//currentHandheldGO = null; // put in: RemoveHandheld if needed.
+/*        public void SwitchHandheldOld(HandheldSO handheld)
+        {
+            if (_CurrentHandheldSO == handheld)
+                return;
+
+            Destroy(_CurrentHandheldGO);
+
+            _CurrentHandheldSO = handheld;
+            _CurrentHandheldGO = Instantiate(_CurrentHandheldSO.HandheldPrefab, RigSocket, true); // prototype code, needs to be updated to support reload
+
+            _CurrentHandheldGO.transform.localPosition = Vector3.zero;
+            _CurrentHandheldGO.transform.localRotation = Quaternion.identity;
+
+            // we want the IHandheldObject script to always be on the model and not on the parent object.
+            // that way we can set animations and events on our handhelds
+            _CurrentHandheldInterface = _CurrentHandheldGO.GetComponentInChildren<IHandheldObject>();
+
+            if (_CurrentHandheldInterface != null)
+            {
+                _CurrentHandheldInterface.OnAttachedCarrier(this);
+                _CurrentHandheldInterface.OnEquip();
+
+                RigAnimator.runtimeAnimatorController = handheld.RigAnimController;
+            }
+            else
+            {
+                DestroyImmediate(_CurrentHandheldGO);
+                _CurrentHandheldSO = null;
+                _CurrentHandheldInterface = null;
+                _CurrentHandheldGO = null;
+            }
+        }*/
