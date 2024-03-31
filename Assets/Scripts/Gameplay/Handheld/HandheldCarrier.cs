@@ -83,6 +83,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         #endregion
 
+        #region Initialization:
+
         private void Start()
         {
             InitializeHandheldGOsList();
@@ -90,6 +92,16 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
             OnHandheldChanged?.Invoke(EquipedHandhelds[0].HandheldBulletPrefab);
         }
+
+        private void InitializeHandheldGOsList()
+        {
+            for (int i = 0; i < HandheldsGO.Count; i++)
+                SetHandheldPosition(i, preservedHandheldsTransform, false, true);
+        }
+
+        #endregion
+
+        #region Interaction:
 
         private void OnTriggerEnter(Collider col)
         {
@@ -107,10 +119,33 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             }
         }
 
-        private void InitializeHandheldGOsList()
+        private void ApplyInteraction()
         {
-            for (int i = 0; i < HandheldsGO.Count; i++)
-                SetHandheldPosition(i, preservedHandheldsTransform, false, true);
+            // if interacting with a similar weapon, restock ammo:
+            if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
+                OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
+
+            // if interacting with a new weapon:
+            else if (EquipedHandhelds[currentHandheldIndex] != interactableHandheldSO)
+            {
+                //Replace current with the new weapon:
+                EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
+                SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
+                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            }
+        }
+
+        #endregion
+
+        #region HandheldSwitching:
+
+        private void ApplySwitch(float value)
+        {
+            currentHandheldIndex += 1 * (int)Mathf.Sign(value); // can't use int, must cast to float.
+            currentHandheldIndex = Mathf.Clamp(currentHandheldIndex, 0, EquipedHandhelds.Count - 1); // clamp between 0 to max count - 1.
+
+            SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
+            OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
         }
 
         public void SwitchHandheld(HandheldSO handheld)
@@ -142,14 +177,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 RemoveHandheld(handheldSOIndex);
         }
 
-        private void RemoveHandheld(int index)
-        {
-            //HandheldsGO[index].SetActive(false); // Temporarily kept.
-            SetHandheldPosition(index, preservedHandheldsTransform, false, true);
-            currentHandheldSO = null;
-            currentHandheldI = null;
-        }
-
         private void SetHandheldPosition(int index, Transform parent, bool isActive, bool worldPositionStays)
         {
             HandheldsGO[index].SetActive(isActive);
@@ -158,31 +185,15 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             HandheldsGO[index].transform.localRotation = Quaternion.identity;
         }
 
-        private void SwitchWeapon(float value)
+        private void RemoveHandheld(int index)
         {
-            currentHandheldIndex += 1 * (int)Mathf.Sign(value); // can't use int, must cast to float.
-            currentHandheldIndex = Mathf.Clamp(currentHandheldIndex, 0, EquipedHandhelds.Count - 1); // clamp between 0 to max count - 1.
-
-            SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-            OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            //HandheldsGO[index].SetActive(false); // Temporarily kept.
+            SetHandheldPosition(index, preservedHandheldsTransform, false, true);
+            currentHandheldSO = null;
+            currentHandheldI = null;
         }
 
-        private void ApplyInteraction()
-        {
-            // if interacting with a similar weapon, restock ammo:
-            if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
-                OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
-
-            // if interacting with a new weapon:
-            else if (EquipedHandhelds[currentHandheldIndex] != interactableHandheldSO)
-            {
-                //Replace current with the new weapon:
-                EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
-                SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
-            }
-        }
-
+        #endregion
 
         #region Used_Input_Events:
 
@@ -223,33 +234,15 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             //Debug.Log("Value = " + value);
 
             if (value > 0)
-                SwitchWeapon(value);
+                ApplySwitch(value);
                 //Debug.Log("Scroll Up");
 
             if (value < 0)
-                SwitchWeapon(value);
+                ApplySwitch(value);
                 //Debug.Log("Scroll Down");
 
             if (currentHandheldI != null)
                 currentHandheldI.OnScroll(context);
-        }
-
-        // PROTOTYPE, DELETE IF NO LONGER NEEDED:
-        public void OnSwitchWeapon(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                currentHandheldIndex += 1 * (int)Mathf.Sign(context.ReadValue<float>()); // can't use int, must cast to float.
-                currentHandheldIndex = Mathf.Clamp(currentHandheldIndex, 0, EquipedHandhelds.Count - 1); // clamp between 0 to max count - 1.
-
-                SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-
-                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
-            }
-
-            // Using this code block to avoid binding/unbiding from our input system:
-            if (currentHandheldI != null)
-                currentHandheldI.OnSwitchWeapon(context);
         }
 
         // PROTOTYPE, DELETE IF NO LONGER NEEDED:
@@ -260,15 +253,19 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 InputAction action = GetComponentInParent<PlayerInput>().actions["NextWeapon"];
                 float valueH = action.ReadValue<float>();
 
-                if (valueH < 0)
+                // valueH = 120
+                if (valueH <= 0)
                     return;
 
-                Debug.Log("ValueH = " + valueH);
+                ApplySwitch(valueH);
 
-                if (valueH > 0)
+                /*if (valueH > 0)
+                {
+                    Debug.Log("ValueH = " + valueH); // = 120
                     Debug.Log("Scroll Up");
+                }*/
             }
-                
+
             if (currentHandheldI != null)
                 currentHandheldI.OnNextWeapon(context);
         }
@@ -281,12 +278,19 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 InputAction action = GetComponentInParent<PlayerInput>().actions["PreviousWeapon"];
                 float valueL = action.ReadValue<float>();
 
-                /*                if (value > 0)
-                                    return;*/
-                Debug.Log("ValueL = " + valueL);
+                valueL = -valueL;
 
-                if (valueL > 0)
+                // valueL = -120
+                if (valueL >= 0)
+                    return;
+
+                ApplySwitch(valueL);
+
+/*                if (valueL < 0)
+                {
+                    Debug.Log("ValueL = " + valueL); // = -120
                     Debug.Log("Scroll Down");
+                }*/
             }
 
             if (currentHandheldI != null)
@@ -359,4 +363,23 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 _CurrentHandheldInterface = null;
                 _CurrentHandheldGO = null;
             }
+        }*/
+
+
+// PROTOTYPE, DELETE IF NO LONGER NEEDED:
+/*        public void OnSwitchWeapon(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                currentHandheldIndex += 1 * (int)Mathf.Sign(context.ReadValue<float>()); // can't use int, must cast to float.
+                currentHandheldIndex = Mathf.Clamp(currentHandheldIndex, 0, EquipedHandhelds.Count - 1); // clamp between 0 to max count - 1.
+
+                SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
+
+                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            }
+
+            // Using this code block to avoid binding/unbiding from our input system:
+            if (currentHandheldI != null)
+                currentHandheldI.OnSwitchWeapon(context);
         }*/

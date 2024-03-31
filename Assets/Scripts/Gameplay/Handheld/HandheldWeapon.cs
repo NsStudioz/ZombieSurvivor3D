@@ -55,8 +55,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         private void OnDestroy()
         {
-            HandheldCarrier.OnInteractSimilarHandheld -= RestockHandheldAmmo;
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            HandheldCarrier.OnInteractSimilarHandheld -= RestockHandheldAmmo;
         }
 
         private void RestockHandheldAmmo(HandheldSO handheld)
@@ -92,6 +92,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             }
         }
 
+        #region InterfaceFunctions:
+
         // updates our carrier, with that we can use the animations of a specific handheld:
         public void OnAttachedCarrier(HandheldCarrier attachedCarrier)
         {
@@ -111,6 +113,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         }
 
+        #endregion
+
         private void SyncHandheldGunData()
         {
             handheldName = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldName;
@@ -125,6 +129,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
 
         #region Used_Input_Events:
+        // These code block templates are for Handheld input actions and logic:
 
         public void OnFire1(InputAction.CallbackContext context)
         {
@@ -140,10 +145,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             }
         }
 
-        public void OnScroll(InputAction.CallbackContext context)
-        {
 
-        }
 
         #endregion
 
@@ -159,12 +161,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         }
 
-        // These code block templates are for Handheld input actions and logic:
-        public void OnSwitchWeapon(InputAction.CallbackContext context)
-        {
-
-        }
-
         public void OnNextWeapon(InputAction.CallbackContext context)
         {
             //Debug.Log("Individual Handheld Registered Scroll Up");
@@ -173,6 +169,11 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         public void OnPreviousWeapon(InputAction.CallbackContext context)
         {
             //Debug.Log("Individual Handheld Registered Scroll Down");
+        }
+
+        public void OnScroll(InputAction.CallbackContext context)
+        {
+
         }
 
         #endregion
