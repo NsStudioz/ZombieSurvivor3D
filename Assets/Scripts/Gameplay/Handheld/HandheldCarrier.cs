@@ -32,7 +32,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         [Header("Player Input")]
         [SerializeField] PlayerInput playerInput;
 
-
         // EXPERIMENT:
         [Header("Handhelds recycling")]
         public List<GameObject> HandheldsGO;
@@ -62,9 +61,9 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         private void OnEnable()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             playerInput.actions.FindActionMap("GameplayControls").Enable();
             playerInput.actions.FindActionMap("InteractionControls").Enable();
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnDisable()
