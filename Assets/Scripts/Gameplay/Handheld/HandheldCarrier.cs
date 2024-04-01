@@ -42,6 +42,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         //Events
         public static event Action<HandheldSO> OnInteractSimilarHandheld;
         public static event Action<GameObject> OnHandheldChanged;
+        public static event Action OnArsenalBoxItemInteracted;
 
         #region Helpers
 
@@ -237,14 +238,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             if (isInteractButtonClickHeld)
             {
                 ApplyInteraction();
-
-                // MAKE AN EVENT INSTEAD:
-                if (ArsenalBoxDetector.GetArsenalBoxLootState())
-                {
-                    ArsenalBox instance = ArsenalBoxDetector.GetArsenalBox();
-                    instance.RemoveLootFromBox();
-                    //Debug.Log("Loot Removed from: " + instance);
-                }
+                // Remove interacted item in arsenal box:
+                OnArsenalBoxItemInteracted?.Invoke(); // listener = ArsenalBoxDetector
             }
         }
 

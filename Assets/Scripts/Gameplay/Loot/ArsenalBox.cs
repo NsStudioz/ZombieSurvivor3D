@@ -78,7 +78,8 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             if (LootInstance == null)
                 return;
 
-            timeElapsed -= Time.deltaTime;
+            if (timeElapsed > 0)
+                timeElapsed -= Time.deltaTime;
 
             if(timeElapsed <= 0)
             {

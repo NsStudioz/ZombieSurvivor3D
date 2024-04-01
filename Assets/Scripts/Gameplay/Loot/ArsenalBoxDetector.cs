@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ZombieSurvivor3D.Gameplay.GameState;
+using ZombieSurvivor3D.Gameplay.Handheld;
 using ZombieSurvivor3D.Gameplay.Score;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
@@ -19,16 +20,26 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            HandheldCarrier.OnArsenalBoxItemInteracted += ArsenalBoxTriggerRemoveLoot;  
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            HandheldCarrier.OnArsenalBoxItemInteracted -= ArsenalBoxTriggerRemoveLoot;
         }
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        // Invoker: HandheldCarrier:
+        private void ArsenalBoxTriggerRemoveLoot()
+        {
+            if (GetArsenalBoxLootState())
+                GetArsenalBox().RemoveLootFromBox();
+            //Debug.Log("Loot Removed from: " + instance);
         }
 
         #endregion
