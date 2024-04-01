@@ -137,20 +137,20 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         private void SyncData()
         {
-            handheldName = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldName;
-            fireRate = handheldCarrier.GetCurrentHandheldScriptableObject().FireRate;
-            fireRateCooldown = handheldCarrier.GetCurrentHandheldScriptableObject().FireRateCooldown;
-            reloadCooldown = handheldCarrier.GetCurrentHandheldScriptableObject().ReloadCooldown;
-            FiringModeInt = (int)handheldCarrier.GetCurrentHandheldScriptableObject().FiringMode;
+            handheldName = handheldCarrier.GetCurrentHandheldSO().HandheldName;
+            fireRate = handheldCarrier.GetCurrentHandheldSO().FireRate;
+            fireRateCooldown = handheldCarrier.GetCurrentHandheldSO().FireRateCooldown;
+            reloadCooldown = handheldCarrier.GetCurrentHandheldSO().ReloadCooldown;
+            FiringModeInt = (int)handheldCarrier.GetCurrentHandheldSO().FiringMode;
             //  
-            bulletTestGO = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldBulletPrefab;
+            bulletTestGO = handheldCarrier.GetCurrentHandheldSO().HandheldBulletPrefab;
         }
 
         private void SyncAmmoFirstTime()
         {
-            ammoInMag = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoInMag;
+            ammoInMag = handheldCarrier.GetCurrentHandheldSO().AmmoInMag;
             ammoInMagFull = ammoInMag;
-            ammoMax = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoMax;
+            ammoMax = handheldCarrier.GetCurrentHandheldSO().AmmoMax;
         }
 
         /// <summary>

@@ -50,7 +50,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             return rigAnimator;
         }
 
-        public HandheldSO GetCurrentHandheldScriptableObject()
+        public HandheldSO GetCurrentHandheldSO()
         {
             return currentHandheldSO;
         }
