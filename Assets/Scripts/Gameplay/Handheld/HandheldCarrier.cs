@@ -12,11 +12,12 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
     public class HandheldCarrier : MonoBehaviour, ControlsPC.IGameplayControlsActions, ControlsPC.IInteractionControlsActions
     {
         // System for important logic (Math + fire weapon + etc...)
+        [Header("My Equipped Handhelds")]
+        public List<HandheldSO> EquipedHandhelds;
 
         [Header("Main Elements")]
         [SerializeField] Transform rigSocket;
         [SerializeField] Animator rigAnimator;
-        public List<HandheldSO> EquipedHandhelds;
 
         // Current Handheld Elements
         HandheldSO currentHandheldSO;
@@ -122,17 +123,33 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         private void ApplyInteraction()
         {
             // if interacting with a similar weapon, restock ammo:
-            if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
+            for (int i = 0; i < EquipedHandhelds.Count; i++)
+                if (EquipedHandhelds[i] == interactableHandheldSO)
+                {
+                    OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
+                    return;
+                }
+
+            // De-sync gun data:
+            HandheldsGO[handheldSOIndex].GetComponentInChildren<HandheldWeapon>().RemoveHandheldFromPlayer();
+            //Replace current with the new weapon:
+            EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
+            SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
+            OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+
+/*            if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
                 OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
 
             // if interacting with a new weapon:
             else if (EquipedHandhelds[currentHandheldIndex] != interactableHandheldSO)
             {
+                // currently works:
+                HandheldsGO[handheldSOIndex].GetComponentInChildren<HandheldWeapon>().RemoveHandheldFromPlayer();
                 //Replace current with the new weapon:
                 EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
                 SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
-            }
+                OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner    
+            }*/
         }
 
         #endregion
@@ -196,6 +213,13 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         #endregion
 
         #region Used_Input_Events:
+
+        public void OnReload(InputAction.CallbackContext context)
+        {
+            // Using this code block to avoid binding/unbiding from our input system:
+            if (currentHandheldI != null)
+                currentHandheldI.OnReload(context);
+        }
 
         public void OnInteract(InputAction.CallbackContext context)
         {
@@ -313,13 +337,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             // Using this code block to avoid binding/unbiding from our input system:
             if (currentHandheldI != null)
                 currentHandheldI.OnFire2(context);
-        }
-
-        public void OnReload(InputAction.CallbackContext context)
-        {
-            // Using this code block to avoid binding/unbiding from our input system:
-            if (currentHandheldI != null)
-                currentHandheldI.OnReload(context);
         }
 
         #endregion

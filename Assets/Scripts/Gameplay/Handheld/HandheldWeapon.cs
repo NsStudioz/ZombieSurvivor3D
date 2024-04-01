@@ -13,29 +13,35 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
     {
         // Input Handling will trigger animations and weapon/equipment logic:
 
+        HandheldCarrier handheldCarrier;
+
         [Header("Main Elements")]
         [SerializeField] Animator weaponAnimator;
         [SerializeField] string handheldName;
+        [SerializeField] private bool isFirstTimeEquipped = false; // new weapon in carrier.
 
-        [Header("Main Attributes")]
-        [SerializeField] int ammoCapacity;
+        [Header("Ammo")]
+        [SerializeField] int ammoInMag;
+        [SerializeField] int ammoMax;
+
+        [Header("Firing")]
         [SerializeField] float fireRate;
         [SerializeField] float fireRateCooldown;
-        [SerializeField] float reloadCooldown;
-
-        [Header("Second Attributes")]
         [SerializeField] int FiringModeInt = 0;
+        [SerializeField] bool isLeftMouseClickHeld = false;
 
-/*        [Header("Firing Modes Attributes")]
-        private const int MODE_SINGLE = 3;
-        private const int MODE_SEMI = 2;
-        private const int MODE_BURST = 1;
-        private const int MODE_AUTO = 0;*/
-
+        [Header("Reload")]
+        [SerializeField] float reloadCooldown;
 
         [Header("Testing Purposes")]
         [SerializeField] GameObject bulletTestGO;
-        [SerializeField] bool isLeftMouseClickHeld = false;
+
+
+        /*        [Header("Firing Modes Attributes")]
+                private const int MODE_SINGLE = 3;
+                private const int MODE_SEMI = 2;
+                private const int MODE_BURST = 1;
+                private const int MODE_AUTO = 0;*/
 
         /*    [Header("Audio Files")]
             [SerializeField] AudioClip _EquipAudio;
@@ -43,7 +49,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             [SerializeField] AudioClip _FireAudio;
             [SerializeField] AudioClip _FailedFireAudio;*/
 
-        HandheldCarrier handheldCarrier;
+
 
         #region Event_Listeners
 
@@ -61,7 +67,12 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         private void RestockHandheldAmmo(HandheldSO handheld)
         {
-            ammoCapacity = handheld.AmmoCapacity;
+            // if string not working, use tag: handheld != handHeldTag.GetHandheldSOTag()
+            if (handheld.HandheldName != handheldName) 
+                return;
+
+            ammoInMag = handheld.AmmoInMag;
+            ammoMax = handheld.AmmoMax;
         }
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
@@ -74,7 +85,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         private void Update()
         {
-            if (ammoCapacity <= 0)
+            if (ammoInMag <= 0)
                 return;
 
             while (isLeftMouseClickHeld)
@@ -84,13 +95,14 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 if (fireRate <= 0f)
                 {
                     BulletSpawner.Instance.SpawnBullet(transform.position, transform.rotation);
-                    ammoCapacity--;
+                    ammoInMag--;
                     fireRate = fireRateCooldown;
                 }
 
                 break;
             }
         }
+
 
         #region InterfaceFunctions:
 
@@ -103,9 +115,14 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         public void OnEquip()
         {
+            //Example: carrierSystem.GetAnimator().SetTrigger("Equip");
+
+            if (!isFirstTimeEquipped)
+                return;
+
             SyncHandheldGunData();
-            // Example:
-            //carrierSystem.GetAnimator().SetTrigger("Equip");
+            SyncAmmoFirstTime();
+            isFirstTimeEquipped = false;
         }
 
         public void OnUnequip()
@@ -118,7 +135,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         private void SyncHandheldGunData()
         {
             handheldName = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldName;
-            ammoCapacity = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoCapacity;
             fireRate = handheldCarrier.GetCurrentHandheldScriptableObject().FireRate;
             fireRateCooldown = handheldCarrier.GetCurrentHandheldScriptableObject().FireRateCooldown;
             reloadCooldown = handheldCarrier.GetCurrentHandheldScriptableObject().ReloadCooldown;
@@ -127,6 +143,19 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             bulletTestGO = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldBulletPrefab;
         }
 
+        private void SyncAmmoFirstTime()
+        {
+            ammoInMag = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoInMag;
+            ammoMax = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoMax;
+        }
+
+        /// <summary>
+        /// Re-sync gun data when re-picking this gun up from the environment.
+        /// </summary>
+        public void RemoveHandheldFromPlayer()
+        {
+            isFirstTimeEquipped = true;
+        }
 
         #region Used_Input_Events:
         // These code block templates are for Handheld input actions and logic:
@@ -145,18 +174,16 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             }
         }
 
+        public void OnReload(InputAction.CallbackContext context)
+        {
 
+        }
 
         #endregion
 
         #region OnHold_Input_Events:
 
         public void OnFire2(InputAction.CallbackContext context)
-        {
-
-        }
-
-        public void OnReload(InputAction.CallbackContext context)
         {
 
         }

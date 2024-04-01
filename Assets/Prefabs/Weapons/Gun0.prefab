@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 1774669299401039766}
   - component: {fileID: 5238881678683326162}
   - component: {fileID: 983456693613218915}
+  - component: {fileID: 1727369912053557385}
   m_Layer: 9
   m_Name: Model
   m_TagString: Handheld
@@ -145,7 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAnimator: {fileID: 0}
   handheldName: RifleTest2
-  ammoCapacity: 15
+  ammoInMag: 0
+  ammoMax: 0
   fireRate: 0
   fireRateCooldown: 0.5
   reloadCooldown: 0
@@ -165,3 +167,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handheldSO_Tag: {fileID: 11400000, guid: 2b5d7309e9bee1741acf761dce5623d9, type: 2}
+--- !u!114 &1727369912053557385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774669299401039764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd9dce0237d1cf46a333b6bec6db2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMagAmmo: 0
+  currentReservedAmmo: 0
