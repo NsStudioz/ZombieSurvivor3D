@@ -131,7 +131,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 }
 
             // De-sync gun data:
-            HandheldsGO[handheldSOIndex].GetComponentInChildren<HandheldWeapon>().RemoveHandheldFromPlayer();
+            HandheldsGO[handheldSOIndex].GetComponentInChildren<HandheldWeapon>().RemoveFromPlayer();
             //Replace current with the new weapon:
             EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
             SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);

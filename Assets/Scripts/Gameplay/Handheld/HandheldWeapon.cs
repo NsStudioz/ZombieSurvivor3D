@@ -57,16 +57,22 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         private void OnEnable()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            HandheldCarrier.OnInteractSimilarHandheld += RestockHandheldAmmo;
+            HandheldCarrier.OnInteractSimilarHandheld += RestockAmmo;
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            HandheldCarrier.OnInteractSimilarHandheld -= RestockHandheldAmmo;
+            HandheldCarrier.OnInteractSimilarHandheld -= RestockAmmo;
         }
 
-        private void RestockHandheldAmmo(HandheldSO handheld)
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            if (this != null)
+                enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        private void RestockAmmo(HandheldSO handheld)
         {
             // if string not working, use tag: handheld != handHeldTag.GetHandheldSOTag()
             if (handheld.HandheldName != handheldName) 
@@ -76,13 +82,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             ammoMax = handheld.AmmoMax;
         }
 
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            if (this != null)
-                enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
         #endregion
+
 
         private void Update()
         {
@@ -121,7 +122,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             if (!isFirstTimeEquipped)
                 return;
 
-            SyncHandheldGunData();
+            SyncData();
             SyncAmmoFirstTime();
             isFirstTimeEquipped = false;
         }
@@ -133,7 +134,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         #endregion
 
-        private void SyncHandheldGunData()
+
+        private void SyncData()
         {
             handheldName = handheldCarrier.GetCurrentHandheldScriptableObject().HandheldName;
             fireRate = handheldCarrier.GetCurrentHandheldScriptableObject().FireRate;
@@ -154,10 +156,28 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         /// <summary>
         /// Re-sync gun data when re-picking this gun up from the environment.
         /// </summary>
-        public void RemoveHandheldFromPlayer()
+        public void RemoveFromPlayer()
         {
             isFirstTimeEquipped = true;
         }
+
+        private void Reload()
+        {
+            // how many bullets spend in a mag:
+            int spentAmmo = ammoInMagFull - ammoInMag;
+
+            // AF = 30 | AS = 2 | AIM = 28 | ammoMax = 1
+            if (ammoMax <= spentAmmo) // if this is the last magazine:
+            {
+                ammoInMag += ammoMax; // AIM = 29
+                ammoMax -= ammoMax;   // AM = 0
+                return;
+            }
+
+            ammoMax -= spentAmmo;
+            ammoInMag += spentAmmo;
+        }
+
 
         #region Used_Input_Events:
         // These code block templates are for Handheld input actions and logic:
@@ -181,23 +201,11 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             if (ammoMax <= 0 || ammoInMag == ammoInMagFull)
                 return;
 
-            // how many bullets spend in a mag:
-            int spentAmmo;
-            spentAmmo = ammoInMagFull - ammoInMag;
-
-            // AF = 30 | AS = 2 | AIM = 28 | ammoMax = 1
-            if (ammoMax <= spentAmmo) // if this is the last magazine:
-            {
-                ammoInMag += ammoMax; // AIM = 29
-                ammoMax -= ammoMax;   // AM = 0
-                return;
-            }
-
-            ammoMax -= spentAmmo;
-            ammoInMag += spentAmmo;
+            Reload();
         }
 
         #endregion
+
 
         #region OnHold_Input_Events:
 
