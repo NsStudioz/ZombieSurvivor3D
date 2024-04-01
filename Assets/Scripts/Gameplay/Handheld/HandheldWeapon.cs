@@ -22,6 +22,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         [Header("Ammo")]
         [SerializeField] int ammoInMag;
+        [SerializeField] int ammoInMagFull;
         [SerializeField] int ammoMax;
 
         [Header("Firing")]
@@ -146,6 +147,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         private void SyncAmmoFirstTime()
         {
             ammoInMag = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoInMag;
+            ammoInMagFull = ammoInMag;
             ammoMax = handheldCarrier.GetCurrentHandheldScriptableObject().AmmoMax;
         }
 
@@ -176,7 +178,23 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         public void OnReload(InputAction.CallbackContext context)
         {
+            if (ammoMax <= 0 || ammoInMag == ammoInMagFull)
+                return;
 
+            // how many bullets spend in a mag:
+            int spentAmmo;
+            spentAmmo = ammoInMagFull - ammoInMag;
+
+            // AF = 30 | AS = 2 | AIM = 28 | ammoMax = 1
+            if (ammoMax <= spentAmmo) // if this is the last magazine:
+            {
+                ammoInMag += ammoMax; // AIM = 29
+                ammoMax -= ammoMax;   // AM = 0
+                return;
+            }
+
+            ammoMax -= spentAmmo;
+            ammoInMag += spentAmmo;
         }
 
         #endregion
