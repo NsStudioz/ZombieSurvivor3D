@@ -18,7 +18,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         [Header("Attributes")]
         [SerializeField] public string HandheldName;
-        [SerializeField] public int AmmoCapacity;
+        [SerializeField] public int AmmoInMag;
+        [SerializeField] public int AmmoMax;
         [SerializeField] public float FireRate;
         [SerializeField] public float FireRateCooldown;
         [SerializeField] public float ReloadCooldown;

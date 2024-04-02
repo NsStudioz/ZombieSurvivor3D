@@ -20,7 +20,8 @@ MonoBehaviour:
   HandheldType: 3
   FiringMode: 0
   HandheldName: Gun0
-  AmmoCapacity: 20
+  AmmoInMag: 10
+  AmmoMax: 100
   FireRate: 0
   FireRateCooldown: 0.1
   ReloadCooldown: 0

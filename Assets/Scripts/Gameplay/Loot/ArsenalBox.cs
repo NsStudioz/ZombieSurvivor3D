@@ -64,6 +64,11 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             ResetLootState();
         }
 
+        private void InteractThisBox()
+        {
+            isInteracted = true;
+        }
+
         public void OpenArsenalBoxForLoot()
         {
             if (isInteracted)
@@ -78,7 +83,8 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             if (LootInstance == null)
                 return;
 
-            timeElapsed -= Time.deltaTime;
+            if (timeElapsed > 0)
+                timeElapsed -= Time.deltaTime;
 
             if(timeElapsed <= 0)
             {
@@ -87,17 +93,12 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             }
         }
 
-        private void InteractThisBox()
-        {
-            isInteracted = true;
-        }
-
         /// <summary>
         /// Remove loot from the box and reset timer.
         /// </summary>
         private void ResetLootState()
         {
-            Destroy(LootInstance);
+            LootInstance.GetComponentInChildren<ItemColliderMover>().Move();
             LootInstance = null;
             timeElapsed = timeElapsedThreshold;
         }
