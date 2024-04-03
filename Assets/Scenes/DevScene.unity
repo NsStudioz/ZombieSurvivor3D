@@ -2910,6 +2910,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timer: 0
   spawnPos: {x: 0, y: 0, z: 0}
+  pickupsCommon:
+  - {fileID: 8185835769500091938, guid: ef21ea9cc070ab7408447837c09804c9, type: 3}
+  pickupsUncommon:
+  - {fileID: 8185835769500091938, guid: ef21ea9cc070ab7408447837c09804c9, type: 3}
+  pickupsRare:
+  - {fileID: 8185835769500091938, guid: ef21ea9cc070ab7408447837c09804c9, type: 3}
 --- !u!4 &851770736
 Transform:
   m_ObjectHideFlags: 0

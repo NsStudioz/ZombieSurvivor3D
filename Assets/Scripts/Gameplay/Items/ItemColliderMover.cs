@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ZombieSurvivor3D
+namespace ZombieSurvivor3D.Gameplay.Items
 {
     public class ItemColliderMover : MonoBehaviour
     {

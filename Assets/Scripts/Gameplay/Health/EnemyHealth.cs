@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.Loot;
 using ZombieSurvivor3D.Gameplay.ObjectPool;
 using ZombieSurvivor3D.Gameplay.Score;
 
@@ -68,6 +69,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
             {
                 StopAllCoroutines();
                 //Debug.Log("Object Died!: " + transform.parent.gameObject.name);
+                NumberGenerator.GenerateForPickups(transform.parent.position);
                 EnemySpawner.Instance.DespawnEnemy(transform.parent.gameObject);
                 UpdateScore(100);
             }
