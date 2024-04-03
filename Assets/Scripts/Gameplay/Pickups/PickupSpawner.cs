@@ -74,7 +74,7 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         /// </summary>
         private void SpawnPickup(Vector3 pos)
         {
-            rndFloat = Random.Range(0.1f, 100.0f);
+            rndFloat = Random.Range(rndLowest, rndHighest);
 
             /*               // access interace of gameobject  =  IEquipable:
                // pickupC.GetComponent<IEquipable>().OnPicked();
