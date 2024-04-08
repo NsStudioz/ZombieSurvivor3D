@@ -108,6 +108,14 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
             }
         }
 
+        private void ChoosePickup(List<GameObject> list, Vector3 pos)
+        {
+            GameObject pickupGO = GetPickupFromList(list, pos);
+            //
+            IPickupable pickupable = pickupGO.GetComponent<IPickupable>();
+            pickupable?.OnPickup();
+        }
+
         /// <summary>
         /// Get Pickup Gameobject from desired list and pass the designated position.
         /// </summary>
