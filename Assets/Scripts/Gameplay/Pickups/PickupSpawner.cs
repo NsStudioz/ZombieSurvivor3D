@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.Bullets;
-using ZombieSurvivor3D.Gameplay.Health;
 using ZombieSurvivor3D.Gameplay.Loot;
 
 namespace ZombieSurvivor3D.Gameplay.Pickups
@@ -18,34 +16,28 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
 
         [Header("Spawn Position")]
         [SerializeField] private Vector3 spawnPos;
-        //[SerializeField] private float Timer;
 
         [Header("Rarity Randomizer")]
         [SerializeField] private float rndLowest = 0.1f;
         [SerializeField]  private float rndHighest = 100.0f;
         private float rndFloat;
+        private int zeroValue = 0; // for list index
 
         [Header("Spawnables")]
         [SerializeField] private List<GameObject> pickupsCommon = new List<GameObject>();
         [SerializeField] private List<GameObject> pickupsUncommon = new List<GameObject>();
         [SerializeField] private List<GameObject> pickupsRare = new List<GameObject>();
-        private int zeroValue = 0; // for list index
-
-        #region Rarity
-
-        private float rare = 100.0f;    // perks (Any).
-        private float uncommon = 66.6f; // buffs, hop-ups: FIRE-SALE
-        private float common = 33.3f;   // buffs, hop-ups: Kaboom, Max-Ammo, Insta-Kill, Double-Points... (Maybe...Carpenter)
 
         /// <summary>
         /// 
-        /// common   = 66.6f
-        /// uncommon = 99.6f
-        /// rare     = 99.7f (must survive a while before trigger rare:)
+        /// common   = 66.6f  // perks (Any).
+        /// uncommon = 99.6f  // buffs, hop-ups: FIRE-SALE
+        /// rare     = 100.0f  // buffs, hop-ups: Kaboom, Max-Ammo, Insta-Kill, Double-Points... (Maybe...Carpenter)
+        /// 
+        /// (Rare = must survive a while before trigger rare:)
         /// 
         /// </summary>
 
-        #endregion
 
         void Awake()
         {
@@ -61,9 +53,9 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         {
             if (Input.GetKeyDown(KeyCode.V))
             {
-                spawnPos = new Vector3(Random.Range(1, 100),
-                                       Random.Range(1, 100),
-                                       Random.Range(1, 100));
+                spawnPos = new Vector3(Random.Range(0, 1),
+                                       Random.Range(0, 1),
+                                       Random.Range(0, 1));
 
                 NumberGenerator.GenerateForPickups(spawnPos);
             }
@@ -76,19 +68,19 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         {
             rndFloat = Random.Range(rndLowest, rndHighest);
 
-            if (rndFloat > 0 && rndFloat <= common)
+            if (Randomizer.IsCommon(rndFloat))
             {   
-                ChoosePickup(pickupsCommon, spawnPos);
+                ChoosePickup(pickupsCommon, pos);
                 Debug.Log("Spawn Common Pickup " + pos); 
             }
-            else if (rndFloat > common && rndFloat <= uncommon)
+            else if (Randomizer.IsUncommon(rndFloat))
             {   
-                ChoosePickup(pickupsUncommon, spawnPos);
+                ChoosePickup(pickupsUncommon, pos);
                 Debug.Log("Spawn Uncommon Pickup " + pos); 
             }
-            else if (rndFloat > uncommon && rndFloat <= rare)
+            else if (Randomizer.IsRare(rndFloat))
             {   
-                ChoosePickup(pickupsRare, spawnPos);
+                ChoosePickup(pickupsRare, pos);
                 Debug.Log("Spawn Rare Pickup " + pos); 
             }
         }

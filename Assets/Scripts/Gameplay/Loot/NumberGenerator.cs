@@ -6,19 +6,19 @@ namespace ZombieSurvivor3D.Gameplay.Loot
     public class NumberGenerator
     {
 
-        public static event Action<int> OnRandomNumberGeneratedLoot;
-        public static event Action<int> OnRandomNumberGeneratedBuffs;
+        public static event Action<float> OnRandomNumberGeneratedLoot;
+        public static event Action<float> OnRandomNumberGeneratedBuffs;
         public static event Action<UnityEngine.Vector3> OnRandomNumberGeneratedPickups;
 
         public static void GenerateForLoot()
         {
-            int rnd = GetRnd();
+            float rnd = GetRndFloat();
             OnRandomNumberGeneratedLoot?.Invoke(rnd);
         }
 
         public static void GenerateForBuffs()
         {
-            int rnd = GetRnd();
+            float rnd = GetRndFloat();
             OnRandomNumberGeneratedBuffs?.Invoke(rnd);
         }
 
