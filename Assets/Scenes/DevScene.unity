@@ -2908,8 +2908,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25002f39946b9724da9d6b224b2086ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: 0
   spawnPos: {x: 0, y: 0, z: 0}
+  rndLowest: 0.1
+  rndHighest: 100
   pickupsCommon:
   - {fileID: 8185835769500091938, guid: ef21ea9cc070ab7408447837c09804c9, type: 3}
   pickupsUncommon:
