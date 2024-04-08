@@ -76,38 +76,24 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         {
             rndFloat = Random.Range(rndLowest, rndHighest);
 
-            /*               // access interace of gameobject  =  IEquipable:
-               // pickupC.GetComponent<IEquipable>().OnPicked();
-
-               // Example:
-               // IDamageable damageable = hit.collider.GetComponent<IDamageable>();
-               // damageable?.TakeDamage(bulletDamage);*/
             if (rndFloat > 0 && rndFloat <= common)
-            {
-                GameObject pickupC = GetPickupFromList(pickupsCommon, spawnPos);
-
-                IPickupable pickupable = pickupC.GetComponent<IPickupable>();
-                pickupable?.OnPickup();
-                //Debug.Log("Spawn Common Pickup " + pos);
+            {   
+                ChoosePickup(pickupsCommon, spawnPos);
+                Debug.Log("Spawn Common Pickup " + pos); 
             }
             else if (rndFloat > common && rndFloat <= uncommon)
-            {
-                GameObject pickupU = GetPickupFromList(pickupsUncommon, spawnPos);
-
-                IPickupable pickupable = pickupU.GetComponent<IPickupable>();
-                pickupable?.OnPickup();
-                //Debug.Log("Spawn Uncommon Pickup " + pos);
+            {   
+                ChoosePickup(pickupsUncommon, spawnPos);
+                Debug.Log("Spawn Uncommon Pickup " + pos); 
             }
             else if (rndFloat > uncommon && rndFloat <= rare)
-            {
-                GameObject pickupR = GetPickupFromList(pickupsRare, spawnPos);
-
-                IPickupable pickupable = pickupR.GetComponent<IPickupable>();
-                pickupable?.OnPickup();
-                //Debug.Log("Spawn Rare Pickup " + pos);
+            {   
+                ChoosePickup(pickupsRare, spawnPos);
+                Debug.Log("Spawn Rare Pickup " + pos); 
             }
         }
 
+        // Access interace of gameobject  =  IEquipable:
         private void ChoosePickup(List<GameObject> list, Vector3 pos)
         {
             GameObject pickupGO = GetPickupFromList(list, pos);
