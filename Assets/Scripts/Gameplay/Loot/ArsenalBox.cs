@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
+using ZombieSurvivor3D.Gameplay.Items;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
