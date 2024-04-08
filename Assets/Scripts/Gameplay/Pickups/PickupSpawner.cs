@@ -33,7 +33,7 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
 
         #region Rarity
 
-        private float rare = 100.0f;     // perks (Any).
+        private float rare = 100.0f;    // perks (Any).
         private float uncommon = 66.6f; // buffs, hop-ups: FIRE-SALE
         private float common = 33.3f;   // buffs, hop-ups: Kaboom, Max-Ammo, Insta-Kill, Double-Points... (Maybe...Carpenter)
 

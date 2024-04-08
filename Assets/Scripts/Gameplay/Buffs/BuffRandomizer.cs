@@ -166,44 +166,8 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             int rnd = RollRandomItemFromList(buffList);
 
             Debug.Log("Chosen Buff: " + buffList[rnd]);
-
-            // Listener = BuffCardUI.cs
-            OnBuffRolled?.Invoke(buffList[rnd]);
+            
+            OnBuffRolled?.Invoke(buffList[rnd]); // Listener = BuffCardUI.cs
         }
-
-
-        /*        //DEBUFFS CODE BLOCKS, NO LONGER NEEDED:
-
-                // DATED, DELETE SOON:
-                [SerializeField] private List<GameObject> Debuffs;
-
-                #region DebuffsElements (DATED, DELETE SOON:):
-
-                private int debuffMinInt = 10;
-                private int debuffMaxInt = 90;
-
-                #endregion
-
-                private void RollRandomDebuff(int rnd)
-                {
-                    int value = rnd;
-
-                    if (value <= debuffMinInt || value >= debuffMaxInt)
-                    {
-                        // Spawn Debuff:
-                        Debug.Log("Spawn Debuff");
-                        //RollDebuff(Debuffs);
-                    }
-                }
-
-                private void RollDebuff(List<GameObject> buffList)
-                {
-                    int rnd = RollRandomItemFromList(buffList);
-
-                    Debug.Log("Chosen Debuff: " + buffList[rnd]);
-
-                    OnBuffRolled?.Invoke(buffList[rnd], -1);
-                }*/
-
     }
 }
