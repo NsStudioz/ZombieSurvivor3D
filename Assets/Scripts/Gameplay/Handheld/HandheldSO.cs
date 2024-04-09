@@ -8,11 +8,13 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
     [CreateAssetMenu(fileName = "Handheld", menuName = "New Handheld SO", order = 1)]
     public class HandheldSO : ScriptableObject
     {
+
         [Header("Main Elements")]
         [SerializeField] public GameObject HandheldPrefab;
         [SerializeField] public GameObject HandheldBulletPrefab;
         [SerializeField] public RuntimeAnimatorController RigAnimController;
 
+        [Header("Type")]
         public HandheldTypes HandheldType = HandheldTypes.Pistol;
         public FiringModes FiringMode = FiringModes.Single;
 

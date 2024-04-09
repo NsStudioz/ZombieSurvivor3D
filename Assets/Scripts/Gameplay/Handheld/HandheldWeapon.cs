@@ -37,19 +37,17 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         [Header("Testing Purposes")]
         [SerializeField] GameObject bulletTestGO;
 
-
         /*        [Header("Firing Modes Attributes")]
                 private const int MODE_SINGLE = 3;
                 private const int MODE_SEMI = 2;
                 private const int MODE_BURST = 1;
-                private const int MODE_AUTO = 0;*/
+                private const int MODE_AUTO = 0;
 
-        /*    [Header("Audio Files")]
+            [Header("Audio Files")]
             [SerializeField] AudioClip _EquipAudio;
             [SerializeField] AudioClip _UnequipAudio;
             [SerializeField] AudioClip _FireAudio;
             [SerializeField] AudioClip _FailedFireAudio;*/
-
 
 
         #region Event_Listeners
@@ -84,7 +82,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         #endregion
 
-
         private void Update()
         {
             if (ammoInMag <= 0)
@@ -104,7 +101,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 break;
             }
         }
-
 
         #region InterfaceFunctions:
 
@@ -133,7 +129,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         }
 
         #endregion
-
 
         private void SyncData()
         {

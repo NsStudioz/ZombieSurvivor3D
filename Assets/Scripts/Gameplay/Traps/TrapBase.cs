@@ -8,7 +8,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
     public abstract class TrapBase : MonoBehaviour
     {
 
-        [Header("Init Attributes")]
+        [Header("Attributes")]
         [SerializeField] private int pointsCost;
         [SerializeField] protected bool isActivated = false;
         [SerializeField] protected int damage;
@@ -22,19 +22,18 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
 
-
             if (isActivated)
                 Deactivate();
-        }
-
-        public int GetPointCost()
-        {
-            return pointsCost;
         }
 
         public virtual void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        public int GetPointCost()
+        {
+            return pointsCost;
         }
 
         public void Activate()

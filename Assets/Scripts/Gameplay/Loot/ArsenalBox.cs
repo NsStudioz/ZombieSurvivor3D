@@ -10,11 +10,14 @@ namespace ZombieSurvivor3D.Gameplay.Loot
     public class ArsenalBox : MonoBehaviour
     {
         // when project finishes, remove this injection and make a proper value:
+        [Header("Points Cost")]
         [SerializeField] private int pointsCost;
 
+        [Header("Main Attributes")]
         [SerializeField] private GameObject LootInstance = null;
         [SerializeField] private Transform LootPosOffset;
 
+        [Header("Activity")]
         [SerializeField] private float timeElapsed;
         [SerializeField] private float timeElapsedThreshold;
         [SerializeField] private bool isInteracted;

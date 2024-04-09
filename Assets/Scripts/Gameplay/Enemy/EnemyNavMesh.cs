@@ -15,6 +15,8 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
         //[SerializeField] Transform playerTransform;
         [SerializeField] Transform retreatTransform;
 
+        #region EventListeners:
+
         private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
@@ -25,6 +27,19 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
             // prevents memory leaks and errors after the object is destroyed.
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            if (newGameState == GameStateManager.GameState.Gameplay)
+                navMeshAgent.speed = 2f;
+            else if (newGameState == GameStateManager.GameState.Paused)
+                navMeshAgent.speed = 0f;
+
+            //navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
 
         void Start()
         {
@@ -41,9 +56,7 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
                 //target = playerTransform;
                 navMeshAgent.destination = target.position;
             }
-
-            //-------------------------------------------
-
+            //---------------Experimental-------------------
             if (Input.GetKeyDown(KeyCode.B))
             {
                 //target = playerTransform;
@@ -56,15 +69,6 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
             }
         }
 
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            if (newGameState == GameStateManager.GameState.Gameplay)
-                navMeshAgent.speed = 2f;
-            else if (newGameState == GameStateManager.GameState.Paused)
-                navMeshAgent.speed = 0f;
 
-            //navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
     }
 }

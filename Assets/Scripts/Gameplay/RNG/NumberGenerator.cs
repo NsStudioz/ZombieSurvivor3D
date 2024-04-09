@@ -26,18 +26,19 @@ namespace ZombieSurvivor3D.Gameplay.RNG
         {
             float rnd = GetRndFloat();
 
+            // currently guarantees invokes every time:
             if (rnd >= 1)
                 OnRandomNumberGeneratedPickups?.Invoke(pos);
         }
 
         private static int GetRnd()
         {
-            return UnityEngine.Random.Range(1, 100);
+            return UnityEngine.Random.Range(0, 100);
         }
 
         private static float GetRndFloat()
         {
-            return UnityEngine.Random.Range(1, 100);
+            return UnityEngine.Random.Range(0f, 100);
         }
     }
 }

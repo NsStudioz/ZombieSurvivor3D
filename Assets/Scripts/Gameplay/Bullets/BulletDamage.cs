@@ -24,15 +24,14 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
         const string ENEMY_TAG = "Enemy";
         const string GROUND_TAG = "Ground";
 
+        #region EventListeners:
+
         private void Awake()
         {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            //
             enemyLayerInt = EnemyLayer;
             groundLayerInt = GroundLayer;
-        }
-
-        private void Start()
-        {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnDestroy()
@@ -44,6 +43,8 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
         {
             enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
+
+        #endregion
 
         private void Update()
         {

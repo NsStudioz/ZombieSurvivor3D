@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Pickups
@@ -8,11 +9,20 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
     public class PickupSpawner : MonoBehaviour
     {
 
-        // Spawns the following possible pickups: De/Buffs, Perks, Hop-Ups
-        // When an enemy dies. there is a chance for a pickup to appear.
-        // If the chance occurs and is guaranteed, spawn the pickup.
-        // Pickup spawn on enemy. Pass the vector3 of the enemy with a Y-Axis offset to here.
-
+        /// <summary>
+        /// 
+        /// Spawns the following possible pickups: De/Buffs, Perks, Hop-Ups
+        /// When an enemy dies. there is a chance for a pickup to appear.
+        /// If the chance occurs and is guaranteed, spawn the pickup.
+        /// Pickup spawn on enemy. Pass the vector3 of the enemy with a Y-Axis offset to here.
+        /// 
+        /// common   = 66.6f  // perks (Any).
+        /// uncommon = 99.6f  // buffs, hop-ups: FIRE-SALE
+        /// rare     = 100.0f  // buffs, hop-ups: Kaboom, Max-Ammo, Insta-Kill, Double-Points... (Maybe...Carpenter)
+        /// 
+        /// (Rare = must survive a while before trigger rare:)
+        /// 
+        /// </summary>
 
         [Header("Spawn Position")]
         [SerializeField] private Vector3 spawnPos;
@@ -28,26 +38,26 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         [SerializeField] private List<GameObject> pickupsUncommon = new List<GameObject>();
         [SerializeField] private List<GameObject> pickupsRare = new List<GameObject>();
 
-        /// <summary>
-        /// 
-        /// common   = 66.6f  // perks (Any).
-        /// uncommon = 99.6f  // buffs, hop-ups: FIRE-SALE
-        /// rare     = 100.0f  // buffs, hop-ups: Kaboom, Max-Ammo, Insta-Kill, Double-Points... (Maybe...Carpenter)
-        /// 
-        /// (Rare = must survive a while before trigger rare:)
-        /// 
-        /// </summary>
-
+        #region EventListeners: 
 
         void Awake()
         {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             NumberGenerator.OnRandomNumberGeneratedPickups += SpawnPickup;
         }
 
         private void OnDestroy()
         {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             NumberGenerator.OnRandomNumberGeneratedPickups -= SpawnPickup;
         }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
 
         private void Update()
         {
@@ -91,7 +101,7 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
             GameObject pickupGO = GetPickupFromList(list, pos);
             //
             IPickupable pickupable = pickupGO.GetComponent<IPickupable>();
-            pickupable?.OnPickup();
+            pickupable?.OnSpawned();
         }
 
         /// <summary>

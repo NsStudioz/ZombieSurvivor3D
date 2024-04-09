@@ -10,6 +10,7 @@ namespace ZombieSurvivor3D.Gameplay.Loot
     public class ArsenalBoxDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
     {
 
+        [Header("Attributes")]
         [SerializeField] private static ArsenalBox ArsenalBoxObject = null;
         [SerializeField] private bool isPressed;
 
@@ -34,15 +35,15 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
-        // Invoker: HandheldCarrier:
         private void ArsenalBoxTriggerRemoveLoot()
         {
             if (GetArsenalBoxLootState())
                 GetArsenalBox().RemoveLootFromBox();
-            //Debug.Log("Loot Removed from: " + instance);
         }
 
         #endregion
+
+        #region Collisions:
 
         private void OnTriggerEnter(Collider col)
         {
@@ -56,15 +57,9 @@ namespace ZombieSurvivor3D.Gameplay.Loot
                 ArsenalBoxObject = null;
         }
 
-        public static bool GetArsenalBoxLootState()
-        {
-            return ArsenalBoxObject != null;
-        }
+        #endregion
 
-        public static ArsenalBox GetArsenalBox()
-        {
-            return ArsenalBoxObject;
-        }
+        #region Input:
 
         public void OnInteract(InputAction.CallbackContext context)
         {
@@ -88,6 +83,18 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         {
             ScoreSystem.Instance.UpdateScore(ArsenalBoxObject.GetPointsCost());
             ArsenalBoxObject.OpenArsenalBoxForLoot();
+        }
+
+        #endregion
+
+        public static ArsenalBox GetArsenalBox()
+        {
+            return ArsenalBoxObject;
+        }
+
+        public static bool GetArsenalBoxLootState()
+        {
+            return ArsenalBoxObject != null;
         }
     }
 }

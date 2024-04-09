@@ -12,6 +12,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
         [SerializeField] protected bool isAffected;
         protected const int ZERO_HEALTH = 0;
 
+        #region EventListeners:
 
         protected void Awake()
         {
@@ -27,6 +28,8 @@ namespace ZombieSurvivor3D.Gameplay.Health
         {
             enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
+
+        #endregion
 
         protected virtual void InitializeHealthComponent(int health)
         {

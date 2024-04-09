@@ -11,11 +11,14 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
     {
         public static BulletSpawner Instance;
 
+        [Header("List")]
         [SerializeField] private Queue<GameObject> bulletQueue = new Queue<GameObject>();
 
+        [Header("Atrributes")]
         [SerializeField] private GameObject bulletPrefab = null;
-
         [SerializeField] private int bulletMaxReservedCount = 5;
+
+        #region EventListeners:
 
         private void Awake()
         {
@@ -26,19 +29,27 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             }
             Instance = this;
 
-            HandheldCarrier.OnHandheldChanged += SwitchBulletType;
-
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-
-        private void OnEnable()
-        {
             HandheldCarrier.OnHandheldChanged += SwitchBulletType;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
+            ClearQueue();
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             HandheldCarrier.OnHandheldChanged -= SwitchBulletType;
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
+
+        private void ClearQueue()
+        {
+            bulletQueue.Clear();
         }
 
         public void SpawnBullet(Vector3 position, Quaternion rotation)
@@ -74,21 +85,6 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             }
         }
 
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            ClearQueue();
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        private void ClearQueue()
-        {
-            bulletQueue.Clear();
-        }
     }
 }
 

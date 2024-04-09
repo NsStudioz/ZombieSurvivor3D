@@ -10,24 +10,28 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
     {
         public static EnemySpawner Instance;
 
-        [Header("Main Elements")]
-        [SerializeField] GameObject enemyStandardPrefab;
-        [SerializeField] Transform parentTransform;
+        [Header("Lists")]
         [SerializeField] Queue<GameObject> enemyQueue = new Queue<GameObject>();
         [SerializeField] List<Transform> spawnPoints = new List<Transform>();
 
+        [Header("Main Elements")]
+        [SerializeField] GameObject enemyStandardPrefab;
+        [SerializeField] Transform parentTransform;
+
         [Header("Spawning")]
         [SerializeField] int pointerIndex = 0;
-        //
+
+        [Header("Timers")]
         [SerializeField] float timer;
         [SerializeField] float timerThreshold;
-        //
-        //[SerializeField] int enemyHealth = 100;
+
         [Header("Enemy Counting")]
         [SerializeField] int enemyMaxCountModifier = 5;
         [SerializeField] int remainingEnemies = 10;
         [SerializeField] int enemyCount = 0;
+        
         public int EnemyMaxCount { get; private set; }
+        //[SerializeField] int enemyHealth = 100;
 
         [Header("Limits")]
         [SerializeField] int minInt;
@@ -35,8 +39,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
         [SerializeField] int minFloat;
         [SerializeField] int maxFloat;
 
-
-        #region Monobehavior Methods:
+        #region EventListeners:
 
         private void Awake()
         {
@@ -50,6 +53,19 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            ClearQueue();
+        }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
+
         void Start()
         {
             EnemyMaxCount = enemyMaxCountModifier;
@@ -59,12 +75,27 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             RandomizeEnemySpawn();
         }
 
+        private void ClearQueue()
+        {
+            enemyQueue.Clear();
+            remainingEnemies = 0;
+        }
+
         private void InitializeEnemiesInSpawner()
         {
             for (int i = 0; i < EnemyMaxCount + 1; i++)
             {
-                ObjectPool.Instance.SpawnAndReserveObjectInPool(enemyQueue, enemyStandardPrefab, transform.position, transform.rotation, parentTransform);
+                ObjectPool.Instance.SpawnAndReserveObjectInPool(
+                                enemyQueue, enemyStandardPrefab, 
+                                transform.position, transform.rotation, 
+                                parentTransform);
             }
+        }
+
+        private void RandomizeEnemySpawn()
+        {
+            pointerIndex = Random.Range(minInt, maxInt);
+            timer = Random.Range(minFloat, maxFloat);
         }
 
         void Update()
@@ -80,14 +111,6 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             if (timer <= 0f)
                 SpawnEnemy();
         }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            ClearQueue();
-        }
-
-        #endregion
 
         private void SpawnEnemy()
         {
@@ -112,23 +135,5 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
             enemyCount--;
         }
-
-        private void RandomizeEnemySpawn()
-        {
-            pointerIndex = Random.Range(minInt, maxInt);
-            timer = Random.Range(minFloat, maxFloat);
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        private void ClearQueue()
-        {
-            enemyQueue.Clear();
-            remainingEnemies = 0;
-        }
-
     }
 }

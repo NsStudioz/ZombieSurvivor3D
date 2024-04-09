@@ -10,11 +10,11 @@ namespace ZombieSurvivor3D.Gameplay.Traps
     public class TrapDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
     {
 
+        [Header("Attributes")]
         [SerializeField] private TrapBase TrapBaseObject = null;
         [SerializeField] private bool isPressed;
 
         private const string TRAP_TAG = "Traps";
-
 
         #region EventListeners:
 
@@ -35,6 +35,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         #endregion
 
+        #region Collisions:
 
         private void OnTriggerEnter(Collider col)
         {
@@ -47,6 +48,8 @@ namespace ZombieSurvivor3D.Gameplay.Traps
             if (col.CompareTag(TRAP_TAG))
                 TrapBaseObject = null;
         }
+
+        #endregion
 
         private void ActivateTrap()
         {

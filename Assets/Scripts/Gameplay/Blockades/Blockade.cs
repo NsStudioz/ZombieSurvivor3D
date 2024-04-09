@@ -6,6 +6,7 @@ namespace ZombieSurvivor3D.Gameplay.Blockades
     public class Blockade : MonoBehaviour
     {
 
+        [Header("Attributes")]
         [SerializeField] private int pointsCost;
 
         #region EventListeners:

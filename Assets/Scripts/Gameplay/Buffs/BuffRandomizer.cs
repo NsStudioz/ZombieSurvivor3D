@@ -98,9 +98,9 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             {
                 // spawn random rare buff:
                 RollBuff(RareBuffs);
-                LockPity();
-                // lock rare buffs temporarily:
                 Debug.Log("Spawn Rare Buff");
+                // lock rare buffs temporarily:
+                LockPity();
             }
         }
 

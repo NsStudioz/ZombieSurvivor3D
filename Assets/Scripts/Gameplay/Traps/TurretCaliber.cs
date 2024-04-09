@@ -75,7 +75,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         private void HitTarget()
         {
             if (explosionRadius <= 0f)
-                Damage(); // damage only the target.
+                Damage(); // damage a single target.
             else
                 Explode(); // Damage multiple targets.
 

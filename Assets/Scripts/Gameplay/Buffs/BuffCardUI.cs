@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Buffs
 {
@@ -12,6 +13,8 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
     /// </summary>
     public class BuffCardUI : MonoBehaviour
     {
+
+        [Header("Buff Item")]
         [SerializeField] private GameObject buffCardGO = null;
         [SerializeField] private BuffsTemplateSO buffItem = null;
 
@@ -25,8 +28,11 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         [Header("Other Elements")]
         [SerializeField] private float timerToHide;
 
+        #region EventListeners:
+
         private void Awake()
         {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             BuffRandomizer.OnBuffRolled += Activate;
 
             buffCardGO.SetActive(false);
@@ -34,8 +40,16 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
         private void OnDestroy()
         {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             BuffRandomizer.OnBuffRolled -= Activate;
         }
+
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
 
         /// <summary>
         /// Activate the card, apply the desired stats to the card.

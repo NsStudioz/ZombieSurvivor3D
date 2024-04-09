@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Pickups
 {
@@ -20,16 +21,31 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         ///
         /// </summary>
 
-
-        [SerializeField] private float Timer;
+        [Header("Attributes")]
         [SerializeField] private bool isSpawned;
+        [SerializeField] private float Timer; // Time to disappear/blip
+
+        #region EventListeners:
+
+        private void Awake()
+        {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        }
 
         private void OnDestroy()
         {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             StopAllCoroutines();
         }
 
-        public void OnPickup()
+        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            enabled = newGameState == GameStateManager.GameState.Gameplay;
+        }
+
+        #endregion
+
+        public void OnSpawned()
         {
             isSpawned = true;
             StartCoroutine(AppearanceDuration());
@@ -41,9 +57,18 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
             Destroy(gameObject);
         }
 
+        public void OnPicked()
+        {
+            // Picked
+        }
+
         /// <summary>
-        /// While true
         /// 
+        /// While true...
+        /// Play animation and SFX for 'Timer' amount of seconds.
+        /// When 'Timer' reaches its end...
+        /// Start blipping (Play animation + SFX)
+        /// On the 5th Blip, disappear the object entirely.
         /// 
         /// </summary>
         /// <returns></returns>
@@ -58,6 +83,7 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
                 OnIgnored();
             }   
         }
+
 
     }
 }
