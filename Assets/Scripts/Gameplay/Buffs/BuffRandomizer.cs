@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.GameState;
-using ZombieSurvivor3D.Gameplay.Loot;
+using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Buffs
 {

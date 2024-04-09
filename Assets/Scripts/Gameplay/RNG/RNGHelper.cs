@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ZombieSurvivor3D.Gameplay.Loot
+namespace ZombieSurvivor3D.Gameplay.RNG
 {
     public class RNGHelper
     {

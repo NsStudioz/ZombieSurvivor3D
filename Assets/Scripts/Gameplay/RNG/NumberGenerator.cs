@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace ZombieSurvivor3D.Gameplay.Loot
+namespace ZombieSurvivor3D.Gameplay.RNG
 {
     public class NumberGenerator
     {
