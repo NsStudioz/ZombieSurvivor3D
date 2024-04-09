@@ -75,27 +75,26 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             // Pity Calculation:
             CountLockedPity();
 
-            if (isPityLocked && Randomizer.IsRare(value))
+            if (isPityLocked && RNGHelper.IsRare(value))
             {
                 int nonRareRandomizer = UnityEngine.Random.Range(10, 30);
                 value -= nonRareRandomizer;
             }
-
             //Debug.Log("Random Value: " + value);
 
-            if (Randomizer.IsCommon(value))
+            if (RNGHelper.IsCommon(value))
             {
                 // spawn random common buff:
                 RollBuff(CommonBuffs);
                 Debug.Log("Spawn Common Buff");
             }
-            else if (Randomizer.IsUncommon(value))
+            else if (RNGHelper.IsUncommon(value))
             {
                 // spawn random Uncommon buff:
                 RollBuff(UncommonBuffs);
                 Debug.Log("Spawn Uncommon Buff");
             }
-            else if (Randomizer.IsRare(value))
+            else if (RNGHelper.IsRare(value))
             {
                 // spawn random rare buff:
                 RollBuff(RareBuffs);

@@ -43,17 +43,17 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             float value = rnd;
             //Debug.Log("Random Value: " + value);
 
-            if (Randomizer.IsCommon(value))
+            if (RNGHelper.IsCommon(value))
             {
                 SpawnLoot(CommonLoot);
                 Debug.Log("Common Loot!");
             }
-            else if (Randomizer.IsUncommon(value))
+            else if (RNGHelper.IsUncommon(value))
             {
                 SpawnLoot(UncommonLoot);
                 Debug.Log("Uncommon Loot!");
             }
-            else if (Randomizer.IsRare(value))
+            else if (RNGHelper.IsRare(value))
             {
                 SpawnLoot(RareLoot);
                 Debug.Log("Rare Loot!");

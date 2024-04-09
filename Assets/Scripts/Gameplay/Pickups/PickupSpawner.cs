@@ -68,17 +68,17 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         {
             rndFloat = Random.Range(rndLowest, rndHighest);
 
-            if (Randomizer.IsCommon(rndFloat))
+            if (RNGHelper.IsCommon(rndFloat))
             {   
                 ChoosePickup(pickupsCommon, pos);
                 Debug.Log("Spawn Common Pickup " + pos); 
             }
-            else if (Randomizer.IsUncommon(rndFloat))
+            else if (RNGHelper.IsUncommon(rndFloat))
             {   
                 ChoosePickup(pickupsUncommon, pos);
                 Debug.Log("Spawn Uncommon Pickup " + pos); 
             }
-            else if (Randomizer.IsRare(rndFloat))
+            else if (RNGHelper.IsRare(rndFloat))
             {   
                 ChoosePickup(pickupsRare, pos);
                 Debug.Log("Spawn Rare Pickup " + pos); 

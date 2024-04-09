@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
-    public class Randomizer
+    public class RNGHelper
     {
 
         private static float zeroValueF = 0f;
@@ -26,7 +26,8 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         {
             return value > uncommon && value <= rare;
         }
-
+    }
+}
 
 /*        public void SimulateRNG<T>(T list1, List<T> list2, List<T> list3,
                                    Action<T> func1, Action<List<T>> func2, Action<List<T>> func3,
@@ -54,5 +55,3 @@ namespace ZombieSurvivor3D.Gameplay.Loot
                 Debug.Log("Rare!");
             }
         }*/
-    }
-}
