@@ -24,26 +24,6 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         // Events:
         public static event Action<BuffsTemplateSO> OnBuffRolled;
 
-        #region RarityElements:
-
-        // Common First half:
-        private int minMinCommon = 1;
-        private int maxMinCommon = 35;
-        // Uncommon First half:
-        private int minMinUncommon = 36;
-        private int maxMinUncommon = 46;
-        // Rare:
-        private int minRare = 47;
-        private int maxRare = 53;
-        // Uncommon Second half:
-        private int minMaxUncommon = 54;
-        private int maxMaxUncommon = 64;
-        // Common Second half:
-        private int minMaxCommon = 65;
-        private int maxMaxCommon = 100;
-
-        #endregion
-
         #region EventListeners:
 
         private void Awake()
@@ -61,33 +41,6 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
-
-        #region RarityHelpers:
-
-        private bool IsCommonRolledPreRareIndex(int value)
-        {
-            return value >= minMinCommon && value <= maxMinCommon;
-        }
-        private bool IsCommonRolledPostRareIndex(int value)
-        {
-            return value >= minMaxCommon && value <= maxMaxCommon;
-        }
-
-        private bool IsUncommonRolledPreRareIndex(int value)
-        {
-            return value >= minMinUncommon && value <= maxMinUncommon;
-        }
-        private bool IsUncommonRolledPostRareIndex(int value)
-        {
-            return value >= minMaxUncommon && value <= maxMaxUncommon;
-        }
-
-        private bool IsRareRolled(int value)
-        {
-            return value >= minRare && value <= maxRare;
         }
 
         #endregion
@@ -115,43 +68,39 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         #endregion
 
         // Roll 1 buff for the player:
-        private void RollRandomBuff(int rnd)
+        private void RollRandomBuff(float rnd)
         {
-            int value = rnd;
+            float value = rnd;
 
             // Pity Calculation:
             CountLockedPity();
 
-            if (isPityLocked && IsRareRolled(value))
+            if (isPityLocked && RNGHelper.IsRare(value))
             {
                 int nonRareRandomizer = UnityEngine.Random.Range(10, 30);
                 value -= nonRareRandomizer;
             }
+            //Debug.Log("Random Value: " + value);
 
-            Debug.Log("Random Value: " + value);
-
-            // Is the buff common?:
-            if (IsCommonRolledPreRareIndex(value) || IsCommonRolledPostRareIndex(value))
+            if (RNGHelper.IsCommon(value))
             {
                 // spawn random common buff:
                 RollBuff(CommonBuffs);
-                Debug.Log("Spawn Common");
+                Debug.Log("Spawn Common Buff");
             }
-            // Is the buff uncommon?
-            else if (IsUncommonRolledPreRareIndex(value) || IsUncommonRolledPostRareIndex(value))
+            else if (RNGHelper.IsUncommon(value))
             {
                 // spawn random Uncommon buff:
                 RollBuff(UncommonBuffs);
-                Debug.Log("Spawn Uncommon");
+                Debug.Log("Spawn Uncommon Buff");
             }
-            // Is the buff rare?
-            else if (IsRareRolled(value))
+            else if (RNGHelper.IsRare(value))
             {
                 // spawn random rare buff:
                 RollBuff(RareBuffs);
-                Debug.Log("Spawn Rare");
-                // lock rare buffs temporarily:
                 LockPity();
+                // lock rare buffs temporarily:
+                Debug.Log("Spawn Rare Buff");
             }
         }
 
@@ -166,44 +115,8 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             int rnd = RollRandomItemFromList(buffList);
 
             Debug.Log("Chosen Buff: " + buffList[rnd]);
-
-            // Listener = BuffCardUI.cs
-            OnBuffRolled?.Invoke(buffList[rnd]);
+            
+            OnBuffRolled?.Invoke(buffList[rnd]); // Listener = BuffCardUI.cs
         }
-
-
-        /*        //DEBUFFS CODE BLOCKS, NO LONGER NEEDED:
-
-                // DATED, DELETE SOON:
-                [SerializeField] private List<GameObject> Debuffs;
-
-                #region DebuffsElements (DATED, DELETE SOON:):
-
-                private int debuffMinInt = 10;
-                private int debuffMaxInt = 90;
-
-                #endregion
-
-                private void RollRandomDebuff(int rnd)
-                {
-                    int value = rnd;
-
-                    if (value <= debuffMinInt || value >= debuffMaxInt)
-                    {
-                        // Spawn Debuff:
-                        Debug.Log("Spawn Debuff");
-                        //RollDebuff(Debuffs);
-                    }
-                }
-
-                private void RollDebuff(List<GameObject> buffList)
-                {
-                    int rnd = RollRandomItemFromList(buffList);
-
-                    Debug.Log("Chosen Debuff: " + buffList[rnd]);
-
-                    OnBuffRolled?.Invoke(buffList[rnd], -1);
-                }*/
-
     }
 }
