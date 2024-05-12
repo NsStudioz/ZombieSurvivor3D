@@ -17,17 +17,6 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
 
         #region EventListeners:
 
-/*        private void Awake()
-        {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-
-        private void OnDestroy()
-        {
-            // prevents memory leaks and errors after the object is destroyed.
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-*/
         protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             if (newGameState == GameStateManager.GameState.Gameplay)
@@ -37,7 +26,6 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
 
             base.OnGameStateChanged(newGameState);
             //navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
-            //enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

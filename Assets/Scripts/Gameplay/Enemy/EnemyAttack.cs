@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.Bullets;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Health;
 
 
 namespace ZombieSurvivor3D.Gameplay.Enemy
 {
-    public class EnemyAttack : MonoBehaviour
+    public class EnemyAttack : GameListener
     {
         int damageToPlayer = 1;
         const string PLAYER_TAG = "Player";
@@ -18,26 +16,11 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
                 int playerLayerInt;
                 [SerializeField] int rayRange;*/
 
-        #region
 
-        private void Awake()
+        private void Start()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-
             //playerLayerInt = PlayerLayer.value;
         }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         private void OnTriggerEnter(Collider col)
         {
