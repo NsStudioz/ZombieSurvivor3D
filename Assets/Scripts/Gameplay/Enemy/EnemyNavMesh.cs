@@ -8,7 +8,7 @@ using ZombieSurvivor3D.Gameplay.Player;
 
 namespace ZombieSurvivor3D.Gameplay.Enemy
 {
-    public class EnemyNavMesh : MonoBehaviour
+    public class EnemyNavMesh : GameStateListener
     {
         [SerializeField] NavMeshAgent navMeshAgent;
         [SerializeField] Transform target = null;
@@ -17,7 +17,7 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
 
         #region EventListeners:
 
-        private void Awake()
+/*        private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
@@ -27,16 +27,17 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
             // prevents memory leaks and errors after the object is destroyed.
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+*/
+        protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             if (newGameState == GameStateManager.GameState.Gameplay)
                 navMeshAgent.speed = 2f;
             else if (newGameState == GameStateManager.GameState.Paused)
                 navMeshAgent.speed = 0f;
 
+            base.OnGameStateChanged(newGameState);
             //navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
+            //enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

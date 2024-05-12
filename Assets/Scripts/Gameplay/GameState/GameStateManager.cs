@@ -36,6 +36,7 @@ namespace ZombieSurvivor3D.Gameplay.GameState
 
             CurrentGameState = newGameState;
             OnGameStateChanged?.Invoke(newGameState);
+            //EventManager<GameState>.Raise(Events.EventKey.OnGameState.ToString(), newGameState);
         }
     }
 
