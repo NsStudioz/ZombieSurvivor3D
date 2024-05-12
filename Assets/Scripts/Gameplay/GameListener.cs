@@ -5,9 +5,8 @@ using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D
 {
-    public class GameStateListener : MonoBehaviour
+    public class GameListener : MonoBehaviour
     {
-
         protected void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
@@ -33,7 +32,6 @@ namespace ZombieSurvivor3D
         {
             enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
-
 
     }
 }

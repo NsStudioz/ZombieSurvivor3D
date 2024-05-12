@@ -8,7 +8,7 @@ using ZombieSurvivor3D.Gameplay.Player;
 
 namespace ZombieSurvivor3D.Gameplay.Enemy
 {
-    public class EnemyNavMesh : GameStateListener
+    public class EnemyNavMesh : GameListener
     {
         [SerializeField] NavMeshAgent navMeshAgent;
         [SerializeField] Transform target = null;
