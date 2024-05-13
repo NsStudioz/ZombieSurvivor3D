@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Gameplay.GameState;
 
 
 namespace ZombieSurvivor3D.Gameplay.Handheld
@@ -56,13 +55,12 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         #endregion
 
-        #region Event_Listeners
+        #region Input_Init
 
         private void OnEnable()
         {
             playerInput.actions.FindActionMap("GameplayControls").Enable();
             playerInput.actions.FindActionMap("InteractionControls").Enable();
-            //GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnDisable()

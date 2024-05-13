@@ -68,7 +68,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         {
             if (this != null)
                 base.OnGameStateChanged(newGameState);
-                //enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         private void RestockAmmo(HandheldSO handheld)

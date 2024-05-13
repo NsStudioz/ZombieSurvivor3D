@@ -6,16 +6,16 @@ namespace ZombieSurvivor3D.Gameplay.Player
 {
     public static class Immunity
     {
-        private static bool isImmune = false;
+        //private static bool isImmune = false;
 
         public static void ActivateImmunityOnPlayer()
         {
-            isImmune = true;
+            //isImmune = true;
         }
 
         public static void DeactivateImmunityOnPlayer()
         {
-            isImmune = false;
+            //isImmune = false;
         }
     }
 }
