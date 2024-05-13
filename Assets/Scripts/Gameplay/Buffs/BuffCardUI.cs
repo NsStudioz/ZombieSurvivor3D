@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Buffs
 {
@@ -24,6 +25,8 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         [SerializeField] private TextMeshProUGUI descriptionTxt;
         [SerializeField] private TextMeshProUGUI durationTxt;
 
+        private IEnumerator iEnumeratorRef;
+
         [Header("Other Elements")]
         [SerializeField] private float timerToHide;
 
@@ -41,6 +44,21 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         {
             base.OnDestroy();
             BuffRandomizer.OnBuffRolled -= Activate;
+            StopCoroutine(iEnumeratorRef);
+        }
+
+        protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+            base.OnGameStateChanged(newGameState);
+
+            if (iEnumeratorRef == null)
+                return;
+
+            if (newGameState == GameStateManager.GameState.Paused)
+                StopCoroutine(iEnumeratorRef);
+
+            else if (newGameState == GameStateManager.GameState.Gameplay)
+                StartCoroutine(iEnumeratorRef);
         }
 
         #endregion
@@ -54,7 +72,9 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             buffCardGO.SetActive(true);
             buffItem = buffInstance;
 
-            StartCoroutine(SetVisibilityTimer(timerToHide));
+            iEnumeratorRef = SetVisibilityTimer(timerToHide);
+            //StartCoroutine(SetVisibilityTimer(timerToHide));
+            StartCoroutine(iEnumeratorRef);
 
             // Sync card color with card rarity:
             // might replace this with switch expression:
@@ -75,7 +95,9 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
         private IEnumerator SetVisibilityTimer(float timeDelay)
         {
-            yield return new WaitForSeconds(timeDelay);
+            for (int i = 0; i < 100; i++)
+                yield return new WaitForSeconds(timeDelay / 100);
+            //yield return new WaitForSeconds(timeDelay);
             buffCardGO.SetActive(false);
             buffItem = null;
         }

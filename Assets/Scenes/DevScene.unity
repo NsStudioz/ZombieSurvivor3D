@@ -690,8 +690,6 @@ MonoBehaviour:
   - {fileID: 1774669298440197006, guid: a162312b428c31f4a8764c76ab2dbfec, type: 3}
   - {fileID: 1774669298440197006, guid: f6173d3edfc2f9a4b8f2e8569c72aba4, type: 3}
   - {fileID: 1774669298440197006, guid: 335911fcc20c3e441909a4f28b89f14d, type: 3}
-  pityLockCount: 0
-  isPityLocked: 0
 --- !u!4 &229011273
 Transform:
   m_ObjectHideFlags: 0
@@ -3392,9 +3390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c3d891c1933334795d0672815885a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStandardPrefab: {fileID: 2261602777475772770, guid: 454d991b25d233c40be5d8c39160892a,
-    type: 3}
-  parentTransform: {fileID: 1404335496}
   spawnPoints:
   - {fileID: 782880519}
   - {fileID: 917527265}
@@ -3402,6 +3397,9 @@ MonoBehaviour:
   - {fileID: 1156762372}
   - {fileID: 470848051}
   - {fileID: 1591196964}
+  enemyStandardPrefab: {fileID: 2261602777475772770, guid: 454d991b25d233c40be5d8c39160892a,
+    type: 3}
+  parentTransform: {fileID: 1404335496}
   pointerIndex: 0
   timer: 0
   timerThreshold: 5
@@ -8513,6 +8511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuffBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185835769500091938, guid: ef21ea9cc070ab7408447837c09804c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef21ea9cc070ab7408447837c09804c9, type: 3}
