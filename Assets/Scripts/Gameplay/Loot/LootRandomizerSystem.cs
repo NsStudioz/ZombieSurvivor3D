@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
-    public class LootRandomizerSystem : MonoBehaviour
+    public class LootRandomizerSystem : GameListener
     {
 
         [Header("Weapon/Equipment Loot Lists")]
@@ -20,21 +19,16 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             NumberGenerator.OnRandomNumberGeneratedLoot += CycleThroughLootRarity;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             NumberGenerator.OnRandomNumberGeneratedLoot -= CycleThroughLootRarity;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

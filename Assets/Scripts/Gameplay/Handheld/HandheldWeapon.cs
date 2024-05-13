@@ -9,7 +9,7 @@ using ZombieSurvivor3D.Gameplay.ObjectPool;
 
 namespace ZombieSurvivor3D.Gameplay.Handheld
 {
-    public class HandheldWeapon : MonoBehaviour, IHandheldObject
+    public class HandheldWeapon : GameListener, IHandheldObject
     {
         // Input Handling will trigger animations and weapon/equipment logic:
 
@@ -52,22 +52,23 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         #region Event_Listeners
 
-        private void OnEnable()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             HandheldCarrier.OnInteractSimilarHandheld += RestockAmmo;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             HandheldCarrier.OnInteractSimilarHandheld -= RestockAmmo;
         }
 
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             if (this != null)
-                enabled = newGameState == GameStateManager.GameState.Gameplay;
+                base.OnGameStateChanged(newGameState);
+                //enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         private void RestockAmmo(HandheldSO handheld)

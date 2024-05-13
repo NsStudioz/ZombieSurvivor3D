@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Handheld;
 using ZombieSurvivor3D.Gameplay.Score;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
-    public class ArsenalBoxDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
+    public class ArsenalBoxDetector : GameListener, ControlsPC.IInteractionControlsActions
     {
 
         [Header("Attributes")]
@@ -18,22 +17,19 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             HandheldCarrier.OnArsenalBoxItemInteracted += ArsenalBoxTriggerRemoveLoot;  
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             HandheldCarrier.OnArsenalBoxItemInteracted -= ArsenalBoxTriggerRemoveLoot;
         }
 
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
+        #endregion
 
         private void ArsenalBoxTriggerRemoveLoot()
         {
@@ -41,8 +37,16 @@ namespace ZombieSurvivor3D.Gameplay.Loot
                 GetArsenalBox().RemoveLootFromBox();
         }
 
-        #endregion
+        public static ArsenalBox GetArsenalBox()
+        {
+            return ArsenalBoxObject;
+        }
 
+        public static bool GetArsenalBoxLootState()
+        {
+            return ArsenalBoxObject != null;
+        }
+        
         #region Collisions:
 
         private void OnTriggerEnter(Collider col)
@@ -87,14 +91,6 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
         #endregion
 
-        public static ArsenalBox GetArsenalBox()
-        {
-            return ArsenalBoxObject;
-        }
 
-        public static bool GetArsenalBoxLootState()
-        {
-            return ArsenalBoxObject != null;
-        }
     }
 }

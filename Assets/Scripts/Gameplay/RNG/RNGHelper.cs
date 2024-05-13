@@ -28,30 +28,3 @@ namespace ZombieSurvivor3D.Gameplay.RNG
         }
     }
 }
-
-/*        public void SimulateRNG<T>(T list1, List<T> list2, List<T> list3,
-                                   Action<T> func1, Action<List<T>> func2, Action<List<T>> func3,
-                                   int rnd)
-        {
-            int value = rnd;
-            Debug.Log("Random Value: " + value);
-
-            if (value >= 0 && value <= common)
-            {
-                // COMMON:
-                func1(list1);
-                Debug.Log("Common");
-            }
-            else if (value >= common && value <= uncommon)
-            {
-                // UNCOMMON:
-                func2(list2);
-                Debug.Log("Uncommon");
-            }
-            else if (value >= uncommon && value <= rare)
-            {
-                // RARE:
-                func3(list3);
-                Debug.Log("Rare!");
-            }
-        }*/

@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.Handheld;
-using ZombieSurvivor3D.Gameplay.GameState;
 
 
 namespace ZombieSurvivor3D.Gameplay.ObjectPool
 {
-    public class BulletSpawner : MonoBehaviour
+    public class BulletSpawner : GameListener
     {
         public static BulletSpawner Instance;
 
@@ -20,7 +19,7 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
             if (Instance != null)
             {
@@ -29,20 +28,15 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             }
             Instance = this;
 
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             HandheldCarrier.OnHandheldChanged += SwitchBulletType;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             ClearQueue();
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             HandheldCarrier.OnHandheldChanged -= SwitchBulletType;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

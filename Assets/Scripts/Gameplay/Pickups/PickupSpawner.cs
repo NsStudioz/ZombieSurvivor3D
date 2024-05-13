@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Pickups
 {
-    public class PickupSpawner : MonoBehaviour
+    public class PickupSpawner : GameListener
     {
 
         /// <summary>
@@ -38,25 +37,20 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         [SerializeField] private List<GameObject> pickupsUncommon = new List<GameObject>();
         [SerializeField] private List<GameObject> pickupsRare = new List<GameObject>();
 
-        #region EventListeners: 
+        #region EventListeners:
 
-        void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             NumberGenerator.OnRandomNumberGeneratedPickups += SpawnPickup;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             NumberGenerator.OnRandomNumberGeneratedPickups -= SpawnPickup;
         }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
+        
         #endregion
 
         private void Update()

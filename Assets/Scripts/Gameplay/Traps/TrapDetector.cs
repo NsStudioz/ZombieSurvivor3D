@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Score;
 
 namespace ZombieSurvivor3D.Gameplay.Traps
 {
-    public class TrapDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
+    public class TrapDetector : GameListener, ControlsPC.IInteractionControlsActions
     {
 
         [Header("Attributes")]
@@ -16,24 +15,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         private const string TRAP_TAG = "Traps";
 
-        #region EventListeners:
-
-        private void Awake()
-        {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         #region Collisions:
 

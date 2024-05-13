@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
-
 
 namespace ZombieSurvivor3D.Gameplay.ObjectPool
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner : GameListener
     {
         public static EnemySpawner Instance;
 
@@ -39,9 +37,8 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
         [SerializeField] int minFloat;
         [SerializeField] int maxFloat;
 
-        #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
             if (Instance != null)
             {
@@ -50,21 +47,14 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             }
             Instance = this;
 
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             ClearQueue();
         }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         void Start()
         {

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Score
 {
-    public class ScoreSystem : MonoBehaviour
+    public class ScoreSystem : GameListener
     {
 
         public static ScoreSystem Instance;
@@ -14,9 +13,7 @@ namespace ZombieSurvivor3D.Gameplay.Score
         [SerializeField] ScoreComponent scoreComponent;
         [SerializeField] int highScoreForUI;
 
-        #region EventListeners:
-
-        private void Awake()
+        protected override void Awake()
         {
             if (Instance != null)
             {
@@ -25,20 +22,8 @@ namespace ZombieSurvivor3D.Gameplay.Score
             }
             Instance = this;
 
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
         }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         private void Start()
         {

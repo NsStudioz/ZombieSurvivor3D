@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Health;
 
 namespace ZombieSurvivor3D.Gameplay.Traps
 {
-    public class TurretCaliber : MonoBehaviour
+    public class TurretCaliber : GameListener
     {
         [Header("Targeting")]
         private Transform target = null;
@@ -20,24 +19,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         public float speed = 10f;
         public float explosionRadius = 0f;
 
-        #region EventListeners:
-
-        private void Start()
-        {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         void Update()
         {

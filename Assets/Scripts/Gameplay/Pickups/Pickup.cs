@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Pickups
 {
-    public class Pickup : MonoBehaviour, IPickupable
+    public class Pickup : GameListener, IPickupable
     {
         /// <summary>
         /// 
@@ -25,30 +24,16 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         [SerializeField] private bool isSpawned;
         [SerializeField] private float Timer; // Time to disappear/blip
 
-        #region EventListeners:
-
-        private void Awake()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             StopAllCoroutines();
         }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         public void OnSpawned()
         {
             isSpawned = true;
-            StartCoroutine(AppearanceDuration());
+            StartCoroutine(AppearanceDuration());  // DOES NOT WORK WITH GAMESTATEMANAGER. TIMER DOES NOT STOP.
         }
 
         public void OnIgnored()

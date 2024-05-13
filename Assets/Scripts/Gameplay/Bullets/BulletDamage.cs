@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.ObjectPool;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Health;
 
 
 namespace ZombieSurvivor3D.Gameplay.Bullets
 {
-    public class BulletDamage : MonoBehaviour
+    public class BulletDamage : GameListener
     {
 
         [Header("Attributes")]
@@ -24,27 +23,13 @@ namespace ZombieSurvivor3D.Gameplay.Bullets
         const string ENEMY_TAG = "Enemy";
         const string GROUND_TAG = "Ground";
 
-        #region EventListeners:
-
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             //
             enemyLayerInt = EnemyLayer;
             groundLayerInt = GroundLayer;
         }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         private void Update()
         {

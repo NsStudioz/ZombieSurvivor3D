@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Buffs
 {
     /// <summary>
     /// UI Card, will appear with animation when triggered by the BuffRandomizer.
     /// </summary>
-    public class BuffCardUI : MonoBehaviour
+    public class BuffCardUI : GameListener
     {
 
         [Header("Buff Item")]
@@ -30,23 +29,18 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             BuffRandomizer.OnBuffRolled += Activate;
 
             buffCardGO.SetActive(false);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             BuffRandomizer.OnBuffRolled -= Activate;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

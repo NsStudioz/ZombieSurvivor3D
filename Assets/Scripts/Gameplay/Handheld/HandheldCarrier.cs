@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ZombieSurvivor3D.Gameplay.GameState;
-using ZombieSurvivor3D.Gameplay.Loot;
 
 
 namespace ZombieSurvivor3D.Gameplay.Handheld
 {
-    public class HandheldCarrier : MonoBehaviour, ControlsPC.IGameplayControlsActions, ControlsPC.IInteractionControlsActions
+    public class HandheldCarrier : GameListener, ControlsPC.IGameplayControlsActions, ControlsPC.IInteractionControlsActions
     {
         // System for important logic (Math + fire weapon + etc...)
         [Header("My Equipped Handhelds")]
@@ -63,23 +62,13 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         {
             playerInput.actions.FindActionMap("GameplayControls").Enable();
             playerInput.actions.FindActionMap("InteractionControls").Enable();
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            //GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnDisable()
         {
             playerInput.actions.FindActionMap("GameplayControls").Disable();
             playerInput.actions.FindActionMap("InteractionControls").Disable();
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

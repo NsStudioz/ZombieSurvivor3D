@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Items;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
-    public class ArsenalBox : MonoBehaviour
+    public class ArsenalBox : GameListener
     {
         // when project finishes, remove this injection and make a proper value:
         [Header("Points Cost")]
@@ -24,21 +23,16 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             LootRandomizerSystem.OnSpawnLoot += SpawnChosenLoot;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             LootRandomizerSystem.OnSpawnLoot -= SpawnChosenLoot;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

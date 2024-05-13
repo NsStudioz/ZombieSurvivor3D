@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : GameListener
     {
         [Header("Camera Elements")]
         Camera mainCamera;
@@ -21,25 +20,11 @@ namespace ZombieSurvivor3D.Gameplay.Player
         [SerializeField] float moveSpeed = 1f;
         private const float zeroFloat = 0f;
 
-        #region EventListeners:
-
-        private void Awake()
+        protected override void Awake()
         {
             mainCamera = Camera.main;
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
         }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
 
         void Start()
         {

@@ -35,20 +35,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         private const float ZEROED_VALUE = 0f;
 
-        #region EventListeners:
-
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-        }
-
-        #endregion
-
         void Start()
         {
             // test:

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Buffs
@@ -10,7 +9,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
     /// <summary>
     /// Grants a randomized buff or debuff, then passes the stats to a buff UI object.
     /// </summary>
-    public class BuffRandomizer : MonoBehaviour
+    public class BuffRandomizer : GameListener
     {
         [Header("Buffs Lists")]
         [SerializeField] private List<BuffsTemplateSO> CommonBuffs;    // Contains buffs & Debuffs
@@ -26,21 +25,16 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
             NumberGenerator.OnRandomNumberGeneratedBuffs += RollRandomBuff;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.OnDestroy();
             NumberGenerator.OnRandomNumberGeneratedBuffs -= RollRandomBuff;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion

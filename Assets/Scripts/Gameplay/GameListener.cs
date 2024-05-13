@@ -7,7 +7,7 @@ namespace ZombieSurvivor3D
 {
     public class GameListener : MonoBehaviour
     {
-        protected void Awake()
+        protected virtual void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
@@ -23,7 +23,7 @@ namespace ZombieSurvivor3D
         {
             
         }*/
-        protected void OnDestroy()
+        protected virtual void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         }
