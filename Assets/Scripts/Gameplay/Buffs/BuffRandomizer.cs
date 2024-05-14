@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Buffs
@@ -21,20 +22,22 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         [SerializeField] private bool isPityLocked = false;
 
         // Events:
-        public static event Action<BuffsTemplateSO> OnBuffRolled;
+        //public static event Action<BuffsTemplateSO> OnBuffRolled;
 
         #region EventListeners:
 
         protected override void Awake()
         {
             base.Awake();
-            NumberGenerator.OnRandomNumberGeneratedBuffs += RollRandomBuff;
+            //NumberGenerator.OnRNGBuffs += RollRandomBuff;
+            EventManager<float>.Register(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            NumberGenerator.OnRandomNumberGeneratedBuffs -= RollRandomBuff;
+            //NumberGenerator.OnRNGBuffs -= RollRandomBuff;
+            EventManager<float>.Unregister(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
         #endregion
@@ -110,7 +113,8 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
             Debug.Log("Chosen Buff: " + buffList[rnd]);
             
-            OnBuffRolled?.Invoke(buffList[rnd]); // Listener = BuffCardUI.cs
+            //OnBuffRolled?.Invoke(buffList[rnd]); // Listener = BuffCardUI.cs
+            EventManager<BuffsTemplateSO>.Raise(Events.EventKey.OnBuffRoll.ToString(), buffList[rnd]);
         }
     }
 }

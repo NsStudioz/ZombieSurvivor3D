@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.Items;
 using ZombieSurvivor3D.Gameplay.RNG;
@@ -26,13 +27,15 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         protected override void Awake()
         {
             base.Awake();
-            LootRandomizerSystem.OnSpawnLoot += SpawnChosenLoot;
+            //LootRandomizerSystem.OnSpawnLoot += SpawnChosenLoot;
+            EventManager<GameObject>.Register(Events.EventKey.OnSpawnLoot.ToString(), SpawnChosenLoot);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            LootRandomizerSystem.OnSpawnLoot -= SpawnChosenLoot;
+            //LootRandomizerSystem.OnSpawnLoot -= SpawnChosenLoot;
+            EventManager<GameObject>.Unregister(Events.EventKey.OnSpawnLoot.ToString(), SpawnChosenLoot);
         }
 
         #endregion

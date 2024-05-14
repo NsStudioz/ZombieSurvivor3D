@@ -9,7 +9,12 @@ namespace ZombieSurvivor3D
         public enum EventKey
         {
             None = 0,
-            OnGameState = 1,
+            OnGameStateChange = 1,
+            OnBuffRoll = 2,
+            OnRNGLoot = 3,
+            OnRNGBuffs = 4,
+            OnRNGPickups = 5,
+            OnSpawnLoot = 6,
 
         }
 

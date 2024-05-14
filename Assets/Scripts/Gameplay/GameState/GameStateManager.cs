@@ -7,7 +7,7 @@ namespace ZombieSurvivor3D.Gameplay.GameState
 
         //Events:
         public delegate void GameStateChangeHandler(GameState newGameState);
-        public event GameStateChangeHandler OnGameStateChanged;
+        //public event GameStateChangeHandler OnGameStateChanged;
 
         // Constructor:
         public static GameStateManager Instance
@@ -35,8 +35,8 @@ namespace ZombieSurvivor3D.Gameplay.GameState
                 return;
 
             CurrentGameState = newGameState;
-            OnGameStateChanged?.Invoke(newGameState);
-            //EventManager<GameState>.Raise(Events.EventKey.OnGameState.ToString(), newGameState);
+            //OnGameStateChanged?.Invoke(newGameState);
+            EventManager<GameState>.Raise(Events.EventKey.OnGameStateChange.ToString(), newGameState);
         }
     }
 

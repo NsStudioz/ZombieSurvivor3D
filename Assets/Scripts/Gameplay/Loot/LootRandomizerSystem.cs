@@ -15,20 +15,22 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         [SerializeField] private List<GameObject> RareLoot;
 
         // Events:
-        public static event Action<GameObject> OnSpawnLoot;
+        //public static event Action<GameObject> OnSpawnLoot;
 
         #region EventListeners:
 
         protected override void Awake()
         {
             base.Awake();
-            NumberGenerator.OnRandomNumberGeneratedLoot += CycleThroughLootRarity;
+            //NumberGenerator.OnRNGLoot += CycleThroughLootRarity;
+            EventManager<float>.Register(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            NumberGenerator.OnRandomNumberGeneratedLoot -= CycleThroughLootRarity;
+            //NumberGenerator.OnRNGLoot -= CycleThroughLootRarity;
+            EventManager<float>.Unregister(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
         #endregion
@@ -61,7 +63,8 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
             Debug.Log("Chosen Loot: " + lootList[rnd]);
 
-            OnSpawnLoot?.Invoke(lootList[rnd]);
+            //OnSpawnLoot?.Invoke(lootList[rnd]);
+            EventManager<GameObject>.Raise(Events.EventKey.OnSpawnLoot.ToString(), lootList[rnd]);
         }
 
     }
