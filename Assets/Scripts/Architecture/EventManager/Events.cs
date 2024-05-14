@@ -15,6 +15,9 @@ namespace ZombieSurvivor3D
             OnRNGBuffs = 4,
             OnRNGPickups = 5,
             OnSpawnLoot = 6,
+            OnHandheldChanged = 7,
+            OnHandheldSimilar = 8,
+            OnArsenalBoxItemInteracted = 9,
 
         }
 

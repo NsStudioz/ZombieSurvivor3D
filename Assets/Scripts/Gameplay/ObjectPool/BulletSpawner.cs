@@ -29,14 +29,16 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             Instance = this;
 
             base.Awake();
-            HandheldCarrier.OnHandheldChanged += SwitchBulletType;
+            //HandheldCarrier.OnHandheldChanged += SwitchBulletType;
+            EventManager<GameObject>.Register(Events.EventKey.OnHandheldChanged.ToString(),SwitchBulletType);
         }
 
         protected override void OnDestroy()
         {
             ClearQueue();
             base.OnDestroy();
-            HandheldCarrier.OnHandheldChanged -= SwitchBulletType;
+            //HandheldCarrier.OnHandheldChanged -= SwitchBulletType;
+            EventManager<GameObject>.Unregister(Events.EventKey.OnHandheldChanged.ToString(),SwitchBulletType);
         }
 
         #endregion

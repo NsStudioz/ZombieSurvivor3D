@@ -46,7 +46,9 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             base.OnDestroy();
             //BuffRandomizer.OnBuffRolled -= Activate;
             EventManager<BuffsTemplateSO>.Unregister(Events.EventKey.OnBuffRoll.ToString(), Activate);
-            StopCoroutine(iEnumeratorRef);
+
+            if (iEnumeratorRef != null)
+                StopCoroutine(iEnumeratorRef);
         }
 
         protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
