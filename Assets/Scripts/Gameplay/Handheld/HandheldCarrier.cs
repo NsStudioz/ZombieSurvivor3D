@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Gameplay.GameState;
-using ZombieSurvivor3D.Gameplay.Loot;
 
 
 namespace ZombieSurvivor3D.Gameplay.Handheld
 {
-    public class HandheldCarrier : MonoBehaviour, ControlsPC.IGameplayControlsActions, ControlsPC.IInteractionControlsActions
+    public class HandheldCarrier : GameListener, ControlsPC.IGameplayControlsActions, ControlsPC.IInteractionControlsActions
     {
         // System for important logic (Math + fire weapon + etc...)
         [Header("My Equipped Handhelds")]
@@ -39,9 +37,9 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         int handheldSOIndex = 0;
         
         //Events
-        public static event Action<HandheldSO> OnInteractSimilarHandheld;
-        public static event Action<GameObject> OnHandheldChanged;
-        public static event Action OnArsenalBoxItemInteracted;
+        //public static event Action<HandheldSO> OnInteractSimilarHandheld;
+        //public static event Action<GameObject> OnHandheldChanged;
+        //public static event Action OnArsenalBoxItemInteracted;
 
         #region Helpers
 
@@ -57,29 +55,18 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
         #endregion
 
-        #region Event_Listeners
+        #region Input_Init
 
         private void OnEnable()
         {
             playerInput.actions.FindActionMap("GameplayControls").Enable();
             playerInput.actions.FindActionMap("InteractionControls").Enable();
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void OnDisable()
         {
             playerInput.actions.FindActionMap("GameplayControls").Disable();
             playerInput.actions.FindActionMap("InteractionControls").Disable();
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
         #endregion
@@ -91,7 +78,9 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             InitializeHandheldGOsList();
             SwitchHandheld(EquipedHandhelds[0]);
 
-            OnHandheldChanged?.Invoke(EquipedHandhelds[0].HandheldBulletPrefab);
+            //OnHandheldChanged?.Invoke(EquipedHandhelds[0].HandheldBulletPrefab);
+            EventManager<GameObject>.Raise(Events.EventKey.OnHandheldChanged.ToString(), 
+                                           EquipedHandhelds[0].HandheldBulletPrefab);
         }
 
         private void InitializeHandheldGOsList()
@@ -126,7 +115,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             for (int i = 0; i < EquipedHandhelds.Count; i++)
                 if (EquipedHandhelds[i] == interactableHandheldSO)
                 {
-                    OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
+                    //OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
+                    EventManager<HandheldSO>.Raise(Events.EventKey.OnHandheldSimilar.ToString(), interactableHandheldSO);
                     return;
                 }
 
@@ -135,7 +125,9 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             //Replace current with the new weapon:
             EquipedHandhelds[currentHandheldIndex] = interactableHandheldSO;
             SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-            OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            //OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            EventManager<GameObject>.Raise(Events.EventKey.OnHandheldChanged.ToString(), 
+                                           EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab);
 
 /*            if (EquipedHandhelds[currentHandheldIndex] == interactableHandheldSO)
                 OnInteractSimilarHandheld?.Invoke(interactableHandheldSO); // Listener = HandheldWeapon
@@ -162,7 +154,9 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             currentHandheldIndex = Mathf.Clamp(currentHandheldIndex, 0, EquipedHandhelds.Count - 1); // clamp between 0 to max count - 1.
 
             SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
-            OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            //OnHandheldChanged?.Invoke(EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab); // Listener = BulletSpawner
+            EventManager<GameObject>.Raise(Events.EventKey.OnHandheldChanged.ToString(), 
+                                           EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab);
         }
 
         public void SwitchHandheld(HandheldSO handheld)
@@ -238,7 +232,8 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             {
                 ApplyInteraction();
                 // Remove interacted item in arsenal box:
-                OnArsenalBoxItemInteracted?.Invoke(); // listener = ArsenalBoxDetector
+                //OnArsenalBoxItemInteracted?.Invoke(); // listener = ArsenalBoxDetector
+                EventManager<int>.Raise(Events.EventKey.OnArsenalBoxItemInteracted.ToString(), 0);
             }
         }
 

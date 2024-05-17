@@ -1,53 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using ZombieSurvivor3D.Gameplay.GameState;
-
 
 namespace ZombieSurvivor3D.Gameplay.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : GameListener
     {
         [Header("Camera Elements")]
         Camera mainCamera;
 
         [Header("RayCast Elements")]
-        Ray cameraRay;
-        RaycastHit cameraRayHit;
         [SerializeField] LayerMask rayCastHitLayers;
         [SerializeField] float rayMaxDistance;
+        Ray cameraRay;
+        RaycastHit cameraRayHit;
 
         [Header("Main Elements")]
+        [SerializeField] Vector3 forward, right;
         [SerializeField] float moveSpeed = 1f;
         private const float zeroFloat = 0f;
-        [SerializeField] Vector3 forward, right;
 
-        private void Awake()
+        protected override void Awake()
         {
             mainCamera = Camera.main;
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            base.Awake();
         }
 
         void Start()
+        {
+            InitMovement();
+        }
+
+        void Update()
+        {
+            MovePlayer(Time.deltaTime);
+            Look();
+        }
+
+        #region Move & Look:
+
+        private void InitMovement()
         {
             forward = mainCamera.transform.forward;
             forward.y = 0f;
             forward = Vector3.Normalize(forward);
 
             right = Quaternion.Euler(new Vector3(zeroFloat, 90, zeroFloat)) * forward;
-        }
-
-
-        void Update()
-        {
-            MovePlayer(Time.deltaTime);
-            Look();
         }
 
         private void MovePlayer(float deltaTime)
@@ -73,9 +71,6 @@ namespace ZombieSurvivor3D.Gameplay.Player
             }
         }
 
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
+        #endregion
     }
 }

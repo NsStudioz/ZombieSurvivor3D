@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
-    public class LootRandomizerSystem : MonoBehaviour
+    public class LootRandomizerSystem : GameListener
     {
 
         [Header("Weapon/Equipment Loot Lists")]
@@ -16,25 +15,22 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         [SerializeField] private List<GameObject> RareLoot;
 
         // Events:
-        public static event Action<GameObject> OnSpawnLoot;
+        //public static event Action<GameObject> OnSpawnLoot;
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            NumberGenerator.OnRandomNumberGeneratedLoot += CycleThroughLootRarity;
+            base.Awake();
+            //NumberGenerator.OnRNGLoot += CycleThroughLootRarity;
+            EventManager<float>.Register(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            NumberGenerator.OnRandomNumberGeneratedLoot -= CycleThroughLootRarity;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
+            base.OnDestroy();
+            //NumberGenerator.OnRNGLoot -= CycleThroughLootRarity;
+            EventManager<float>.Unregister(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
         #endregion
@@ -67,7 +63,8 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
             Debug.Log("Chosen Loot: " + lootList[rnd]);
 
-            OnSpawnLoot?.Invoke(lootList[rnd]);
+            //OnSpawnLoot?.Invoke(lootList[rnd]);
+            EventManager<GameObject>.Raise(Events.EventKey.OnSpawnLoot.ToString(), lootList[rnd]);
         }
 
     }

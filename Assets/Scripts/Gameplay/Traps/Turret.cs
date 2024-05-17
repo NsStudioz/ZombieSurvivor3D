@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.Bullets;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Health;
 
 namespace ZombieSurvivor3D.Gameplay.Traps
@@ -37,20 +35,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         private const float ZEROED_VALUE = 0f;
 
-        #region EventListeners:
-
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-        }
-
-        #endregion
-
         void Start()
         {
             // test:
@@ -72,7 +56,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
             OpenFire();
         }
 
-        #region Locking & Rotating Systems:
+        #region Locking & Rotating:
 
         /// <summary>
         /// Find a target in the vicinity.
@@ -123,8 +107,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         #endregion
 
-
-        #region Firing_Mechs:
+        #region Firing:
 
         /// <summary>
         /// Fire at the target.

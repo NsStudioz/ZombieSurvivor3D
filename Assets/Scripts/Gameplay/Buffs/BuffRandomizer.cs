@@ -10,7 +10,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
     /// <summary>
     /// Grants a randomized buff or debuff, then passes the stats to a buff UI object.
     /// </summary>
-    public class BuffRandomizer : MonoBehaviour
+    public class BuffRandomizer : GameListener
     {
         [Header("Buffs Lists")]
         [SerializeField] private List<BuffsTemplateSO> CommonBuffs;    // Contains buffs & Debuffs
@@ -22,25 +22,22 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         [SerializeField] private bool isPityLocked = false;
 
         // Events:
-        public static event Action<BuffsTemplateSO> OnBuffRolled;
+        //public static event Action<BuffsTemplateSO> OnBuffRolled;
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            NumberGenerator.OnRandomNumberGeneratedBuffs += RollRandomBuff;
+            base.Awake();
+            //NumberGenerator.OnRNGBuffs += RollRandomBuff;
+            EventManager<float>.Register(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            NumberGenerator.OnRandomNumberGeneratedBuffs -= RollRandomBuff;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
+            base.OnDestroy();
+            //NumberGenerator.OnRNGBuffs -= RollRandomBuff;
+            EventManager<float>.Unregister(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
         #endregion
@@ -98,9 +95,9 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             {
                 // spawn random rare buff:
                 RollBuff(RareBuffs);
-                LockPity();
-                // lock rare buffs temporarily:
                 Debug.Log("Spawn Rare Buff");
+                // lock rare buffs temporarily:
+                LockPity();
             }
         }
 
@@ -116,7 +113,8 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
             Debug.Log("Chosen Buff: " + buffList[rnd]);
             
-            OnBuffRolled?.Invoke(buffList[rnd]); // Listener = BuffCardUI.cs
+            //OnBuffRolled?.Invoke(buffList[rnd]); // Listener = BuffCardUI.cs
+            EventManager<BuffsTemplateSO>.Raise(Events.EventKey.OnBuffRoll.ToString(), buffList[rnd]);
         }
     }
 }

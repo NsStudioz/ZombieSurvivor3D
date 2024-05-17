@@ -1,41 +1,41 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Items;
 using ZombieSurvivor3D.Gameplay.RNG;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
-    public class ArsenalBox : MonoBehaviour
+    public class ArsenalBox : GameListener
     {
         // when project finishes, remove this injection and make a proper value:
+        [Header("Points Cost")]
         [SerializeField] private int pointsCost;
 
+        [Header("Main Attributes")]
         [SerializeField] private GameObject LootInstance = null;
         [SerializeField] private Transform LootPosOffset;
 
+        [Header("Activity")]
         [SerializeField] private float timeElapsed;
         [SerializeField] private float timeElapsedThreshold;
         [SerializeField] private bool isInteracted;
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            LootRandomizerSystem.OnSpawnLoot += SpawnChosenLoot;
+            base.Awake();
+            //LootRandomizerSystem.OnSpawnLoot += SpawnChosenLoot;
+            EventManager<GameObject>.Register(Events.EventKey.OnSpawnLoot.ToString(), SpawnChosenLoot);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            LootRandomizerSystem.OnSpawnLoot -= SpawnChosenLoot;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
+            base.OnDestroy();
+            //LootRandomizerSystem.OnSpawnLoot -= SpawnChosenLoot;
+            EventManager<GameObject>.Unregister(Events.EventKey.OnSpawnLoot.ToString(), SpawnChosenLoot);
         }
 
         #endregion

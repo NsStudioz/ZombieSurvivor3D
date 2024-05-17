@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace ZombieSurvivor3D.Gameplay.Handheld
 {
     public class HandheldSOTag : MonoBehaviour

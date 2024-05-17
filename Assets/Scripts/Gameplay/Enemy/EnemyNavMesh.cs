@@ -8,23 +8,27 @@ using ZombieSurvivor3D.Gameplay.Player;
 
 namespace ZombieSurvivor3D.Gameplay.Enemy
 {
-    public class EnemyNavMesh : MonoBehaviour
+    public class EnemyNavMesh : GameListener
     {
         [SerializeField] NavMeshAgent navMeshAgent;
         [SerializeField] Transform target = null;
         //[SerializeField] Transform playerTransform;
         [SerializeField] Transform retreatTransform;
 
-        private void Awake()
+        #region EventListeners:
+
+        protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            if (newGameState == GameStateManager.GameState.Gameplay)
+                navMeshAgent.speed = 2f;
+            else if (newGameState == GameStateManager.GameState.Paused)
+                navMeshAgent.speed = 0f;
+
+            base.OnGameStateChanged(newGameState);
+            //navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
         }
 
-        private void OnDestroy()
-        {
-            // prevents memory leaks and errors after the object is destroyed.
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
+        #endregion
 
         void Start()
         {
@@ -41,9 +45,7 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
                 //target = playerTransform;
                 navMeshAgent.destination = target.position;
             }
-
-            //-------------------------------------------
-
+            //---------------Experimental-------------------
             if (Input.GetKeyDown(KeyCode.B))
             {
                 //target = playerTransform;
@@ -56,15 +58,6 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
             }
         }
 
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            if (newGameState == GameStateManager.GameState.Gameplay)
-                navMeshAgent.speed = 2f;
-            else if (newGameState == GameStateManager.GameState.Paused)
-                navMeshAgent.speed = 0f;
 
-            //navMeshAgent.enabled = newGameState == GameStateManager.GameState.Gameplay;
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
     }
 }

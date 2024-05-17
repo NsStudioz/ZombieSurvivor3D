@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZombieSurvivor3D.Gameplay.GameState;
 
 namespace ZombieSurvivor3D.Gameplay.Pickups
 {
-    public class Pickup : MonoBehaviour, IPickupable
+    public class Pickup : GameListener, IPickupable
     {
         /// <summary>
         /// 
@@ -20,19 +21,40 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         ///
         /// </summary>
 
-
-        [SerializeField] private float Timer;
+        [Header("Attributes")]
         [SerializeField] private bool isSpawned;
+        [SerializeField] private float Timer; // Time to disappear/blip
+        private IEnumerator iEnumeratorRef;
 
-        private void OnDestroy()
+        #region EventListeners
+
+        protected override void OnDestroy()
         {
-            StopAllCoroutines();
+            base.OnDestroy();
+            StopCoroutine(iEnumeratorRef);
         }
 
-        public void OnPickup()
+        protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
+        {
+/*            if (this == null)
+                return;*/
+
+            base.OnGameStateChanged(newGameState);
+
+            if (newGameState == GameStateManager.GameState.Paused)
+                StopCoroutine(iEnumeratorRef);
+
+            else if (newGameState == GameStateManager.GameState.Gameplay)
+                StartCoroutine(iEnumeratorRef);
+        }
+
+        #endregion
+
+        public void OnSpawned()
         {
             isSpawned = true;
-            StartCoroutine(AppearanceDuration());
+            iEnumeratorRef = SetVisibilityTimer();
+            StartCoroutine(iEnumeratorRef);  // DOES NOT WORK WITH GAMESTATEMANAGER. TIMER DOES NOT STOP.
         }
 
         public void OnIgnored()
@@ -41,23 +63,34 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
             Destroy(gameObject);
         }
 
+        public void OnPicked()
+        {
+            // Picked
+        }
+
         /// <summary>
-        /// While true
         /// 
+        /// While true...
+        /// Play animation and SFX for 'Timer' amount of seconds.
+        /// When 'Timer' reaches its end...
+        /// Start blipping (Play animation + SFX)
+        /// On the 5th Blip, disappear the object entirely.
         /// 
         /// </summary>
         /// <returns></returns>
-        private IEnumerator AppearanceDuration()
+        private IEnumerator SetVisibilityTimer()
         {
             while (isSpawned)
             {
                 // play animation (maybe can make the blip in animation).
                 // play sound.
-                yield return new WaitForSeconds(Timer); // timer should be between 15-20 seconds.
+                for (int i = 0; i < 100; i++)
+                    yield return new WaitForSeconds(Timer / 100);
                 
                 OnIgnored();
             }   
         }
+
 
     }
 }

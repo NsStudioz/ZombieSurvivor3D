@@ -9,7 +9,7 @@ using ZombieSurvivor3D.Gameplay.ObjectPool;
 
 namespace ZombieSurvivor3D.Gameplay.Handheld
 {
-    public class HandheldWeapon : MonoBehaviour, IHandheldObject
+    public class HandheldWeapon : GameListener, IHandheldObject
     {
         // Input Handling will trigger animations and weapon/equipment logic:
 
@@ -37,39 +37,39 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         [Header("Testing Purposes")]
         [SerializeField] GameObject bulletTestGO;
 
-
         /*        [Header("Firing Modes Attributes")]
                 private const int MODE_SINGLE = 3;
                 private const int MODE_SEMI = 2;
                 private const int MODE_BURST = 1;
-                private const int MODE_AUTO = 0;*/
+                private const int MODE_AUTO = 0;
 
-        /*    [Header("Audio Files")]
+            [Header("Audio Files")]
             [SerializeField] AudioClip _EquipAudio;
             [SerializeField] AudioClip _UnequipAudio;
             [SerializeField] AudioClip _FireAudio;
             [SerializeField] AudioClip _FailedFireAudio;*/
 
 
-
         #region Event_Listeners
 
-        private void OnEnable()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            HandheldCarrier.OnInteractSimilarHandheld += RestockAmmo;
+            base.Awake();
+            //HandheldCarrier.OnInteractSimilarHandheld += RestockAmmo;
+            EventManager<HandheldSO>.Register(Events.EventKey.OnHandheldSimilar.ToString(), RestockAmmo);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            HandheldCarrier.OnInteractSimilarHandheld -= RestockAmmo;
+            base.OnDestroy();
+            //HandheldCarrier.OnInteractSimilarHandheld -= RestockAmmo;
+            EventManager<HandheldSO>.Unregister(Events.EventKey.OnHandheldSimilar.ToString(), RestockAmmo);
         }
 
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
+        protected override void OnGameStateChanged(GameStateManager.GameState newGameState)
         {
             if (this != null)
-                enabled = newGameState == GameStateManager.GameState.Gameplay;
+                base.OnGameStateChanged(newGameState);
         }
 
         private void RestockAmmo(HandheldSO handheld)
@@ -83,7 +83,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         }
 
         #endregion
-
 
         private void Update()
         {
@@ -104,7 +103,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 break;
             }
         }
-
 
         #region InterfaceFunctions:
 
@@ -133,7 +131,6 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         }
 
         #endregion
-
 
         private void SyncData()
         {

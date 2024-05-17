@@ -2,22 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ZombieSurvivor3D.Gameplay.Handheld;
-using ZombieSurvivor3D.Gameplay.GameState;
 
 
 namespace ZombieSurvivor3D.Gameplay.ObjectPool
 {
-    public class BulletSpawner : MonoBehaviour
+    public class BulletSpawner : GameListener
     {
         public static BulletSpawner Instance;
 
+        [Header("List")]
         [SerializeField] private Queue<GameObject> bulletQueue = new Queue<GameObject>();
 
+        [Header("Atrributes")]
         [SerializeField] private GameObject bulletPrefab = null;
-
         [SerializeField] private int bulletMaxReservedCount = 5;
 
-        private void Awake()
+        #region EventListeners:
+
+        protected override void Awake()
         {
             if (Instance != null)
             {
@@ -26,19 +28,24 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             }
             Instance = this;
 
-            HandheldCarrier.OnHandheldChanged += SwitchBulletType;
-
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            base.Awake();
+            //HandheldCarrier.OnHandheldChanged += SwitchBulletType;
+            EventManager<GameObject>.Register(Events.EventKey.OnHandheldChanged.ToString(),SwitchBulletType);
         }
 
-        private void OnEnable()
+        protected override void OnDestroy()
         {
-            HandheldCarrier.OnHandheldChanged += SwitchBulletType;
+            ClearQueue();
+            base.OnDestroy();
+            //HandheldCarrier.OnHandheldChanged -= SwitchBulletType;
+            EventManager<GameObject>.Unregister(Events.EventKey.OnHandheldChanged.ToString(),SwitchBulletType);
         }
 
-        private void OnDisable()
+        #endregion
+
+        private void ClearQueue()
         {
-            HandheldCarrier.OnHandheldChanged -= SwitchBulletType;
+            bulletQueue.Clear();
         }
 
         public void SpawnBullet(Vector3 position, Quaternion rotation)
@@ -74,21 +81,6 @@ namespace ZombieSurvivor3D.Gameplay.ObjectPool
             }
         }
 
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            ClearQueue();
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        private void ClearQueue()
-        {
-            bulletQueue.Clear();
-        }
     }
 }
 

@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using ZombieSurvivor3D.Gameplay.GameState;
 using ZombieSurvivor3D.Gameplay.Handheld;
 using ZombieSurvivor3D.Gameplay.Score;
 
 namespace ZombieSurvivor3D.Gameplay.Loot
 {
-    public class ArsenalBoxDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
+    public class ArsenalBoxDetector : GameListener, ControlsPC.IInteractionControlsActions
     {
 
+        [Header("Attributes")]
         [SerializeField] private static ArsenalBox ArsenalBoxObject = null;
         [SerializeField] private bool isPressed;
 
@@ -17,32 +17,39 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
         #region EventListeners:
 
-        private void Awake()
+        protected override void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-            HandheldCarrier.OnArsenalBoxItemInteracted += ArsenalBoxTriggerRemoveLoot;  
+            base.Awake();
+            //HandheldCarrier.OnArsenalBoxItemInteracted += ArsenalBoxTriggerRemoveLoot;
+            EventManager<int>.Register(Events.EventKey.OnArsenalBoxItemInteracted.ToString(), ArsenalBoxTriggerRemoveLoot);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-            HandheldCarrier.OnArsenalBoxItemInteracted -= ArsenalBoxTriggerRemoveLoot;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        // Invoker: HandheldCarrier:
-        private void ArsenalBoxTriggerRemoveLoot()
-        {
-            if (GetArsenalBoxLootState())
-                GetArsenalBox().RemoveLootFromBox();
-            //Debug.Log("Loot Removed from: " + instance);
+            base.OnDestroy();
+            //HandheldCarrier.OnArsenalBoxItemInteracted -= ArsenalBoxTriggerRemoveLoot;
+            EventManager<int>.Unregister(Events.EventKey.OnArsenalBoxItemInteracted.ToString(), ArsenalBoxTriggerRemoveLoot);
         }
 
         #endregion
+
+        private void ArsenalBoxTriggerRemoveLoot(int eventId)
+        {
+            if (GetArsenalBoxLootState())
+                GetArsenalBox().RemoveLootFromBox();
+        }
+
+        public static ArsenalBox GetArsenalBox()
+        {
+            return ArsenalBoxObject;
+        }
+
+        public static bool GetArsenalBoxLootState()
+        {
+            return ArsenalBoxObject != null;
+        }
+        
+        #region Collisions:
 
         private void OnTriggerEnter(Collider col)
         {
@@ -56,15 +63,9 @@ namespace ZombieSurvivor3D.Gameplay.Loot
                 ArsenalBoxObject = null;
         }
 
-        public static bool GetArsenalBoxLootState()
-        {
-            return ArsenalBoxObject != null;
-        }
+        #endregion
 
-        public static ArsenalBox GetArsenalBox()
-        {
-            return ArsenalBoxObject;
-        }
+        #region Input:
 
         public void OnInteract(InputAction.CallbackContext context)
         {
@@ -89,5 +90,9 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             ScoreSystem.Instance.UpdateScore(ArsenalBoxObject.GetPointsCost());
             ArsenalBoxObject.OpenArsenalBoxForLoot();
         }
+
+        #endregion
+
+
     }
 }

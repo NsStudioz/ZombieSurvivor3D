@@ -7,7 +7,7 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 {
     public class Fence : TrapBase
     {
-
+        // Will need later:
         //[SerializeField] private GameObject fenceGO;
         //[SerializeField] private BoxCollider boxCol;
 
@@ -15,13 +15,15 @@ namespace ZombieSurvivor3D.Gameplay.Traps
         [SerializeField] private string targetTag;
         [SerializeField] float damageOverTimeDelay;
 
+        #region Collisions:
+
         private void OnTriggerEnter(Collider col)
         {
             if (!isActivated)
                 return;
 
             IgnoreNonTarget(col);
-            Damage(col);         
+            Damage(col);
         }
 
         private void OnTriggerExit(Collider col)
@@ -39,6 +41,10 @@ namespace ZombieSurvivor3D.Gameplay.Traps
                 return;
         }
 
+        #endregion
+
+        #region Damage:
+
         private void Damage(Collider col)
         {
             // Damage collider target over time:
@@ -53,7 +59,9 @@ namespace ZombieSurvivor3D.Gameplay.Traps
             damageable?.StopContinuousDamage();
         }
 
-
         //IDamageable damageable = col.GetComponentInChildren<IDamageable>();
+        #endregion
+
+
     }
 }

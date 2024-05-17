@@ -5,32 +5,16 @@ using ZombieSurvivor3D.Gameplay.Score;
 
 namespace ZombieSurvivor3D.Gameplay.Blockades
 {
-    public class BlockadeDetector : MonoBehaviour, ControlsPC.IInteractionControlsActions
+    public class BlockadeDetector : GameListener, ControlsPC.IInteractionControlsActions
     {
 
+        [Header("Attributes")]
         [SerializeField] private Blockade BlockadeObject = null;
         [SerializeField] private bool isPressed;
 
         private const string BLOCKADE_TAG = "Blockade";
 
-        #region EventListeners:
-
-        private void Awake()
-        {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        }
-
-        private void OnGameStateChanged(GameStateManager.GameState newGameState)
-        {
-            enabled = newGameState == GameStateManager.GameState.Gameplay;
-        }
-
-        #endregion
+        #region Collisions: 
 
         private void OnTriggerEnter(Collider col)
         {
@@ -44,12 +28,9 @@ namespace ZombieSurvivor3D.Gameplay.Blockades
                 BlockadeObject = null;
         }
 
-        private void OpenBlockade()
-        {
-            ScoreSystem.Instance.UpdateScore(BlockadeObject.GetPointCost());
-            BlockadeObject.Destroy();
-            BlockadeObject = null;
-        }
+        #endregion
+
+        #region Input:
 
         public void OnInteract(InputAction.CallbackContext context)
         {
@@ -68,5 +49,14 @@ namespace ZombieSurvivor3D.Gameplay.Blockades
                 isPressed = false;
             }
         }
+
+        private void OpenBlockade()
+        {
+            ScoreSystem.Instance.UpdateScore(BlockadeObject.GetPointCost());
+            BlockadeObject.Destroy();
+            BlockadeObject = null;
+        }
+
+        #endregion
     }
 }

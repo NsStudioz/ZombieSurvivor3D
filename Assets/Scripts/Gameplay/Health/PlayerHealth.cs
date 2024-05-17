@@ -17,7 +17,6 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
         private void Update() => RegenerateHealth();
 
-
         private void RegenerateHealth()
         {
             if (HealthComponent.GetCurrentHealth() <= ZERO_HEALTH)

@@ -33,7 +33,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
         private void Awake()
         {
-            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            //GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         }
 
         private void Start()
@@ -58,7 +58,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
 
         private void OnDestroy()
         {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            //GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
         }
 
         private void OnGameStateChanged(GameStateManager.GameState newGameState)
