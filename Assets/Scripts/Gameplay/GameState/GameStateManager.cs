@@ -23,8 +23,10 @@ namespace ZombieSurvivor3D.Gameplay.GameState
 
         public enum GameState
         {
+            Mainmenu,
             Gameplay,
-            Paused
+            Paused,
+            Gameover
         }
 
         public GameState CurrentGameState { get; private set; }
