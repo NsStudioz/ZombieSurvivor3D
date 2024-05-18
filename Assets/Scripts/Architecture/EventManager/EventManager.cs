@@ -29,8 +29,8 @@ namespace ZombieSurvivor3D
                 eventInstance += listener;
                 eventDict.Add(name, eventInstance);
 
-                Debug.Log("New event added: " + eventDict[name]);
-                Debug.Log("Event Dictionary Count = " + eventDict.Count);
+                //Debug.Log("New event added: " + eventDict[name]);
+                //Debug.Log("Event Dictionary Count = " + eventDict.Count);
             }
         }
 
