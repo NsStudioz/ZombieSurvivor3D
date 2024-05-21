@@ -27,14 +27,12 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         protected override void Awake()
         {
             base.Awake();
-            //LootRandomizerSystem.OnSpawnLoot += SpawnChosenLoot;
             EventManager<GameObject>.Register(Events.EventKey.OnSpawnLoot.ToString(), SpawnChosenLoot);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            //LootRandomizerSystem.OnSpawnLoot -= SpawnChosenLoot;
             EventManager<GameObject>.Unregister(Events.EventKey.OnSpawnLoot.ToString(), SpawnChosenLoot);
         }
 

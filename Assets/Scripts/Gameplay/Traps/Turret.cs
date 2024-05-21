@@ -37,9 +37,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
 
         void Start()
         {
-            // test:
-            //Activate();
-            //
             InvokeRepeating(nameof(AquireTarget), ZEROED_VALUE, repeatRate);
         }
 
@@ -99,10 +96,6 @@ namespace ZombieSurvivor3D.Gameplay.Traps
             Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
             // Rotate the turret:
             partToRotate.rotation = Quaternion.Euler(rotation.x, rotation.y, ZEROED_VALUE);
-
-            //Backup:
-            //  Vector3 dir = target.position - transform.position;
-            //partToRotate.rotation = Quaternion.Euler(ZEROED_VALUE, rotation.y, ZEROED_VALUE);
         }
 
         #endregion

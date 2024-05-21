@@ -21,22 +21,17 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         [SerializeField] private int pityLockCount = 0;
         [SerializeField] private bool isPityLocked = false;
 
-        // Events:
-        //public static event Action<BuffsTemplateSO> OnBuffRolled;
-
         #region EventListeners:
 
         protected override void Awake()
         {
             base.Awake();
-            //NumberGenerator.OnRNGBuffs += RollRandomBuff;
             EventManager<float>.Register(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            //NumberGenerator.OnRNGBuffs -= RollRandomBuff;
             EventManager<float>.Unregister(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
@@ -50,7 +45,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
                 return;
 
             pityLockCount--;
-            Debug.Log("Pity Lock Count: " + pityLockCount);
+            //Debug.Log("Pity Lock Count: " + pityLockCount);
 
             if (pityLockCount <= 0)
                 isPityLocked = false;
@@ -79,23 +74,21 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
             }
             //Debug.Log("Random Value: " + value);
 
-            if (RNGHelper.IsCommon(value))
+            if (RNGHelper.IsCommon(value)) // spawn random common buff:
             {
-                // spawn random common buff:
                 RollBuff(CommonBuffs);
-                Debug.Log("Spawn Common Buff");
+                //Debug.Log("Spawn Common Buff");
             }
-            else if (RNGHelper.IsUncommon(value))
+            else if (RNGHelper.IsUncommon(value)) // spawn random Uncommon buff:
             {
-                // spawn random Uncommon buff:
                 RollBuff(UncommonBuffs);
-                Debug.Log("Spawn Uncommon Buff");
+                //Debug.Log("Spawn Uncommon Buff");
             }
-            else if (RNGHelper.IsRare(value))
+            else if (RNGHelper.IsRare(value)) // spawn random rare buff:
             {
-                // spawn random rare buff:
                 RollBuff(RareBuffs);
-                Debug.Log("Spawn Rare Buff");
+                //Debug.Log("Spawn Rare Buff");
+
                 // lock rare buffs temporarily:
                 LockPity();
             }
@@ -111,9 +104,8 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         {
             int rnd = RollRandomItemFromList(buffList);
 
-            Debug.Log("Chosen Buff: " + buffList[rnd]);
+            //Debug.Log("Chosen Buff: " + buffList[rnd]);
             
-            //OnBuffRolled?.Invoke(buffList[rnd]); // Listener = BuffCardUI.cs
             EventManager<BuffsTemplateSO>.Raise(Events.EventKey.OnBuffRoll.ToString(), buffList[rnd]);
         }
     }

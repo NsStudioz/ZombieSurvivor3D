@@ -42,14 +42,12 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         protected override void Awake()
         {
             base.Awake();
-            //NumberGenerator.OnRNGPickups += SpawnPickup;
             EventManager<Vector3>.Register(Events.EventKey.OnRNGPickups.ToString(), SpawnPickup);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            //NumberGenerator.OnRNGPickups -= SpawnPickup;
             EventManager<Vector3>.Unregister(Events.EventKey.OnRNGPickups.ToString(), SpawnPickup);
         }
         
@@ -77,17 +75,17 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
             if (RNGHelper.IsCommon(rndFloat))
             {   
                 ChoosePickup(pickupsCommon, pos);
-                Debug.Log("Spawn Common Pickup " + pos); 
+                //Debug.Log("Spawn Common Pickup " + pos); 
             }
             else if (RNGHelper.IsUncommon(rndFloat))
             {   
                 ChoosePickup(pickupsUncommon, pos);
-                Debug.Log("Spawn Uncommon Pickup " + pos); 
+                //Debug.Log("Spawn Uncommon Pickup " + pos); 
             }
             else if (RNGHelper.IsRare(rndFloat))
             {   
                 ChoosePickup(pickupsRare, pos);
-                Debug.Log("Spawn Rare Pickup " + pos); 
+                //Debug.Log("Spawn Rare Pickup " + pos); 
             }
         }
 
