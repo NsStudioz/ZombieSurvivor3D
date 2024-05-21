@@ -18,7 +18,10 @@ namespace ZombieSurvivor3D
             OnHandheldChanged,
             OnHandheldSimilar,
             OnArsenalBoxItemInteracted,
-            OnPlayerDead
+            OnPlayerDead,
+            OnSpecialEvent,
+            OnTimerStateChange,
+
         }
 
     }
