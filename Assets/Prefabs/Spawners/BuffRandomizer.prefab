@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &984712400768077121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 984712400768077122}
+  - component: {fileID: 984712400768077123}
+  m_Layer: 0
+  m_Name: BuffRandomizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &984712400768077122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984712400768077121}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &984712400768077123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984712400768077121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6f0b018c6f9e047bca435bd3655d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CommonBuffs:
+  - {fileID: 11400000, guid: 861d3ec665788074dbd31b25b0311434, type: 2}
+  - {fileID: 11400000, guid: 2b726e1f1aec24144bb8b2110e8b7e01, type: 2}
+  - {fileID: 11400000, guid: 9ead95e251eca524ea715081bccffcc7, type: 2}
+  UncommonBuffs:
+  - {fileID: 11400000, guid: 2e8e76a56af8a084faca9bef9cd2ce88, type: 2}
+  - {fileID: 11400000, guid: 74a814c4d1a3e124d862ebfbe5da04db, type: 2}
+  - {fileID: 11400000, guid: 4f528b794550a5143bc8eeeda7543329, type: 2}
+  - {fileID: 11400000, guid: 1da61f878ef447f4284e55d32319ccc0, type: 2}
+  RareBuffs:
+  - {fileID: 11400000, guid: 969d7c8c6a1fb3749afbc1dd75d6be52, type: 2}
+  - {fileID: 11400000, guid: 59075fbf2c3c10f4cbc102738ded81ff, type: 2}
+  - {fileID: 11400000, guid: 1897d72f2c3c9e24d9b52f68fde7b2ca, type: 2}
+  pityLockCount: 0
+  isPityLocked: 0
