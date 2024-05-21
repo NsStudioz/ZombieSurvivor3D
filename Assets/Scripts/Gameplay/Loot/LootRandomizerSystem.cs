@@ -14,22 +14,17 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         [SerializeField] private List<GameObject> UncommonLoot;
         [SerializeField] private List<GameObject> RareLoot;
 
-        // Events:
-        //public static event Action<GameObject> OnSpawnLoot;
-
         #region EventListeners:
 
         protected override void Awake()
         {
             base.Awake();
-            //NumberGenerator.OnRNGLoot += CycleThroughLootRarity;
             EventManager<float>.Register(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            //NumberGenerator.OnRNGLoot -= CycleThroughLootRarity;
             EventManager<float>.Unregister(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
@@ -43,17 +38,17 @@ namespace ZombieSurvivor3D.Gameplay.Loot
             if (RNGHelper.IsCommon(value))
             {
                 SpawnLoot(CommonLoot);
-                Debug.Log("Common Loot!");
+                //Debug.Log("Common Loot!");
             }
             else if (RNGHelper.IsUncommon(value))
             {
                 SpawnLoot(UncommonLoot);
-                Debug.Log("Uncommon Loot!");
+                //Debug.Log("Uncommon Loot!");
             }
             else if (RNGHelper.IsRare(value))
             {
                 SpawnLoot(RareLoot);
-                Debug.Log("Rare Loot!");
+                //Debug.Log("Rare Loot!");
             }
         }
 
@@ -61,9 +56,8 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         {
             int rnd = UnityEngine.Random.Range(0, lootList.Count);
 
-            Debug.Log("Chosen Loot: " + lootList[rnd]);
+            //Debug.Log("Chosen Loot: " + lootList[rnd]);
 
-            //OnSpawnLoot?.Invoke(lootList[rnd]);
             EventManager<GameObject>.Raise(Events.EventKey.OnSpawnLoot.ToString(), lootList[rnd]);
         }
 

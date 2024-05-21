@@ -11,7 +11,6 @@ namespace ZombieSurvivor3D
     {
         protected virtual void Awake()
         {
-            //GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             EventManager<GameStateManager.GameState>.Register(
                 Events.EventKey.OnGameStateChange.ToString(), 
                 OnGameStateChanged);
@@ -30,7 +29,6 @@ namespace ZombieSurvivor3D
         }*/
         protected virtual void OnDestroy()
         {
-            //GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             EventManager<GameStateManager.GameState>.Unregister(
                 Events.EventKey.OnGameStateChange.ToString(), 
                 OnGameStateChanged);

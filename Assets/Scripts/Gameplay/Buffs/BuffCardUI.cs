@@ -35,7 +35,6 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         protected override void Awake()
         {
             base.Awake();
-            //BuffRandomizer.OnBuffRolled += Activate;
             EventManager<BuffsTemplateSO>.Register(Events.EventKey.OnBuffRoll.ToString(), Activate);
 
             buffCardGO.SetActive(false);
@@ -44,7 +43,6 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            //BuffRandomizer.OnBuffRolled -= Activate;
             EventManager<BuffsTemplateSO>.Unregister(Events.EventKey.OnBuffRoll.ToString(), Activate);
 
             if (iEnumeratorRef != null)
@@ -72,12 +70,10 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         /// </summary>
         private void Activate(BuffsTemplateSO buffInstance)
         {
-            // Activating the buff:
             buffCardGO.SetActive(true);
             buffItem = buffInstance;
 
             iEnumeratorRef = SetVisibilityTimer(timerToHide);
-            //StartCoroutine(SetVisibilityTimer(timerToHide));
             StartCoroutine(iEnumeratorRef);
 
             // Sync card color with card rarity:
@@ -101,7 +97,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         {
             for (int i = 0; i < 100; i++)
                 yield return new WaitForSeconds(timeDelay / 100);
-            //yield return new WaitForSeconds(timeDelay);
+
             buffCardGO.SetActive(false);
             buffItem = null;
         }

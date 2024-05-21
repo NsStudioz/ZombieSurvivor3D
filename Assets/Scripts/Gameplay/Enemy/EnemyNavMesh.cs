@@ -39,7 +39,6 @@ namespace ZombieSurvivor3D.Gameplay.Enemy
 
         void Update()
         {
-            // Works fine with GameState:
             if (target != null)
             {
                 //target = playerTransform;
