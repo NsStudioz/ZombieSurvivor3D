@@ -26,13 +26,13 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         protected override void Awake()
         {
             base.Awake();
-            EventManager<float>.Register(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
+            EventManager<float>.Register(Events.GameplayRNG.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<float>.Unregister(Events.EventKey.OnRNGBuffs.ToString(), RollRandomBuff);
+            EventManager<float>.Unregister(Events.GameplayRNG.OnRNGBuffs.ToString(), RollRandomBuff);
         }
 
         #endregion
@@ -106,7 +106,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
 
             //Debug.Log("Chosen Buff: " + buffList[rnd]);
             
-            EventManager<BuffsTemplateSO>.Raise(Events.EventKey.OnBuffRoll.ToString(), buffList[rnd]);
+            EventManager<BuffsTemplateSO>.Raise(Events.GameplayRNG.OnBuffRoll.ToString(), buffList[rnd]);
         }
     }
 }

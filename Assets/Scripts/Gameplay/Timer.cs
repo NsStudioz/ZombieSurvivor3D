@@ -28,15 +28,15 @@ namespace ZombieSurvivor3D
                 DontDestroyOnLoad(Instance);
 
             base.Awake();
-            EventManager<int>.Register(Events.EventKey.OnPlayerDead.ToString(), StopTimer);
-            EventManager<int>.Register(Events.EventKey.OnGameOverButtonsCallback.ToString(), ResetTimer);
+            EventManager<int>.Register(Events.Gameplay.OnPlayerDead.ToString(), StopTimer);
+            EventManager<int>.Register(Events.Gameplay.OnGameOverButtonsCallback.ToString(), ResetTimer);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<int>.Unregister(Events.EventKey.OnPlayerDead.ToString(), StopTimer);
-            EventManager<int>.Unregister(Events.EventKey.OnGameOverButtonsCallback.ToString(), ResetTimer);
+            EventManager<int>.Unregister(Events.Gameplay.OnPlayerDead.ToString(), StopTimer);
+            EventManager<int>.Unregister(Events.Gameplay.OnGameOverButtonsCallback.ToString(), ResetTimer);
         }
 
         // TEST, fix in start game logic/UI:
@@ -85,7 +85,7 @@ namespace ZombieSurvivor3D
             if (timeElapsed >= timerSpecialEvent)
             {
                 SetSpecialEventThreshold();
-                EventManager<bool>.Raise(Events.EventKey.OnSpecialEvent.ToString(), true);
+                EventManager<bool>.Raise(Events.Gameplay.OnSpecialEvent.ToString(), true);
             }
         }
 

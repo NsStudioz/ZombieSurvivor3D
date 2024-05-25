@@ -6,15 +6,10 @@ namespace ZombieSurvivor3D
 {
     public static class Events
     {
-        public enum EventKey
+        public enum Gameplay
         {
             None,
             OnGameStateChange,
-            OnBuffRoll,
-            OnRNGLoot,
-            OnRNGBuffs,
-            OnRNGPickups,
-            OnSpawnLoot,
             OnHandheldChanged,
             OnHandheldSimilar,
             OnArsenalBoxItemInteracted,
@@ -28,6 +23,11 @@ namespace ZombieSurvivor3D
         public enum GameplayRNG
         {
             None,
+            OnBuffRoll,
+            OnRNGLoot,
+            OnRNGBuffs,
+            OnRNGPickups,
+            OnSpawnLoot,
         }
 
         public enum MainMenu

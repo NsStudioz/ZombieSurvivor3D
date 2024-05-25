@@ -12,7 +12,7 @@ namespace ZombieSurvivor3D
         protected virtual void Awake()
         {
             EventManager<GameStateManager.GameState>.Register(
-                Events.EventKey.OnGameStateChange.ToString(), 
+                Events.Gameplay.OnGameStateChange.ToString(), 
                 OnGameStateChanged);
         }
 /*        protected void Start()
@@ -30,7 +30,7 @@ namespace ZombieSurvivor3D
         protected virtual void OnDestroy()
         {
             EventManager<GameStateManager.GameState>.Unregister(
-                Events.EventKey.OnGameStateChange.ToString(), 
+                Events.Gameplay.OnGameStateChange.ToString(), 
                 OnGameStateChanged);
         }
 

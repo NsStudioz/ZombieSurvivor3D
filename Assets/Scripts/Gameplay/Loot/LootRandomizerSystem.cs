@@ -19,13 +19,13 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         protected override void Awake()
         {
             base.Awake();
-            EventManager<float>.Register(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
+            EventManager<float>.Register(Events.GameplayRNG.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<float>.Unregister(Events.EventKey.OnRNGLoot.ToString(), CycleThroughLootRarity);
+            EventManager<float>.Unregister(Events.GameplayRNG.OnRNGLoot.ToString(), CycleThroughLootRarity);
         }
 
         #endregion
@@ -58,7 +58,7 @@ namespace ZombieSurvivor3D.Gameplay.Loot
 
             //Debug.Log("Chosen Loot: " + lootList[rnd]);
 
-            EventManager<GameObject>.Raise(Events.EventKey.OnSpawnLoot.ToString(), lootList[rnd]);
+            EventManager<GameObject>.Raise(Events.GameplayRNG.OnSpawnLoot.ToString(), lootList[rnd]);
         }
 
     }

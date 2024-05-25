@@ -9,13 +9,13 @@ namespace ZombieSurvivor3D.Gameplay.RNG
         public static void GenerateForLoot()
         {
             float rnd = GetRndFloat();
-            EventManager<float>.Raise(Events.EventKey.OnRNGLoot.ToString(), rnd);
+            EventManager<float>.Raise(Events.GameplayRNG.OnRNGLoot.ToString(), rnd);
         }
 
         public static void GenerateForBuffs()
         {
             float rnd = GetRndFloat();
-            EventManager<float>.Raise(Events.EventKey.OnRNGBuffs.ToString(), rnd);
+            EventManager<float>.Raise(Events.GameplayRNG.OnRNGBuffs.ToString(), rnd);
         }
 
         public static void GenerateForPickups(UnityEngine.Vector3 pos)
@@ -24,7 +24,7 @@ namespace ZombieSurvivor3D.Gameplay.RNG
 
             // currently guarantees invokes every time:
             if (rnd >= 1)
-                EventManager<UnityEngine.Vector3>.Raise(Events.EventKey.OnRNGPickups.ToString() ,pos);
+                EventManager<UnityEngine.Vector3>.Raise(Events.GameplayRNG.OnRNGPickups.ToString() ,pos);
         }
 
         private static int GetRnd()

@@ -35,7 +35,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         protected override void Awake()
         {
             base.Awake();
-            EventManager<BuffsTemplateSO>.Register(Events.EventKey.OnBuffRoll.ToString(), Activate);
+            EventManager<BuffsTemplateSO>.Register(Events.GameplayRNG.OnBuffRoll.ToString(), Activate);
 
             buffCardGO.SetActive(false);
         }
@@ -43,7 +43,7 @@ namespace ZombieSurvivor3D.Gameplay.Buffs
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<BuffsTemplateSO>.Unregister(Events.EventKey.OnBuffRoll.ToString(), Activate);
+            EventManager<BuffsTemplateSO>.Unregister(Events.GameplayRNG.OnBuffRoll.ToString(), Activate);
 
             if (iEnumeratorRef != null)
                 StopCoroutine(iEnumeratorRef);

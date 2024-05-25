@@ -45,7 +45,7 @@ namespace ZombieSurvivor3D.Gameplay.Health
             {
                 isPlayerHit = false;
                 gameObject.SetActive(false);
-                EventManager<int>.Raise(Events.EventKey.OnPlayerDead.ToString(), 0);
+                EventManager<int>.Raise(Events.Gameplay.OnPlayerDead.ToString(), 0);
                 //Debug.Log("Object Died!: " + transform.parent.gameObject.name);
             }
         }

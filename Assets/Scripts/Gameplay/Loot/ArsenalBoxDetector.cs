@@ -20,13 +20,13 @@ namespace ZombieSurvivor3D.Gameplay.Loot
         protected override void Awake()
         {
             base.Awake();
-            EventManager<int>.Register(Events.EventKey.OnArsenalBoxItemInteracted.ToString(), ArsenalBoxTriggerRemoveLoot);
+            EventManager<int>.Register(Events.Gameplay.OnArsenalBoxItemInteracted.ToString(), ArsenalBoxTriggerRemoveLoot);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<int>.Unregister(Events.EventKey.OnArsenalBoxItemInteracted.ToString(), ArsenalBoxTriggerRemoveLoot);
+            EventManager<int>.Unregister(Events.Gameplay.OnArsenalBoxItemInteracted.ToString(), ArsenalBoxTriggerRemoveLoot);
         }
 
         #endregion

@@ -24,16 +24,16 @@ namespace ZombieSurvivor3D
         {
             m_RestartBtn.onClick.AddListener(RestartGame);
             m_MainMenuBtn.onClick.AddListener(MainMenu);
-            EventManager<int>.Register(Events.EventKey.OnPlayerDead.ToString(), StopGameplayLoop);
-            EventManager<string>.Register(Events.EventKey.OnGameOverResult.ToString(), GetTimeResults);
+            EventManager<int>.Register(Events.Gameplay.OnPlayerDead.ToString(), StopGameplayLoop);
+            EventManager<string>.Register(Events.Gameplay.OnGameOverResult.ToString(), GetTimeResults);
         }
 
         private void OnDestroy()
         {
             m_RestartBtn.onClick.RemoveAllListeners();
             m_MainMenuBtn.onClick.RemoveAllListeners();
-            EventManager<int>.Unregister(Events.EventKey.OnPlayerDead.ToString(), StopGameplayLoop);
-            EventManager<string>.Unregister(Events.EventKey.OnGameOverResult.ToString(), GetTimeResults);
+            EventManager<int>.Unregister(Events.Gameplay.OnPlayerDead.ToString(), StopGameplayLoop);
+            EventManager<string>.Unregister(Events.Gameplay.OnGameOverResult.ToString(), GetTimeResults);
         }
 
         private void StopGameplayLoop(int value)
@@ -63,7 +63,7 @@ namespace ZombieSurvivor3D
 
         private void EventResetTimer()
         {
-            EventManager<int>.Raise(Events.EventKey.OnGameOverButtonsCallback.ToString(), 0);
+            EventManager<int>.Raise(Events.Gameplay.OnGameOverButtonsCallback.ToString(), 0);
         }
 
         private void SetAppearance(bool isVisible)

@@ -42,13 +42,13 @@ namespace ZombieSurvivor3D.Gameplay.Pickups
         protected override void Awake()
         {
             base.Awake();
-            EventManager<Vector3>.Register(Events.EventKey.OnRNGPickups.ToString(), SpawnPickup);
+            EventManager<Vector3>.Register(Events.GameplayRNG.OnRNGPickups.ToString(), SpawnPickup);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<Vector3>.Unregister(Events.EventKey.OnRNGPickups.ToString(), SpawnPickup);
+            EventManager<Vector3>.Unregister(Events.GameplayRNG.OnRNGPickups.ToString(), SpawnPickup);
         }
         
         #endregion

@@ -22,15 +22,15 @@ namespace ZombieSurvivor3D
         protected override void Awake()
         {
             base.Awake();
-            EventManager<bool>.Register(Events.EventKey.OnSpecialEvent.ToString(), SetTextEffect);
-            EventManager<int>.Register(Events.EventKey.OnPlayerDead.ToString(), GetTimeResults);
+            EventManager<bool>.Register(Events.Gameplay.OnSpecialEvent.ToString(), SetTextEffect);
+            EventManager<int>.Register(Events.Gameplay.OnPlayerDead.ToString(), GetTimeResults);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<bool>.Unregister(Events.EventKey.OnSpecialEvent.ToString(), SetTextEffect);
-            EventManager<int>.Unregister(Events.EventKey.OnPlayerDead.ToString(), GetTimeResults);
+            EventManager<bool>.Unregister(Events.Gameplay.OnSpecialEvent.ToString(), SetTextEffect);
+            EventManager<int>.Unregister(Events.Gameplay.OnPlayerDead.ToString(), GetTimeResults);
 
             if (iEnumeratorRef != null)
                 StopCoroutine(iEnumeratorRef);
@@ -82,7 +82,7 @@ namespace ZombieSurvivor3D
 
         private void GetTimeResults(int value)
         {
-            EventManager<string>.Raise(Events.EventKey.OnGameOverResult.ToString(), timerText.text);
+            EventManager<string>.Raise(Events.Gameplay.OnGameOverResult.ToString(), timerText.text);
             // Listener = GameOverHandler.
         }
 

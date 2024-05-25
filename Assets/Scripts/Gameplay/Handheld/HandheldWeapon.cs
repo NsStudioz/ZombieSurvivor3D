@@ -55,13 +55,13 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
         protected override void Awake()
         {
             base.Awake();
-            EventManager<HandheldSO>.Register(Events.EventKey.OnHandheldSimilar.ToString(), RestockAmmo);
+            EventManager<HandheldSO>.Register(Events.Gameplay.OnHandheldSimilar.ToString(), RestockAmmo);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<HandheldSO>.Unregister(Events.EventKey.OnHandheldSimilar.ToString(), RestockAmmo);
+            EventManager<HandheldSO>.Unregister(Events.Gameplay.OnHandheldSimilar.ToString(), RestockAmmo);
         }
 
         protected override void OnGameStateChanged(GameStateManager.GameState newGameState)

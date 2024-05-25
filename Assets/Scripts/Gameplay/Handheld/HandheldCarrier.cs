@@ -73,7 +73,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             InitializeHandheldGOsList();
             SwitchHandheld(EquipedHandhelds[0]);
 
-            EventManager<GameObject>.Raise(Events.EventKey.OnHandheldChanged.ToString(), 
+            EventManager<GameObject>.Raise(Events.Gameplay.OnHandheldChanged.ToString(), 
                                            EquipedHandhelds[0].HandheldBulletPrefab);
         }
 
@@ -110,7 +110,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
                 if (EquipedHandhelds[i] == interactableHandheldSO)
                 {
                     // Listener = HandheldWeapon:
-                    EventManager<HandheldSO>.Raise(Events.EventKey.OnHandheldSimilar.ToString(), interactableHandheldSO);
+                    EventManager<HandheldSO>.Raise(Events.Gameplay.OnHandheldSimilar.ToString(), interactableHandheldSO);
                     return;
                 }
 
@@ -122,7 +122,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
 
             // Listener = BulletSpawner
-            EventManager<GameObject>.Raise(Events.EventKey.OnHandheldChanged.ToString(), 
+            EventManager<GameObject>.Raise(Events.Gameplay.OnHandheldChanged.ToString(), 
                                            EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab);
         }
 
@@ -141,7 +141,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
             SwitchHandheld(EquipedHandhelds[currentHandheldIndex]);
 
             // Listener = BulletSpawner
-            EventManager<GameObject>.Raise(Events.EventKey.OnHandheldChanged.ToString(), 
+            EventManager<GameObject>.Raise(Events.Gameplay.OnHandheldChanged.ToString(), 
                                            EquipedHandhelds[currentHandheldIndex].HandheldBulletPrefab);
         }
 
@@ -220,7 +220,7 @@ namespace ZombieSurvivor3D.Gameplay.Handheld
 
                 // Remove interacted item in arsenal box:
                 // listener = ArsenalBoxDetector
-                EventManager<int>.Raise(Events.EventKey.OnArsenalBoxItemInteracted.ToString(), 0);
+                EventManager<int>.Raise(Events.Gameplay.OnArsenalBoxItemInteracted.ToString(), 0);
             }
         }
 
