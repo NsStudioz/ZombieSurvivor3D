@@ -21,7 +21,23 @@ namespace ZombieSurvivor3D
             OnPlayerDead,
             OnSpecialEvent,
             OnTimerStateChange,
+            OnGameOverResult,
+            OnGameOverButtonsCallback
+        }
 
+        public enum GameplayRNG
+        {
+            None,
+        }
+
+        public enum MainMenu
+        {
+            None,
+        }
+
+        public enum Settings
+        {
+            None,
         }
 
     }

@@ -25,6 +25,7 @@ namespace ZombieSurvivor3D
             m_RestartBtn.onClick.AddListener(RestartGame);
             m_MainMenuBtn.onClick.AddListener(MainMenu);
             EventManager<int>.Register(Events.EventKey.OnPlayerDead.ToString(), StopGameplayLoop);
+            EventManager<string>.Register(Events.EventKey.OnGameOverResult.ToString(), GetTimeResults);
         }
 
         private void OnDestroy()
@@ -32,6 +33,7 @@ namespace ZombieSurvivor3D
             m_RestartBtn.onClick.RemoveAllListeners();
             m_MainMenuBtn.onClick.RemoveAllListeners();
             EventManager<int>.Unregister(Events.EventKey.OnPlayerDead.ToString(), StopGameplayLoop);
+            EventManager<string>.Unregister(Events.EventKey.OnGameOverResult.ToString(), GetTimeResults);
         }
 
         private void StopGameplayLoop(int value)
@@ -41,15 +43,27 @@ namespace ZombieSurvivor3D
             Debug.Log("GameState Changed: " + GameStateManager.Instance.CurrentGameState);
         }
 
+        private void GetTimeResults(string text)
+        {
+            // Invoker = TimerUI.
+            m_TimerText.text = "YOU SURVIVED FOR\n\n" + text + "\n\nMINUTES";
+        }
+
         private void RestartGame()
         {
-            // Restart Game
             SetAppearance(false);
+            EventResetTimer();
         }
 
         private void MainMenu()
         {
             SetAppearance(false);
+            EventResetTimer();
+        }
+
+        private void EventResetTimer()
+        {
+            EventManager<int>.Raise(Events.EventKey.OnGameOverButtonsCallback.ToString(), 0);
         }
 
         private void SetAppearance(bool isVisible)

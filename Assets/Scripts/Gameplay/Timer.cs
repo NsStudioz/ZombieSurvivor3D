@@ -7,25 +7,43 @@ namespace ZombieSurvivor3D
     public class Timer : GameListener
     {
 
-        private float timeElapsed;
-        private float timeElapsedSpecialThreshold;
+        public static Timer Instance;
 
-        private int SpecialThresholdMin;
-        private int SpecialThresholdMax;
+        public float timeElapsed { get; private set; }
+        [SerializeField] private float timerSpecialEvent;
+
+        [SerializeField] private int SpecialEventMin;
+        [SerializeField] private int SpecialEventMax;
 
         private const float TIMER_RESET = 0f;
         public bool hasStarted { get; private set; }
 
         protected override void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+                DontDestroyOnLoad(Instance);
+
             base.Awake();
-            EventManager<bool>.Register(Events.EventKey.OnTimerStateChange.ToString(), SetState);
+            EventManager<int>.Register(Events.EventKey.OnPlayerDead.ToString(), StopTimer);
+            EventManager<int>.Register(Events.EventKey.OnGameOverButtonsCallback.ToString(), ResetTimer);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager<bool>.Unregister(Events.EventKey.OnTimerStateChange.ToString(), SetState);
+            EventManager<int>.Unregister(Events.EventKey.OnPlayerDead.ToString(), StopTimer);
+            EventManager<int>.Unregister(Events.EventKey.OnGameOverButtonsCallback.ToString(), ResetTimer);
+        }
+
+        // TEST, fix in start game logic/UI:
+        private void Start()
+        {
+            hasStarted = true;
+            SetSpecialEventThreshold();
         }
 
         void Update()
@@ -34,6 +52,8 @@ namespace ZombieSurvivor3D
                 return;
 
             timeElapsed += Time.deltaTime;
+
+            ApplySpecialEvent();
         }
 
         private void SetState(bool state)
@@ -41,21 +61,32 @@ namespace ZombieSurvivor3D
             hasStarted = state;
         }
 
-        private void ResetTimer()
+        private void StopTimer(int value)
+        {
+            if (!hasStarted) 
+                return;
+
+            SetState(false);
+        }
+
+        private void ResetTimer(int value)
         {
             timeElapsed = TIMER_RESET;
-            timeElapsedSpecialThreshold = TIMER_RESET;
+            timerSpecialEvent = TIMER_RESET;
         }
 
         private void SetSpecialEventThreshold()
         {
-            timeElapsedSpecialThreshold = timeElapsed + Random.Range(SpecialThresholdMin, SpecialThresholdMax);
+            timerSpecialEvent = (int)timeElapsed + Random.Range(SpecialEventMin, SpecialEventMax);
         }
 
         private void ApplySpecialEvent()
         {
-            if (timeElapsed >= timeElapsedSpecialThreshold)
+            if (timeElapsed >= timerSpecialEvent)
+            {
+                SetSpecialEventThreshold();
                 EventManager<bool>.Raise(Events.EventKey.OnSpecialEvent.ToString(), true);
+            }
         }
 
     }
